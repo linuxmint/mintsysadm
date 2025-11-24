@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-11 14:02+0000\n"
+"POT-Creation-Date: 2025-11-24 13:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: generate_desktop_files:25 generate_desktop_files:53
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:53
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:193
-#: usr/share/mintsysadm/mintsysadm.ui.h:11
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:52
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:214
+#: usr/share/mintsysadm/mintsysadm.ui.h:14
 msgid "System Administration"
 msgstr ""
 
@@ -28,96 +28,109 @@ msgstr ""
 msgid "Configure the system"
 msgstr ""
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:69
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
 msgid "Add a boot argument"
 msgstr ""
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:69
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
 msgid "If the argument is not recognized by the kernel it will be ignored."
 msgstr ""
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:87
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:88
 msgid "Quit"
 msgstr ""
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:99
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:191
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:100
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:212
 msgid "About"
 msgstr ""
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:143
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:164
 msgid ""
 "Running update-grub...\n"
 "\n"
 msgstr ""
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:144
-#: usr/share/mintsysadm/mintsysadm.ui.h:15
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:165
+#: usr/share/mintsysadm/mintsysadm.ui.h:18
 msgid "Processing..."
 msgstr ""
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:170
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:191
 msgid "Success"
 msgstr ""
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:172
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:193
 msgid "Error"
 msgstr ""
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:184
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:205
 msgid "Boot arguments cannot include space characters."
 msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:1
-msgid "Boot menu:"
+msgid "Boot menu"
 msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:2
-msgid "Duration (in seconds)"
-msgstr ""
-
-#: usr/share/mintsysadm/mintsysadm.ui.h:3
 msgid "Show the menu"
 msgstr ""
 
+#: usr/share/mintsysadm/mintsysadm.ui.h:3
+msgid ""
+"The menu will always be shown if multiple operating systems are installed."
+msgstr ""
+
 #: usr/share/mintsysadm/mintsysadm.ui.h:4
-msgid "Set the duration to -1 if you want the menu to show indefinitely."
+msgid "Delay before booting the default selection (seconds)"
 msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:5
-msgid "Boot parameters:"
+msgid "Set the delay to -1 if you want the menu to show indefinitely."
 msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:6
-msgid "The computer booted with the following parameters:"
+msgid "-1"
 msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:7
-msgid ""
-"In addition to the system configuration you can set your own parameters in "
-"the list below:"
+msgid "Remember the last selected choice as the default"
 msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:8
-msgid "Note: Press Save and reboot the computer for changes to take effect."
+msgid "Boot parameters"
 msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:9
-msgid "Save"
+msgid "The computer booted with the following parameters:"
 msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:10
-msgid "Boot Menu"
+msgid ""
+"In addition to the system configuration you can set your own parameters in "
+"the list below"
+msgstr ""
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:11
+msgid "Press Save and reboot the computer for changes to take effect."
 msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:12
-msgid "Updating the boot menu"
+msgid "Save"
 msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:13
+msgid "Boot Menu"
+msgstr ""
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:15
+msgid "Updating the boot menu"
+msgstr ""
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:16
 msgid "Close"
 msgstr ""
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:14
+#: usr/share/mintsysadm/mintsysadm.ui.h:17
 msgid "Result:"
 msgstr ""
