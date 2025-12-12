@@ -10,6 +10,45 @@
   <action id="com.linuxmint.mintsysadm">
     <icon_name>mintsysadm</icon_name>
 <message>System Administration</message>
+<message xml:lang="ar">إدارة النّظام</message>
+<message xml:lang="bg">Администрация на системата</message>
+<message xml:lang="br">Merañ ar reizhiad</message>
+<message xml:lang="ca">Administració del sistema</message>
+<message xml:lang="cs">Správa systému</message>
+<message xml:lang="da">Systemadministration</message>
+<message xml:lang="de">Systemverwaltung</message>
+<message xml:lang="eo">Sistema administrado</message>
+<message xml:lang="es">Administración del sistema</message>
+<message xml:lang="eu">Sistemaren administrazioa</message>
+<message xml:lang="fi">Järjestelmän ylläpito</message>
+<message xml:lang="fr">Administration du système</message>
+<message xml:lang="fr_CA">Administration du système</message>
+<message xml:lang="he">ניהול מערכת</message>
+<message xml:lang="hr">Administriranje sustava</message>
+<message xml:lang="hu">Rendszeradminisztráció</message>
+<message xml:lang="ia">Administration de systema</message>
+<message xml:lang="is">Kerfisstjórnun</message>
+<message xml:lang="it">Amministrazione di sistema</message>
+<message xml:lang="ja">システムの管理</message>
+<message xml:lang="ka">სისტემის მართვა</message>
+<message xml:lang="ko">시스템 관리</message>
+<message xml:lang="lo">ການບໍລິຫານລະບົບ</message>
+<message xml:lang="lv">Sistēmas administrēšana</message>
+<message xml:lang="mk">Системска администрација</message>
+<message xml:lang="nb">Systemadministrasjon</message>
+<message xml:lang="nl">Systeembeheer</message>
+<message xml:lang="nn">Systemadministrasjon</message>
+<message xml:lang="oc">Administracion sistèma</message>
+<message xml:lang="pl">Administracja systemem</message>
+<message xml:lang="pt">Administração do sistema</message>
+<message xml:lang="pt_BR">Administração do sistema</message>
+<message xml:lang="ru">Системное администрирование</message>
+<message xml:lang="sl">Skrbništvo sistema</message>
+<message xml:lang="sv">Systemadministration</message>
+<message xml:lang="tr">Sistem Yönetimi</message>
+<message xml:lang="uk">Керування системою</message>
+<message xml:lang="vi">Quản Trị Hệ Thống</message>
+<message xml:lang="zh_CN">系统管理</message>
 
     <defaults>
       <allow_any>auth_admin_keep</allow_any>
