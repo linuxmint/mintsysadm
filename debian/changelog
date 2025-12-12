@@ -1,3 +1,10 @@
+mintsysadm (1.0.2) zena; urgency=medium
+
+  * l10n: Update translations
+  * l10n: Update files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 12 Dec 2025 16:57:17 +0000
+
 mintsysadm (1.0.1) zena; urgency=medium
 
   [ Clement Lefebvre ]
