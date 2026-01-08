@@ -1,3 +1,10 @@
+mintsysadm (1.0.4) zena; urgency=medium
+
+  * l10n: Update translations
+  * l10n: Update files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 08 Jan 2026 16:10:50 +0000
+
 mintsysadm (1.0.3) zena; urgency=medium
 
   * about: Fix version not showing
