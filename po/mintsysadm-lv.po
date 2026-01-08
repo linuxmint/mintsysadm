@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2025-11-24 13:08+0000\n"
-"PO-Revision-Date: 2025-11-24 15:25+0000\n"
+"PO-Revision-Date: 2025-12-25 11:21+0000\n"
 "Last-Translator: Klavs Petersons <Unknown>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2025-12-12 13:33+0000\n"
-"X-Generator: Launchpad (build 379e22b8475e3402088a4cdb4a6e7936a4d28414)\n"
+"X-Launchpad-Export-Date: 2026-01-08 15:45+0000\n"
+"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"Language: lv\n"
 
 #: generate_desktop_files:25 generate_desktop_files:53
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:52
@@ -91,7 +92,7 @@ msgstr "Aizkave pirms noklusējuma atlases sāknēšanas (sekundes)"
 #: usr/share/mintsysadm/mintsysadm.ui.h:5
 msgid "Set the delay to -1 if you want the menu to show indefinitely."
 msgstr ""
-"Iestatīt aizkavi uz -1, ja vēlaties, lai izvēlne tiktu rādīta bezgalīgi."
+"Iestatīt aizkavi uz -1, ja vēlies, lai izvēlne tiktu rādīta bezgalīgi."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:6
 msgid "-1"
@@ -114,13 +115,12 @@ msgid ""
 "In addition to the system configuration you can set your own parameters in "
 "the list below"
 msgstr ""
-"Papildus sistēmas konfigurācijai jūs varat iestatīt savus parametrus zemāk "
-"esošajā sarakstā"
+"Papildus sistēmas konfigurācijai vari iestatīt savus parametrus tālāk "
+"redzamajā sarakstā"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:11
 msgid "Press Save and reboot the computer for changes to take effect."
-msgstr ""
-"Nospiediet Saglabāt un pārstartējiet datoru, lai izmaiņas stātos spēkā."
+msgstr "Nospied saglabāt un pārstartē datoru, lai izmaiņas stātos spēkā."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:12
 msgid "Save"

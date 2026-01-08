@@ -1,4 +1,4 @@
-# Chinese (Simplified) translation for linuxmint
+# Slovak translation for linuxmint
 # Copyright (c) 2025 Rosetta Contributors and Canonical Ltd 2025
 # This file is distributed under the same license as the linuxmint package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2025-11-24 13:08+0000\n"
-"PO-Revision-Date: 2025-12-09 14:15+0000\n"
-"Last-Translator: 张鹏 <scbeta@qq.com>\n"
-"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"PO-Revision-Date: 2025-12-21 23:38+0000\n"
+"Last-Translator: menom <Unknown>\n"
+"Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,74 +22,76 @@ msgstr ""
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:214
 #: usr/share/mintsysadm/mintsysadm.ui.h:14
 msgid "System Administration"
-msgstr "系统管理"
+msgstr "Správa systému"
 
 #: generate_desktop_files:25
 msgid "Configure the system"
-msgstr "配置系统"
+msgstr "Nastavte systém"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
 msgid "Add a boot argument"
-msgstr "添加启动参数"
+msgstr "Pridajte spúšťací parameter"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
 msgid "If the argument is not recognized by the kernel it will be ignored."
-msgstr "如果内核无法识别该参数，它将被忽略。"
+msgstr "Ak jadro parameter nerozpozná, bude ignorovaný."
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:88
 msgid "Quit"
-msgstr "退出"
+msgstr "Ukončiť"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:100
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:212
 msgid "About"
-msgstr "关于"
+msgstr "O programe"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:164
 msgid ""
 "Running update-grub...\n"
 "\n"
 msgstr ""
-"正在运行update-grub...\n"
+"Spúšťa sa update-grub...\n"
 "\n"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:165
 #: usr/share/mintsysadm/mintsysadm.ui.h:18
 msgid "Processing..."
-msgstr "正在处理…"
+msgstr "Spracováva sa..."
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:191
 msgid "Success"
-msgstr "成功"
+msgstr "Úspech"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:193
 msgid "Error"
-msgstr "错误"
+msgstr "Chyba"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:205
 msgid "Boot arguments cannot include space characters."
-msgstr "启动参数不能包含空格字符。"
+msgstr "Spúšťacie parametre nemôžu obsahovať medzery."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:1
 msgid "Boot menu"
-msgstr "启动菜单"
+msgstr "Ponuka spúšťania"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:2
 msgid "Show the menu"
-msgstr "显示菜单"
+msgstr "Zobraziť ponuku"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:3
 msgid ""
 "The menu will always be shown if multiple operating systems are installed."
-msgstr "如果安装了多个操作系统，菜单将始终显示。"
+msgstr ""
+"Ak je nainštalovaných viacero operačných systémov, ponuka sa vždy zobrazí."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:4
 msgid "Delay before booting the default selection (seconds)"
-msgstr "启动默认选项前的延迟时间（秒）"
+msgstr "Oneskorenie pred spustením predvoleného výberu (sekundy)"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:5
 msgid "Set the delay to -1 if you want the menu to show indefinitely."
-msgstr "启动默认选项前的延迟时间（秒） ..."
+msgstr ""
+"Ak chcete, aby sa ponuka zobrazovala na neurčito, nastavte oneskorenie na -1."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:6
 msgid "-1"
@@ -97,42 +99,44 @@ msgstr "-1"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:7
 msgid "Remember the last selected choice as the default"
-msgstr "将上次选择的选项记为默认"
+msgstr "Zapamätať si poslednú vybratú voľbu ako predvolenú"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:8
 msgid "Boot parameters"
-msgstr "启动参数"
+msgstr "Spúšťacie parametre"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:9
 msgid "The computer booted with the following parameters:"
-msgstr "计算机以以下参数启动："
+msgstr "Počítač sa spustil s nasledujúcimi parametrami:"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:10
 msgid ""
 "In addition to the system configuration you can set your own parameters in "
 "the list below"
-msgstr "除了系统配置外，您还可以在下面的列表中设置自己的参数"
+msgstr ""
+"Okrem konfigurácie systému môžete nastaviť vlastné parametre v zozname nižšie"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:11
 msgid "Press Save and reboot the computer for changes to take effect."
-msgstr "按保存并重启计算机以使更改生效。"
+msgstr ""
+"Stlačte tlačidlo Uložiť a reštartujte počítač, aby sa zmeny prejavili."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:12
 msgid "Save"
-msgstr "保存"
+msgstr "Uložiť"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:13
 msgid "Boot Menu"
-msgstr "启动菜单"
+msgstr "Ponuka spúšťania"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:15
 msgid "Updating the boot menu"
-msgstr "正在更新启动菜单"
+msgstr "Aktualizuje sa ponuka spúšťania"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:16
 msgid "Close"
-msgstr "关闭"
+msgstr "Zavrieť"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:17
 msgid "Result:"
-msgstr "结果："
+msgstr "Výsledok:"

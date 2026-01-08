@@ -1,4 +1,4 @@
-# Chinese (Simplified) translation for linuxmint
+# Romanian translation for linuxmint
 # Copyright (c) 2025 Rosetta Contributors and Canonical Ltd 2025
 # This file is distributed under the same license as the linuxmint package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2025-11-24 13:08+0000\n"
-"PO-Revision-Date: 2025-12-09 14:15+0000\n"
-"Last-Translator: 张鹏 <scbeta@qq.com>\n"
-"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"PO-Revision-Date: 2025-12-22 23:25+0000\n"
+"Last-Translator: Danut Hintariu <Unknown>\n"
+"Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,74 +22,74 @@ msgstr ""
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:214
 #: usr/share/mintsysadm/mintsysadm.ui.h:14
 msgid "System Administration"
-msgstr "系统管理"
+msgstr "Administrare sistem"
 
 #: generate_desktop_files:25
 msgid "Configure the system"
-msgstr "配置系统"
+msgstr "Configurare sistem"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
 msgid "Add a boot argument"
-msgstr "添加启动参数"
+msgstr ""
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
 msgid "If the argument is not recognized by the kernel it will be ignored."
-msgstr "如果内核无法识别该参数，它将被忽略。"
+msgstr "Dacă argumentul nu este recunoscut de kernel, acesta va fi ignorat."
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:88
 msgid "Quit"
-msgstr "退出"
+msgstr "Închide"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:100
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:212
 msgid "About"
-msgstr "关于"
+msgstr "Despre"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:164
 msgid ""
 "Running update-grub...\n"
 "\n"
 msgstr ""
-"正在运行update-grub...\n"
+"Rulare update-grub...\n"
 "\n"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:165
 #: usr/share/mintsysadm/mintsysadm.ui.h:18
 msgid "Processing..."
-msgstr "正在处理…"
+msgstr "Se procesează..."
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:191
 msgid "Success"
-msgstr "成功"
+msgstr "Succes"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:193
 msgid "Error"
-msgstr "错误"
+msgstr "Eroare"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:205
 msgid "Boot arguments cannot include space characters."
-msgstr "启动参数不能包含空格字符。"
+msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:1
 msgid "Boot menu"
-msgstr "启动菜单"
+msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:2
 msgid "Show the menu"
-msgstr "显示菜单"
+msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:3
 msgid ""
 "The menu will always be shown if multiple operating systems are installed."
-msgstr "如果安装了多个操作系统，菜单将始终显示。"
+msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:4
 msgid "Delay before booting the default selection (seconds)"
-msgstr "启动默认选项前的延迟时间（秒）"
+msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:5
 msgid "Set the delay to -1 if you want the menu to show indefinitely."
-msgstr "启动默认选项前的延迟时间（秒） ..."
+msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:6
 msgid "-1"
@@ -97,42 +97,45 @@ msgstr "-1"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:7
 msgid "Remember the last selected choice as the default"
-msgstr "将上次选择的选项记为默认"
+msgstr "Reține ultima opțiune selectată ca implicită"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:8
 msgid "Boot parameters"
-msgstr "启动参数"
+msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:9
 msgid "The computer booted with the following parameters:"
-msgstr "计算机以以下参数启动："
+msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:10
 msgid ""
 "In addition to the system configuration you can set your own parameters in "
 "the list below"
-msgstr "除了系统配置外，您还可以在下面的列表中设置自己的参数"
+msgstr ""
+"Pe lângă configurația sistemului îți poți seta proprii parametri în lista de "
+"mai jos"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:11
 msgid "Press Save and reboot the computer for changes to take effect."
-msgstr "按保存并重启计算机以使更改生效。"
+msgstr ""
+"Apasă Salvare și repornește computerul pentru ca modificările să aibă efect."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:12
 msgid "Save"
-msgstr "保存"
+msgstr "Salvează"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:13
 msgid "Boot Menu"
-msgstr "启动菜单"
+msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:15
 msgid "Updating the boot menu"
-msgstr "正在更新启动菜单"
+msgstr ""
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:16
 msgid "Close"
-msgstr "关闭"
+msgstr "Închide"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:17
 msgid "Result:"
-msgstr "结果："
+msgstr "Rezultat:"

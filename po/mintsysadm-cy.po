@@ -1,4 +1,4 @@
-# Chinese (Simplified) translation for linuxmint
+# Welsh translation for linuxmint
 # Copyright (c) 2025 Rosetta Contributors and Canonical Ltd 2025
 # This file is distributed under the same license as the linuxmint package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
@@ -8,88 +8,95 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2025-11-24 13:08+0000\n"
-"PO-Revision-Date: 2025-12-09 14:15+0000\n"
-"Last-Translator: 张鹏 <scbeta@qq.com>\n"
-"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"PO-Revision-Date: 2025-12-12 19:15+0000\n"
+"Last-Translator: Rhoslyn Prys <Unknown>\n"
+"Language-Team: Welsh <cy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2026-01-08 15:45+0000\n"
 "X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"Language: cy\n"
 
 #: generate_desktop_files:25 generate_desktop_files:53
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:52
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:214
 #: usr/share/mintsysadm/mintsysadm.ui.h:14
 msgid "System Administration"
-msgstr "系统管理"
+msgstr "Gweinyddiaeth System"
 
 #: generate_desktop_files:25
 msgid "Configure the system"
-msgstr "配置系统"
+msgstr "Ffurfweddu'r system"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
 msgid "Add a boot argument"
-msgstr "添加启动参数"
+msgstr "Ychwanegu ymresymiad cychwyn"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
 msgid "If the argument is not recognized by the kernel it will be ignored."
-msgstr "如果内核无法识别该参数，它将被忽略。"
+msgstr ""
+"Os nad yw'r ymresymiad yn cael ei hadnabod gan y cnewyllyn, caiff ei "
+"hanwybyddu."
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:88
 msgid "Quit"
-msgstr "退出"
+msgstr "Gorffen"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:100
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:212
 msgid "About"
-msgstr "关于"
+msgstr "Ynghylch"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:164
 msgid ""
 "Running update-grub...\n"
 "\n"
 msgstr ""
-"正在运行update-grub...\n"
+"Yn rhedeg update-grub...\n"
 "\n"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:165
 #: usr/share/mintsysadm/mintsysadm.ui.h:18
 msgid "Processing..."
-msgstr "正在处理…"
+msgstr "Yn prosesu..."
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:191
 msgid "Success"
-msgstr "成功"
+msgstr "Llwyddiant"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:193
 msgid "Error"
-msgstr "错误"
+msgstr "Gwall"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:205
 msgid "Boot arguments cannot include space characters."
-msgstr "启动参数不能包含空格字符。"
+msgstr "Nid oe modd i ymresymiadau cychwyn gynnwys nodau gofod."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:1
 msgid "Boot menu"
-msgstr "启动菜单"
+msgstr "Dewislen cychwyn"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:2
 msgid "Show the menu"
-msgstr "显示菜单"
+msgstr "Dangos y ddewislen"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:3
 msgid ""
 "The menu will always be shown if multiple operating systems are installed."
-msgstr "如果安装了多个操作系统，菜单将始终显示。"
+msgstr ""
+"Bydd y ddewislen bob amser yn cael ei dangos os oes sawl system weithredu "
+"wedi'u gosod."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:4
 msgid "Delay before booting the default selection (seconds)"
-msgstr "启动默认选项前的延迟时间（秒）"
+msgstr "Oedi cyn cychwyn y dewis rhagosodedig (eiliadau)"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:5
 msgid "Set the delay to -1 if you want the menu to show indefinitely."
-msgstr "启动默认选项前的延迟时间（秒） ..."
+msgstr ""
+"Gosod yr oedi i -1 os ydych chi eisiau i'r ddewislen ddangos am gyfnod "
+"amhenodol."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:6
 msgid "-1"
@@ -97,42 +104,45 @@ msgstr "-1"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:7
 msgid "Remember the last selected choice as the default"
-msgstr "将上次选择的选项记为默认"
+msgstr "Cofio'r dewis a ddewiswyd ddiwethaf fel y rhagosodyn"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:8
 msgid "Boot parameters"
-msgstr "启动参数"
+msgstr "Paramedrau cychwyn"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:9
 msgid "The computer booted with the following parameters:"
-msgstr "计算机以以下参数启动："
+msgstr "Cychwynnodd y cyfrifiadur gyda'r paramedrau canlynol:"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:10
 msgid ""
 "In addition to the system configuration you can set your own parameters in "
 "the list below"
-msgstr "除了系统配置外，您还可以在下面的列表中设置自己的参数"
+msgstr ""
+"Yn ogystal â ffurfweddiad y system gallwch osod eich paramedrau eich hun yn "
+"y rhestr isod"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:11
 msgid "Press Save and reboot the computer for changes to take effect."
-msgstr "按保存并重启计算机以使更改生效。"
+msgstr ""
+"Pwyswch Cadw ac ailgychwyn y cyfrifiadur er mwyn i'r newidiadau ddod i rym."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:12
 msgid "Save"
-msgstr "保存"
+msgstr "Cadw"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:13
 msgid "Boot Menu"
-msgstr "启动菜单"
+msgstr "Dewislen Cychwyn"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:15
 msgid "Updating the boot menu"
-msgstr "正在更新启动菜单"
+msgstr "Yn diweddaru'r ddewislen cychwyn"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:16
 msgid "Close"
-msgstr "关闭"
+msgstr "Cau"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:17
 msgid "Result:"
-msgstr "结果："
+msgstr "Canlyniad:"

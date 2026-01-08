@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2025-11-24 13:08+0000\n"
-"PO-Revision-Date: 2025-11-15 20:21+0000\n"
-"Last-Translator: Saba Mtchedlishvili <Unknown>\n"
+"PO-Revision-Date: 2025-12-23 08:51+0000\n"
+"Last-Translator: NorwayFun <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2025-12-12 13:33+0000\n"
-"X-Generator: Launchpad (build 379e22b8475e3402088a4cdb4a6e7936a4d28414)\n"
+"X-Launchpad-Export-Date: 2026-01-08 15:45+0000\n"
+"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
 "Language: ka\n"
 
 #: generate_desktop_files:25 generate_desktop_files:53
@@ -73,7 +73,7 @@ msgstr "ჩატვირთვის არგუმენტებს არ 
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:1
 msgid "Boot menu"
-msgstr ""
+msgstr "ჩატვირთვის მენიუ"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:2
 msgid "Show the menu"
@@ -83,26 +83,30 @@ msgstr "მაჩვენე მენიუ"
 msgid ""
 "The menu will always be shown if multiple operating systems are installed."
 msgstr ""
+"ეს მენიუ ყოველთვის იქნება ნაჩვენები, თუ დაყენებული გაქვთ ერთზე მეტი "
+"ოპერაციული სისტემა."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:4
 msgid "Delay before booting the default selection (seconds)"
-msgstr ""
+msgstr "დაყოვნება ნაგულისხმევი არჩევნის ჩატვირთვამდე (წამებში)"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:5
 msgid "Set the delay to -1 if you want the menu to show indefinitely."
 msgstr ""
+"დააყენეთ დაყოვნება მნიშვნელობაზე -1, თუ გნებავთ, მენიუ უსასრულოდ იყოს "
+"ნაჩვენები."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:6
 msgid "-1"
-msgstr ""
+msgstr "-1"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:7
 msgid "Remember the last selected choice as the default"
-msgstr ""
+msgstr "ბოლო არჩევნის ნაგულისხმევად დამახსოვრება"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:8
 msgid "Boot parameters"
-msgstr ""
+msgstr "ჩატვირთვის პარამეტრები"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:9
 msgid "The computer booted with the following parameters:"
@@ -113,10 +117,14 @@ msgid ""
 "In addition to the system configuration you can set your own parameters in "
 "the list below"
 msgstr ""
+"ქვემო სიაში სისტემის კონფიგურაციასთან ერთად თქვენი საკუთარი პარამეტრებიც "
+"შეგიძლიათ დააყენოთ"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:11
 msgid "Press Save and reboot the computer for changes to take effect."
 msgstr ""
+"დააჭირეთ ღილაკს \"შენახვა\" და გადატვირთეთ კომპიუტერი ცვლილებების ძალაში "
+"შესასვლელად."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:12
 msgid "Save"
