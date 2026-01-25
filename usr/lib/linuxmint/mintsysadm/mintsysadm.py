@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import apt
+import argparse
 import datetime
 import gi
 import os
@@ -10,6 +11,7 @@ import xapp.widgets
 import re
 import xapp.threading as xt
 import xapp.util
+import sys
 
 gi.require_version("Gtk", "3.0")
 gi.require_version('GtkSource', '3.0')
@@ -23,20 +25,37 @@ _ = xapp.util.l10n("mintsysadm")
 GRUB_FILE = "/etc/default/grub.d/98_mintsysadm.cfg"
 
 class MyApplication(Gtk.Application):
+    # Main initialization routine
     def __init__(self, application_id, flags):
         Gtk.Application.__init__(self, application_id=application_id, flags=flags)
         self.connect("activate", self.activate)
+        self.connect("command-line", self.on_command_line)
+        self.app_window = None
+        self.page = "boot"
+
+    def on_command_line(self, app, command_line):
+        # Parse fresh args each time
+        parser = argparse.ArgumentParser(add_help=False)
+        group = parser.add_mutually_exclusive_group()
+        group.add_argument("--boot", action="store_const", dest="page", const="boot")
+        group.add_argument("--users", action="store_const", dest="page", const="users")
+        argv = command_line.get_arguments()[1:]
+        args, _ = parser.parse_known_args(argv)
+        if args.page is None:
+            args.page = "boot"
+        self.page = args.page
+        self.activate(app)
+        return 0
 
     def activate(self, application):
-        windows = self.get_windows()
-        if (len(windows) > 0):
-            window = windows[0]
-            window.present()
-            window.show_all()
-        else:
-            window = MintSysadmWindow(self)
-            self.add_window(window.window)
-            window.window.show_all()
+        if self.app_window is None:
+            self.app_window = MintSysadmWindow(self)
+            self.add_window(self.app_window.window)
+        window = self.app_window.window
+        window = self.get_windows()[0]
+        window.present()
+        window.show_all()
+        self.app_window.show_page(self.page)
 
 class MintSysadmWindow():
 
@@ -52,6 +71,8 @@ class MintSysadmWindow():
         self.window.set_title(_("System Administration"))
         self.window.set_icon_name("mintsysadm")
 
+
+        self.stack = self.builder.get_object("main_stack")
         self.builder.get_object("grub_switch").connect("notify::active", self.grub_switch_toggled)
 
         # Fill in the boot page
@@ -102,6 +123,10 @@ class MintSysadmWindow():
         menu.append(item)
 
         menu.show_all()
+
+    def show_page(self, page_name):
+        page_name = f"page_{page_name}"
+        self.stack.set_visible_child_name(page_name)
 
     def grub_switch_toggled(self, switch, gparam):
         # Disable "wait indefinitely" if the menu is hidden.
@@ -237,5 +262,5 @@ GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT {boot_args}"
         self.application.quit()
 
 if __name__ == "__main__":
-    application = MyApplication("com.linuxmint.sysadm", Gio.ApplicationFlags.FLAGS_NONE)
-    application.run()
+    application = MyApplication("com.linuxmint.sysadm", Gio.ApplicationFlags.HANDLES_COMMAND_LINE)
+    application.run(sys.argv)

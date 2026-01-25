@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Users and Groups
+Comment=Add or remove users and groups
+Exec=pkexec mintsysadm --users
+Icon=system-users
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Categories=GNOME;GTK;System;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
+X-GNOME-Settings-Panel=system-administration

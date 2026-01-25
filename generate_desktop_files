@@ -19,10 +19,20 @@ X-MultipleArgs=false
 Type=Application
 Categories=GNOME;GTK;System;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 X-GNOME-Settings-Panel=system-administration
-MimeType=text/x-apt-sources-list;
 """
 
 additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm.desktop", prefix, _("System Administration"), _("Configure the system"), suffix)
+
+suffix = """Exec=pkexec mintsysadm --users
+Icon=system-users
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Categories=GNOME;GTK;System;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
+X-GNOME-Settings-Panel=system-administration
+"""
+
+additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm-users.desktop", prefix, _("Users and Groups"), _("Add or remove users and groups"), suffix)
 
 prefix = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC
