@@ -12,6 +12,9 @@ import re
 import xapp.threading as xt
 import xapp.util
 import sys
+from users import UsersWidget
+
+
 
 gi.require_version("Gtk", "3.0")
 gi.require_version('GtkSource', '3.0')
@@ -102,6 +105,10 @@ class MintSysadmWindow():
 
         accel_group = Gtk.AccelGroup()
         self.window.add_accel_group(accel_group)
+
+        # Fill in the users page
+        self.users_widget = UsersWidget(self.window)
+        self.builder.get_object("page_users").add(self.users_widget)
 
         # Menubar
         menu = self.builder.get_object("main_menu")
