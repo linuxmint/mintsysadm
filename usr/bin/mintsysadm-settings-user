@@ -1,0 +1,4 @@
+#!/usr/bin/python3
+import subprocess
+
+exit(subprocess.run(["/usr/lib/linuxmint/mintsysadm/settings_user.py"]).returncode)
