@@ -12,13 +12,9 @@ import xapp.util
 
 gi.require_version("AccountsService", "1.0")
 gi.require_version("Gtk", "3.0")
-from common.user import PasswordDialog, PrivHelper, generate_password, get_circular_pixbuf_from_path
+from common.user import PrivHelper, generate_password, get_circular_pixbuf_from_path, get_password_strength
 from common.widgets import DimmedTable, EditableEntry
 from gi.repository import Gtk, Gdk, AccountsService
-
-# TODO
-#   - Fine tune avatars in mint-common
-#   - Provide cs_user alternative
 
 priv_helper = PrivHelper()
 
@@ -151,6 +147,131 @@ class NewUserDialog(Gtk.Dialog):
         self._on_info_changed(None)
         return False
 
+class PasswordDialog(Gtk.Dialog):
+
+    def __init__ (self, user, password_mask, parent = None):
+        super(PasswordDialog, self).__init__(None, parent)
+
+        self.user = user
+        self.password_mask = password_mask
+
+        self.set_modal(True)
+        self.set_skip_taskbar_hint(True)
+        self.set_skip_pager_hint(True)
+        self.set_title(_("Change Password"))
+
+        table = DimmedTable()
+        table.add_labels([_("New password"), None, _("Confirm password")])
+
+        self.new_password = Gtk.Entry()
+        self.new_password.set_visibility(False)
+        self.new_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "xsi-view-reveal-symbolic")
+        self.new_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Show password"))
+        self.new_password.connect("icon-release", self._on_new_password_icon_released)
+        self.new_password.connect("changed", self._on_passwords_changed)
+        table.attach(self.new_password, 1, 3, 0, 1)
+
+        self.strengh_indicator = Gtk.ProgressBar()
+        self.strengh_indicator.set_tooltip_text(_("The password must be at least 8 characters long."))
+        self.strengh_indicator.set_fraction(0.0)
+        table.attach(self.strengh_indicator, 1, 2, 1, 2, xoptions=Gtk.AttachOptions.EXPAND|Gtk.AttachOptions.FILL)
+        self.strengh_indicator.set_size_request(-1, 1)
+
+        self.strengh_label = Gtk.Label()
+        self.strengh_label.set_tooltip_text(_("The password must be at least 8 characters long."))
+        self.strengh_label.set_alignment(1, 0.5)
+        table.attach(self.strengh_label, 2, 3, 1, 2)
+
+        self.confirm_password = Gtk.Entry()
+        self.confirm_password.set_visibility(False)
+        self.confirm_password.connect("changed", self._on_passwords_changed)
+        table.attach(self.confirm_password, 1, 3, 2, 3)
+
+        self.set_border_width(6)
+
+        box = self.get_content_area()
+        box.add(table)
+        self.show_all()
+
+        self.infobar = Gtk.InfoBar()
+        self.infobar.set_message_type(Gtk.MessageType.ERROR)
+        label = Gtk.Label(_("An error occurred. The password was not changed."))
+        content = self.infobar.get_content_area()
+        content.add(label)
+        table.attach(self.infobar, 0, 3, 4, 5)
+
+        self.add_button(_("Cancel"), Gtk.ResponseType.CANCEL)
+        self.add_button(_("Generate a password"), Gtk.ResponseType.NONE)
+        self.add_button(_("Change"), Gtk.ResponseType.OK)
+
+        self.get_widget_for_response(Gtk.ResponseType.OK).get_style_context().add_class("suggested-action")
+
+        self.update_password_icon()
+        self.set_response_sensitive(Gtk.ResponseType.OK, False)
+        self.infobar.hide()
+
+        self.connect("response", self._on_response)
+
+    def _on_response(self, dialog, response_id):
+        if response_id == Gtk.ResponseType.OK:
+            self.change_password()
+        elif response_id == Gtk.ResponseType.NONE:
+            # Generate button clicked
+            self.infobar.hide()
+            newpass = generate_password()
+            self.new_password.set_text(newpass)
+            self.confirm_password.set_text(newpass)
+            self.new_password.set_visibility(True)
+            self.confirm_password.set_visibility(True)
+            self.update_password_icon()
+            return True  # Keep dialog open
+        else:
+            self.destroy()
+
+    def change_password(self):
+        newpass = self.new_password.get_text()
+        self.user.set_password(newpass, "")
+        subprocess.call(["gpasswd", "-d", self.user.get_user_name(), "nopasswdlogin"])
+        self.password_mask.set_text('\u2022\u2022\u2022\u2022\u2022\u2022')
+        self.destroy()
+
+    def _on_new_password_icon_released(self, widget, icon_pos, event):
+        visible = not self.new_password.get_visibility()
+        self.new_password.set_visibility(visible)
+        self.confirm_password.set_visibility(visible)
+        self.update_password_icon()
+
+    def update_password_icon(self):
+        visible = self.new_password.get_visibility()
+        if visible:
+            self.new_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "xsi-view-conceal-symbolic")
+            self.new_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Hide password"))
+        else:
+            self.new_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "xsi-view-reveal-symbolic")
+            self.new_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Show password"))
+
+    def _on_passwords_changed(self, widget):
+        self.infobar.hide()
+        new_password = self.new_password.get_text()
+        confirm_password = self.confirm_password.get_text()
+        text, fraction = get_password_strength(new_password)
+        self.strengh_label.set_text(text)
+        self.strengh_indicator.set_fraction(fraction)
+        if new_password != confirm_password:
+            self.confirm_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "xsi-dialog-warning-symbolic")
+            self.confirm_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Passwords do not match"))
+        else:
+            self.confirm_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, None)
+        self.check_passwords()
+
+    def check_passwords(self):
+        new_password = self.new_password.get_text()
+        confirm_password = self.confirm_password.get_text()
+        if len(new_password) >= 8 and new_password == confirm_password:
+            self.set_response_sensitive(Gtk.ResponseType.OK, True)
+        else:
+            self.set_response_sensitive(Gtk.ResponseType.OK, False)
+
 class UsersWidget(Gtk.Box):
     def __init__(self, window):
         super().__init__()
@@ -208,7 +329,7 @@ class UsersWidget(Gtk.Box):
 
         row = 0
         col = 0
-        num_cols = 4
+        num_cols = 6
         face_dirs = ["/usr/share/pixmaps/faces/linuxmint/"]
         for face_dir in face_dirs:
             if os.path.exists(face_dir):
@@ -231,15 +352,14 @@ class UsersWidget(Gtk.Box):
 
         row = row + 1
 
-        self.menu.attach(separator, 0, 4, row, row+1)
-        self.menu.attach(face_browse_menuitem, 0, 4, row+2, row+3)
+        self.menu.attach(separator, 0, num_cols, row, row+1)
+        self.menu.attach(face_browse_menuitem, 0, num_cols, row+2, row+3)
 
         face_remove_menuitem = Gtk.MenuItem(_("Remove picture"))
         face_remove_menuitem.connect('activate', self._on_face_remove_menuitem_activated)
-        self.menu.attach(face_remove_menuitem, 0, 4, row+3, row+4)
+        self.menu.attach(face_remove_menuitem, 0, num_cols, row+3, row+4)
 
-        self.account_type_switch = Gtk.Switch()
-        self.account_type_switch.set_halign(Gtk.Align.START)
+        self.account_type_switch = self.builder.get_object("switch_user_admin")
         self.switch_handler_id = self.account_type_switch.connect("state-set", self._on_accounttype_state_set)
 
         self.realname_entry = EditableEntry()
@@ -249,26 +369,12 @@ class UsersWidget(Gtk.Box):
         self.builder.get_object("label_user_last_login").set_margin_start(self.entry_padding + 1)
         self.builder.get_object("label_username").set_margin_start(self.entry_padding + 1)
 
-        self.password_mask = Gtk.Label()
-        self.password_mask.set_alignment(0.0, 0.5)
-        self.password_button = Gtk.Button()
-        self.password_button.add(self.password_mask)
-        self.password_button.set_relief(Gtk.ReliefStyle.NONE)
-        self.password_button.connect('activate', self._on_password_button_clicked)
-        self.password_button.connect('released', self._on_password_button_clicked)
+        self.password_button_label = self.builder.get_object("label_user_password")
+        self.password_button = self.builder.get_object("button_user_password")
+        self.password_button.connect('clicked', self._on_password_button_clicked)
 
-        box = Gtk.Box()
-        box.pack_start(self.face_button, False, False, 0)
-
-
-        self.builder.get_object("box_user_avatar").add(box)
+        self.builder.get_object("box_user_avatar").add(self.face_button)
         self.builder.get_object("box_user_realname").add(self.realname_entry)
-
-
-        # self.builder.get_object("user_grid").attach(box, 1, 0, 1, 1)
-        self.builder.get_object("user_grid").attach(self.account_type_switch, 1, 1, 1, 1)
-        # self.builder.get_object("user_grid").attach(self.realname_entry, 1, 2, 1, 1)
-        self.builder.get_object("user_grid").attach(self.password_button, 1, 3, 1, 1)
 
         self.accountService = AccountsService.UserManager.get_default()
         self.accountService.connect('notify::is-loaded', self.on_accounts_service_ready)
@@ -301,7 +407,7 @@ class UsersWidget(Gtk.Box):
         return (name1 > name2) - (name1 < name2)
 
     def _on_password_button_clicked(self, widget):
-        dialog = PasswordDialog(self.user, self.password_mask, self.window)
+        dialog = PasswordDialog(self.user, self.password_button_label, self.window)
         dialog.run()
 
     def _on_accounttype_state_set(self, switch, state):
@@ -452,8 +558,6 @@ class UsersWidget(Gtk.Box):
 
     def load_user(self, user):
         self.user = user
-        self.password_button.set_sensitive(True)
-        self.password_button.set_tooltip_text("")
 
         self.builder.get_object("label_username").set_text(user.get_user_name())
 
@@ -468,11 +572,11 @@ class UsersWidget(Gtk.Box):
         self.realname_entry.set_text(user.get_real_name())
 
         if user.get_password_mode() == AccountsService.UserPasswordMode.REGULAR:
-            self.password_mask.set_text('\u2022\u2022\u2022\u2022\u2022\u2022')
+            self.password_button_label.set_text('\u2022\u2022\u2022\u2022\u2022\u2022')
         elif user.get_password_mode() == AccountsService.UserPasswordMode.NONE:
-            self.password_mask.set_markup("<b>%s</b>" % _("No password set"))
+            self.password_button_label.set_markup("<b>%s</b>" % _("No password set"))
         else:
-            self.password_mask.set_text(_("Set at login"))
+            self.password_button_label.set_text(_("Set at login"))
 
         self.account_type_switch.handler_block(self.switch_handler_id)
         if user.get_account_type() == AccountsService.UserAccountType.ADMINISTRATOR:
@@ -500,6 +604,8 @@ class UsersWidget(Gtk.Box):
             self.password_button.set_tooltip_text(_("The user's home directory is encrypted. To preserve access to the encrypted directory, only the user should change this password."))
             self.builder.get_object("switch_user_encrypted").set_active(True)
         else:
+            self.password_button.set_sensitive(True)
+            self.password_button.set_tooltip_text("")
             self.builder.get_object("switch_user_encrypted").set_active(False)
 
         self.stack.set_visible_child_name("page_user")

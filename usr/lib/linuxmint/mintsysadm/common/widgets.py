@@ -21,6 +21,7 @@ class EditableEntry(Gtk.Stack):
 
         self.label = Gtk.Label()
         self.entry = Gtk.Entry()
+        self.entry.set_alignment(0.5)  # Center align the text
         self.button = Gtk.Button()
         self.button.set_alignment(0.5, 0.5)
         self.button.set_relief(Gtk.ReliefStyle.NONE)

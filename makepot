@@ -1,5 +1,7 @@
 #!/bin/bash
 
 intltool-extract --type=gettext/glade usr/share/mintsysadm/mintsysadm.ui
-xgettext --language=Python --keyword=_ --keyword=N_ --output=mintsysadm.pot usr/bin/mintsysadm generate_desktop_files usr/lib/linuxmint/mintsysadm/*.py  usr/share/mintsysadm/mintsysadm.ui.h
+intltool-extract --type=gettext/glade usr/share/mintsysadm/settings_user.ui
+xgettext --language=Python --keyword=_ --keyword=N_ --output=mintsysadm.pot usr/bin/mintsysadm generate_desktop_files usr/lib/linuxmint/mintsysadm/*.py  usr/share/mintsysadm/mintsysadm.ui.h usr/share/mintsysadm/settings_user.ui.h
 rm -f usr/share/mintsysadm/mintsysadm.ui.h
+rm -f usr/share/mintsysadm/settings_user.ui.h

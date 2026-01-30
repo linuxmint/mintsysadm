@@ -3,7 +3,9 @@
 DOMAIN = "mintsysadm"
 PATH = "/usr/share/locale"
 
-import os, gettext, sys
+import os
+import gettext
+import sys
 sys.path.append('/usr/lib/linuxmint/common')
 from mintcommon import additionalfiles
 
@@ -20,8 +22,18 @@ Type=Application
 Categories=GNOME;GTK;System;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 X-GNOME-Settings-Panel=system-administration
 """
+additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm.desktop", prefix, _("System Administration"), _("Configure the system"), suffix) # type: ignore
 
-additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm.desktop", prefix, _("System Administration"), _("Configure the system"), suffix)
+suffix = """Exec=mintsysadm-settings-user
+Icon=preferences-desktop-user
+Terminal=false
+Type=Application
+Categories=Settings;
+NotShowIn=GNOME;KDE;XFCE;MATE;
+Name=Account details
+Keywords=user;account;password;avatar;
+"""
+additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm-settings-user.desktop", prefix, _("Account details"), _("User account and password"), suffix) # type: ignore
 
 suffix = """Exec=pkexec mintsysadm --users
 Icon=system-users
@@ -31,9 +43,9 @@ Type=Application
 Categories=GNOME;GTK;System;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 X-GNOME-Settings-Panel=system-administration
 NotShowIn=GNOME;KDE;XFCE;MATE;
+Keywords=users;accounts;
 """
-
-additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm-users.desktop", prefix, _("Users and Groups"), _("Add or remove users and groups"), suffix)
+additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm-users.desktop", prefix, _("Users"), _("Add or remove users"), suffix) # type: ignore
 
 prefix = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC
@@ -60,5 +72,4 @@ suffix = """
 
 </policyconfig>
 """
-
-additionalfiles.generate_polkit_policy(DOMAIN, PATH, "usr/share/polkit-1/actions/com.linuxmint.mintsysadm.policy", prefix, _("System Administration"), suffix)
+additionalfiles.generate_polkit_policy(DOMAIN, PATH, "usr/share/polkit-1/actions/com.linuxmint.mintsysadm.policy", prefix, _("System Administration"), suffix) # type: ignore
