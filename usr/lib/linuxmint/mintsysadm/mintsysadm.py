@@ -9,7 +9,7 @@ import re
 import xapp.threading as xt
 import xapp.util
 import sys
-from users import UsersWidget
+from page_users import UsersWidget
 
 gi.require_version("Gtk", "3.0")
 gi.require_version('GtkSource', '3.0')
