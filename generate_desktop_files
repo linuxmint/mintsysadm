@@ -20,6 +20,7 @@ Type=Application
 Categories=GNOME;GTK;System;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 X-GNOME-Settings-Panel=system-administration
 MimeType=text/x-apt-sources-list;
+Keywords=boot;grub;
 """
 
 additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm.desktop", prefix, _("System Administration"), _("Configure the system"), suffix)
