@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo rm -rf /usr/lib/linuxmint/mintsysadm
+sudo cp -R usr /
+mintsysadm-settings-user
