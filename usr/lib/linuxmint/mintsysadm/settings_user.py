@@ -16,7 +16,7 @@ gi.require_version('XApp', '1.0')
 gi.require_version('AccountsService', '1.0')
 from gi.repository import AccountsService, GLib, Gtk, Gio
 from common.user import generate_password, get_circular_pixbuf_from_path, get_password_strength
-from common.widgets import EditableEntry
+from common.widgets import DimmedTable, EditableEntry
 from PIL import Image
 
 setproctitle.setproctitle("mintsysadm-settings-user")
@@ -300,41 +300,25 @@ class PasswordDialog(Gtk.Dialog):
         self.user = user
         self.password_label = password_label
 
-        self.correct_current_password = False # Flag to remember if the current password is correct or not
-
         self.set_modal(True)
         self.set_skip_taskbar_hint(True)
         self.set_skip_pager_hint(True)
         self.set_title(_("Change Password"))
 
-        table = Gtk.Table(6, 3)
-        table.set_border_width(6)
-        table.set_row_spacings(8)
-        table.set_col_spacings(15)
-
-        label = Gtk.Label.new(_("Current password"))
-        label.set_alignment(1, 0.5)
-        table.attach(label, 0, 1, 0, 1)
-
-        label = Gtk.Label.new(_("New password"))
-        label.set_alignment(1, 0.5)
-        table.attach(label, 0, 1, 1, 2)
-
-        label = Gtk.Label.new(_("Confirm password"))
-        label.set_alignment(1, 0.5)
-        table.attach(label, 0, 1, 3, 4)
+        table = DimmedTable()
+        table.add_labels([_("Current password"), _("New password"), None, _("Confirm password")])
 
         self.current_password = Gtk.Entry()
         self.current_password.set_visibility(False)
-        self.current_password.connect("focus-out-event", self._on_current_password_changed)
+        self.current_password.connect("changed", self.on_passwords_changed)
         table.attach(self.current_password, 1, 3, 0, 1)
 
         self.new_password = Gtk.Entry()
-        self.new_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "view-refresh")
-        self.new_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Generate a password"))
-        self.new_password.set_tooltip_text(_("Generate a password"))
+        self.new_password.set_visibility(False)
+        self.new_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "xsi-view-reveal-symbolic")
+        self.new_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Show password"))
         self.new_password.connect("icon-release", self._on_new_password_icon_released)
-        self.new_password.connect("changed", self._on_passwords_changed)
+        self.new_password.connect("changed", self.on_passwords_changed)
         table.attach(self.new_password, 1, 3, 1, 2)
 
         self.strengh_indicator = Gtk.ProgressBar()
@@ -349,12 +333,9 @@ class PasswordDialog(Gtk.Dialog):
         table.attach(self.strengh_label, 2, 3, 2, 3)
 
         self.confirm_password = Gtk.Entry()
-        self.confirm_password.connect("changed", self._on_passwords_changed)
+        self.confirm_password.set_visibility(False)
+        self.confirm_password.connect("changed", self.on_passwords_changed)
         table.attach(self.confirm_password, 1, 3, 3, 4)
-
-        self.show_password = Gtk.CheckButton(label=_("Show password"))
-        self.show_password.connect('toggled', self._on_show_password_toggled)
-        table.attach(self.show_password, 1, 3, 4, 5)
 
         self.set_border_width(6)
 
@@ -364,14 +345,18 @@ class PasswordDialog(Gtk.Dialog):
 
         self.infobar = Gtk.InfoBar()
         self.infobar.set_message_type(Gtk.MessageType.ERROR)
-        label = Gtk.Label.new(_("An error occurred. Your password was not changed."))
+        label = Gtk.Label.new()
         content = self.infobar.get_content_area()
         content.add(label)
         table.attach(self.infobar, 0, 3, 5, 6)
 
-        self.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, _("Change"), Gtk.ResponseType.OK, )
+        self.add_button(_("Cancel"), Gtk.ResponseType.CANCEL)
+        self.add_button(_("Generate a password"), Gtk.ResponseType.NONE)
+        self.add_button(_("Change"), Gtk.ResponseType.OK)
 
-        self.set_passwords_visibility()
+        self.get_widget_for_response(Gtk.ResponseType.OK).get_style_context().add_class("suggested-action")
+
+        self.update_password_icon()
         self.set_response_sensitive(Gtk.ResponseType.OK, False)
         self.infobar.hide()
 
@@ -380,11 +365,37 @@ class PasswordDialog(Gtk.Dialog):
     def _on_response(self, dialog, response_id):
         if response_id == Gtk.ResponseType.OK:
             self.change_password()
+        elif response_id == Gtk.ResponseType.NONE:
+            # Generate button clicked
+            self.infobar.hide()
+            newpass = generate_password()
+            self.new_password.set_text(newpass)
+            self.confirm_password.set_text(newpass)
+            self.new_password.set_visibility(True)
+            self.confirm_password.set_visibility(True)
+            self.update_password_icon()
+            return True  # Keep dialog open
         else:
             self.destroy()
 
+    def show_error_in_infobar(self, message):
+        label = self.infobar.get_content_area().get_children()[0]
+        label.set_text(message)
+        self.infobar.show_all()
+
+    def hide_infobar(self):
+        self.infobar.hide()
+
     def change_password(self):
         print("Changing password...")
+        try:
+            service = self._get_pam_service()
+            if not pam.pam().authenticate(GLib.get_user_name(), self.current_password.get_text(), service):
+                self.show_error_in_infobar(_("Wrong password"))
+                return
+        except:
+            self.show_error_in_infobar(_("Internal Error"))
+
         oldpass = self.current_password.get_text()
         newpass = self.new_password.get_text()
         passwd = pexpect.spawn("/usr/bin/passwd")
@@ -405,25 +416,24 @@ class PasswordDialog(Gtk.Dialog):
         passwd.close()
 
         if passwd.exitstatus is None or passwd.exitstatus > 0:
-            self.infobar.show_all()
+            self.show_error_in_infobar(_("An error occurred. Your password was not changed."))
         else:
             self.destroy()
 
-    def set_passwords_visibility(self):
-        visible = self.show_password.get_active()
-        self.new_password.set_visibility(visible)
-        self.confirm_password.set_visibility(visible)
+    def update_password_icon(self):
+        visible = self.new_password.get_visibility()
+        if visible:
+            self.new_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "xsi-view-conceal-symbolic")
+            self.new_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Hide password"))
+        else:
+            self.new_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "xsi-view-reveal-symbolic")
+            self.new_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Show password"))
 
     def _on_new_password_icon_released(self, widget, icon_pos, event):
-        self.infobar.hide()
-        self.show_password.set_active(True)
-        newpass = generate_password()
-        self.new_password.set_text(newpass)
-        self.confirm_password.set_text(newpass)
-        self.check_passwords()
-
-    def _on_show_password_toggled(self, widget):
-        self.set_passwords_visibility()
+        visible = not self.new_password.get_visibility()
+        self.new_password.set_visibility(visible)
+        self.confirm_password.set_visibility(visible)
+        self.update_password_icon()
 
     def _get_pam_service(self):
         import os
@@ -434,33 +444,14 @@ class PasswordDialog(Gtk.Dialog):
         else:
             return 'login'
 
-    def _on_current_password_changed(self, widget, event):
-        self.infobar.hide()
-        try:
-            service = self._get_pam_service()
-            if not pam.pam().authenticate(GLib.get_user_name(), self.current_password.get_text(), service):
-                raise PasswordError("Invalid password")
-        except PasswordError:
-            self.new_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "xsi-dialog-warning-symbolic")
-            self.current_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Wrong password"))
-            self.current_password.set_tooltip_text(_("Wrong password"))
-            self.correct_current_password = False
-        except:
-            self.current_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "xsi-dialog-warning-symbolic")
-            self.current_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Internal Error"))
-            self.current_password.set_tooltip_text(_("Internal Error"))
-            self.correct_current_password = False
-            raise
-        else:
-            self.current_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, None)
-            self.current_password.set_tooltip_text("")
-            self.correct_current_password = True
-            self.check_passwords()
-
-    def _on_passwords_changed(self, widget):
-        self.infobar.hide()
+    def on_passwords_changed(self, widget):
+        self.hide_infobar()
+        problem_found = False
+        current_password = self.current_password.get_text()
         new_password = self.new_password.get_text()
         confirm_password = self.confirm_password.get_text()
+        if len(current_password) < 1 or len(new_password) < 8 or len(confirm_password) < 8:
+            problem_found = True
         text, fraction = get_password_strength(new_password)
         self.strengh_label.set_text(text)
         self.strengh_indicator.set_fraction(fraction)
@@ -468,19 +459,14 @@ class PasswordDialog(Gtk.Dialog):
             self.confirm_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "xsi-dialog-warning-symbolic")
             self.confirm_password.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Passwords do not match"))
             self.confirm_password.set_tooltip_text(_("Passwords do not match"))
+            problem_found = True
         else:
             self.confirm_password.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, None)
             self.confirm_password.set_tooltip_text("")
-        self.check_passwords()
-
-    def check_passwords(self):
-        if self.correct_current_password:
-            new_password = self.new_password.get_text()
-            confirm_password = self.confirm_password.get_text()
-            if len(new_password) >= 8 and new_password == confirm_password:
-                self.set_response_sensitive(Gtk.ResponseType.OK, True)
-            else:
-                self.set_response_sensitive(Gtk.ResponseType.OK, False)
+        if problem_found:
+            self.set_response_sensitive(Gtk.ResponseType.OK, False)
+        else:
+            self.set_response_sensitive(Gtk.ResponseType.OK, True)
 
     def pam_conv(self, auth, query_list, userData):
         resp = []
