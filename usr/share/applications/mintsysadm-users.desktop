@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Users
 Comment=Add or remove users
+Keywords=users;accounts;
 Exec=pkexec mintsysadm --users
 Icon=system-users
 Terminal=false
@@ -9,4 +10,3 @@ Type=Application
 Categories=GNOME;GTK;System;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 X-GNOME-Settings-Panel=system-administration
 NotShowIn=GNOME;KDE;XFCE;MATE;
-Keywords=users;accounts;

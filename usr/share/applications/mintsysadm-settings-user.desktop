@@ -1,11 +1,10 @@
 [Desktop Entry]
 Name=Account details
 Comment=User account and password
+Keywords=user;account;password;avatar;
 Exec=mintsysadm-settings-user
 Icon=preferences-desktop-user
 Terminal=false
 Type=Application
 Categories=Settings;
 NotShowIn=GNOME;KDE;XFCE;MATE;
-Name=Account details
-Keywords=user;account;password;avatar;
