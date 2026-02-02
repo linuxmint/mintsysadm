@@ -122,8 +122,7 @@ class MainWindow():
 
         self.builder.get_object("box_realname").add(self.realname_entry)
 
-        current_user = GLib.get_user_name()
-        self.accountService = AccountsService.UserManager.get_default().get_user(current_user)
+        self.accountService = AccountsService.UserManager.get_default().get_user(GLib.get_user_name())
         self.accountService.connect('notify::is-loaded', self.load_user)
 
         self.window.show()
@@ -316,6 +315,8 @@ class PasswordDialog(Gtk.Dialog):
         self.current_password = Gtk.Entry()
         self.current_password.set_visibility(False)
         self.current_password.connect("changed", self.on_passwords_changed)
+        if self.user.get_password_mode() == AccountsService.UserPasswordMode.NONE:
+            self.current_password.set_sensitive(False)
         table.attach(self.current_password, 1, 3, 0, 1)
 
         self.new_password = Gtk.Entry()
@@ -393,30 +394,30 @@ class PasswordDialog(Gtk.Dialog):
 
     def change_password(self):
         print("Changing password...")
-        try:
-            service = self._get_pam_service()
-            if not pam.pam().authenticate(GLib.get_user_name(), self.current_password.get_text(), service):
-                self.show_error_in_infobar(_("Wrong password"))
-                return
-        except:
-            self.show_error_in_infobar(_("Internal Error"))
-
         oldpass = self.current_password.get_text()
         newpass = self.new_password.get_text()
+        try:
+            auth = pam.pam()
+            if auth.authenticate(GLib.get_user_name(), oldpass, 'common-auth'):
+                print("Password is OK.")
+            else:
+                print("Password is not OK.")
+                self.show_error_in_infobar(_("Wrong password"))
+                return
+        except Exception as e:
+            print("PAM error", e)
+            self.show_error_in_infobar(_("Internal Error"))
+            return
+
         passwd = pexpect.spawn("/usr/bin/passwd")
-        # passwd only asks for the old password when there already is one set.
-        if oldpass == "":
-            time.sleep(0.5)
-            passwd.sendline(newpass)
-            time.sleep(0.5)
-            passwd.sendline(newpass)
-        else:
+        if oldpass != "":
+            # passwd only asks for the password if there's one set already
             time.sleep(0.5)
             passwd.sendline(oldpass)
-            time.sleep(0.5)
-            passwd.sendline(newpass)
-            time.sleep(0.5)
-            passwd.sendline(newpass)
+        time.sleep(0.5)
+        passwd.sendline(newpass)
+        time.sleep(0.5)
+        passwd.sendline(newpass)
         time.sleep(0.5)
         passwd.close()
 
@@ -440,22 +441,13 @@ class PasswordDialog(Gtk.Dialog):
         self.confirm_password.set_visibility(visible)
         self.update_password_icon()
 
-    def _get_pam_service(self):
-        import os
-        if os.path.exists('/etc/pam.d/system-auth'):
-            return 'system-auth'
-        elif os.path.exists('/etc/pam.d/common-auth'):
-            return 'common-auth'
-        else:
-            return 'login'
-
     def on_passwords_changed(self, widget):
         self.hide_infobar()
         problem_found = False
         current_password = self.current_password.get_text()
         new_password = self.new_password.get_text()
         confirm_password = self.confirm_password.get_text()
-        if len(current_password) < 1 or len(new_password) < 8 or len(confirm_password) < 8:
+        if len(new_password) < 8 or len(confirm_password) < 8:
             problem_found = True
         text, fraction = get_password_strength(new_password)
         self.strengh_label.set_text(text)
