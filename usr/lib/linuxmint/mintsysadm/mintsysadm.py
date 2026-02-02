@@ -2,19 +2,18 @@
 import argparse
 import gi
 import os
+import re
 import setproctitle
 import subprocess
-import xapp.widgets
-import re
+import sys
 import xapp.threading as xt
 import xapp.util
-import sys
-from page_users import UsersWidget
-
+import xapp.widgets
 gi.require_version("Gtk", "3.0")
 gi.require_version('GtkSource', '3.0')
 gi.require_version('XApp', '1.0')
 from gi.repository import Gtk, Gdk, GtkSource, Gio, XApp
+from page_users import UsersWidget
 
 setproctitle.setproctitle("mintsysadm")
 

@@ -9,7 +9,6 @@ import subprocess
 import xapp.SettingsWidgets as xs
 import xapp.threading as xt
 import xapp.util
-
 gi.require_version("AccountsService", "1.0")
 gi.require_version("Gtk", "3.0")
 from common.user import PrivHelper, generate_password, get_circular_pixbuf_from_path, get_password_strength

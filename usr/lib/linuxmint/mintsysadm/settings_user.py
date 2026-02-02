@@ -1,22 +1,22 @@
 #!/usr/bin/python3
-import PIL
 import gi
-import pexpect
-import time
-import shutil
-import os
-import sys
-import subprocess
-import setproctitle
-import xapp.util
-import pam
 import glob
+import os
+import pam
+import pexpect
+import PIL
+import setproctitle
+import shutil
+import subprocess
+import sys
+import time
+import xapp.util
+gi.require_version('AccountsService', '1.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('XApp', '1.0')
-gi.require_version('AccountsService', '1.0')
-from gi.repository import AccountsService, GLib, Gtk, Gio
 from common.user import generate_password, get_circular_pixbuf_from_path, get_password_strength
 from common.widgets import DimmedTable, EditableEntry
+from gi.repository import AccountsService, GLib, Gtk, Gio
 from PIL import Image
 
 setproctitle.setproctitle("mintsysadm-settings-user")
