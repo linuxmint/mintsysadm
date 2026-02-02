@@ -259,7 +259,6 @@ GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT {boot_args}"
         dlg.set_version("__DEB_VERSION__")
         dlg.set_icon_name("mintsysadm")
         dlg.set_logo_icon_name("mintsysadm")
-        dlg.set_website("https://www.github.com/linuxmint/mintsysadm")
         def close(w, res):
             if res == Gtk.ResponseType.CANCEL or res == Gtk.ResponseType.DELETE_EVENT:
                 w.destroy()
