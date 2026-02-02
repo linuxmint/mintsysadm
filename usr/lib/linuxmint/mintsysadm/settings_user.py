@@ -424,6 +424,7 @@ class PasswordDialog(Gtk.Dialog):
         if passwd.exitstatus is None or passwd.exitstatus > 0:
             self.show_error_in_infobar(_("An error occurred. Your password was not changed."))
         else:
+            self.password_label.set_text('\u2022\u2022\u2022\u2022\u2022\u2022')
             self.destroy()
 
     def update_password_icon(self):
