@@ -230,7 +230,6 @@ class PasswordDialog(Gtk.Dialog):
     def change_password(self):
         newpass = self.new_password.get_text()
         self.user.set_password(newpass, "")
-        subprocess.call(["gpasswd", "-d", self.user.get_user_name(), "nopasswdlogin"])
         self.password_mask.set_text('\u2022\u2022\u2022\u2022\u2022\u2022')
         self.destroy()
 
@@ -717,7 +716,6 @@ class UsersWidget(Gtk.Box):
                                 shutil.rmtree(backup_dir)
                 else:
                     new_user.set_password_mode(AccountsService.UserPasswordMode.NONE)
-                    subprocess.call(["gpasswd", "-a", username, "nopasswdlogin"])
 
                 # Add to sudo group if Administrator
                 if dialog.administrator_switch.get_active():
