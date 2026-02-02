@@ -163,10 +163,10 @@ class MainWindow():
             path = dialog.get_filename()
             image = PIL.Image.open(path)
             image.thumbnail((96, 96), PIL.Image.LANCZOS)
-            self.user.set_icon_file(self.face_path)
             if os.path.exists(self.face_path):
                 os.remove(self.face_path)
             image.save(self.face_path, "png")
+            self.user.set_icon_file(self.face_path)
             try:
                 self.face_image.set_from_pixbuf(get_circular_pixbuf_from_path(self.face_path, ICON_SIZE_CHOOSE_BUTTON))
             except:
@@ -190,8 +190,11 @@ class MainWindow():
         else:
             self.user.set_icon_file("")
             self.face_image.set_from_icon_name("xsi-avatar-default-symbolic", Gtk.IconSize.DIALOG)
-            if os.path.exists(self.face_path):
-                os.remove(self.face_path)
+            try:
+                if os.path.exists(self.face_path):
+                    os.remove(self.face_path)
+            except Exception as e:
+                print(f"Error removing .face file: {e}")
 
     def update_preview_cb (self, dialog, preview):
         # Different widths make the dialog look really crappy as it resizes -
@@ -287,10 +290,12 @@ class MainWindow():
         image.save(temp_path, "png")
         self.set_avatar(temp_path)
         os.remove(temp_path)
-
-class PasswordError(Exception):
-    """Exception raised when an incorrect password is supplied."""
-    pass
+        # Clean up temporary webcam files
+        for temp_file in glob.glob("/tmp/temp-account-pic*.jpeg"):
+            try:
+                os.remove(temp_file)
+            except:
+                pass
 
 class PasswordDialog(Gtk.Dialog):
 
@@ -467,14 +472,6 @@ class PasswordDialog(Gtk.Dialog):
             self.set_response_sensitive(Gtk.ResponseType.OK, False)
         else:
             self.set_response_sensitive(Gtk.ResponseType.OK, True)
-
-    def pam_conv(self, auth, query_list, userData):
-        resp = []
-        for i in range(len(query_list)):
-            query, type = query_list[i]
-            val = self.current_password.get_text()
-            resp.append((val, 0))
-        return resp
 
 if __name__ == "__main__":
     application = MyApplication("com.linuxmint.sysadm.user", Gio.ApplicationFlags.HANDLES_COMMAND_LINE)
