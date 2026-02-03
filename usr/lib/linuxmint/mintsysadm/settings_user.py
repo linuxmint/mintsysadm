@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import cv2
 import gi
 import glob
 import os
@@ -16,7 +17,7 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('XApp', '1.0')
 from common.user import generate_password, get_password_strength, set_image_from_avatar
 from common.widgets import DimmedTable, EditableEntry
-from gi.repository import AccountsService, GLib, Gtk, Gio
+from gi.repository import AccountsService, GLib, Gtk, Gio, Gdk, GdkPixbuf
 from PIL import Image
 
 setproctitle.setproctitle("mintsysadm-settings-user")
@@ -247,39 +248,186 @@ class MainWindow():
             self.password_button_label.set_text(_("Set at login"))
 
     def on_take_picture(self, menuitem):
-        # streamer takes -t photos, uses /dev/video0
-        if 0 != subprocess.call(["streamer", "-j90", "-t8", "-s800x600", "-o", "/tmp/temp-account-pic00.jpeg"]):
-            print("Error: Webcam not available")
-            return
-        # Use the 8th frame (the webcam takes a few frames to "lighten up")
-        image = Image.open("/tmp/temp-account-pic07.jpeg")
-        # Crop the image to thumbnail size
-        width, height = image.size
+        dialog = WebcamDialog(self.window)
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            image_data = dialog.get_captured_image()
+            if image_data:
+                temp_path = self.face_path + ".tmp"
+                image_data.save(temp_path, "png")
+                self.set_avatar(temp_path)
+                os.remove(temp_path)
+        dialog.destroy()
+
+class WebcamDialog(Gtk.Dialog):
+    def __init__(self, parent):
+        super().__init__(title=_("Take a Picture"), transient_for=parent, modal=True)
+        self.set_default_size(640, 480)
+
+        self.add_button(_("Cancel"), Gtk.ResponseType.CANCEL)
+        self.capture_button = self.add_button(_("Capture"), Gtk.ResponseType.OK)
+        self.capture_button.get_style_context().add_class("suggested-action")
+        self.capture_button.set_sensitive(False)  # Disabled until camera loads
+
+        content = self.get_content_area()
+        content.set_spacing(12)
+        content.set_border_width(12)
+
+        # Create a stack to show loading icon or camera preview
+        self.preview_stack = Gtk.Stack()
+        self.preview_stack.set_size_request(640, 480)
+        self.preview_stack.set_transition_type(Gtk.StackTransitionType.SLIDE_DOWN)
+
+        # Message page (for loading or error)
+        self.message_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        self.message_box.set_halign(Gtk.Align.CENTER)
+        self.message_box.set_valign(Gtk.Align.CENTER)
+        self.message_icon = Gtk.Image.new_from_icon_name("xsi-camera-symbolic", Gtk.IconSize.DIALOG)
+        self.message_icon.set_pixel_size(96)
+        self.message_icon.get_style_context().add_class("dim-label")
+        self.message_box.pack_start(self.message_icon, False, False, 0)
+        self.message_label = Gtk.Label(_("Accessing the webcam..."))
+        self.message_label.get_style_context().add_class("dim-label")
+        self.message_label.set_line_wrap(True)
+        self.message_label.set_max_width_chars(50)
+        self.message_box.pack_start(self.message_label, False, False, 0)
+        self.preview_stack.add_named(self.message_box, "message")
+
+        # Camera preview
+        self.image = Gtk.Image()
+        self.image.set_size_request(640, 480)
+        self.preview_stack.add_named(self.image, "preview")
+
+        # Show message (loading) initially
+        self.preview_stack.set_visible_child_name("message")
+        content.pack_start(self.preview_stack, True, True, 0)
+
+        self.show_all()
+
+        self.cap = None
+        self.current_frame = None
+        self.captured_frame = None
+
+        self.connect("response", self.on_response)
+
+        # Defer webcam init so the loading message is rendered first
+        GLib.idle_add(self.init_camera)
+
+    def init_camera(self):
+        if not self.get_visible():
+            return False
+
+        # Prefer GStreamer (similar to cheese) for better quality when available
+        print("Initializing webcam with GStreamer...")
+        target_width = 3840
+        target_height = 2160
+        gst_pipeline = (
+            f"v4l2src device=/dev/video0 ! "
+            f"image/jpeg,width={target_width},height={target_height},framerate=30/1 ! "
+            f"jpegdec ! videoconvert ! appsink drop=1"
+        )
+
+        self.cap = cv2.VideoCapture(gst_pipeline, cv2.CAP_GSTREAMER)
+
+        # Fallback to V4L2 if GStreamer isn't available
+        if not self.cap.isOpened():
+            print("Falling back to V4L2...")
+            self.cap.release()
+            self.cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, target_width)
+            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, target_height)
+            self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
+
+        # Check if camera opened successfully
+        if not self.cap.isOpened():
+            self.cap.release()
+            self.cap = None
+            self.message_icon.set_from_icon_name("xsi-camera-hardware-disabled-symbolic", Gtk.IconSize.DIALOG)
+            self.message_label.set_text(_("The webcam couldn't be accessed."))
+            self.preview_stack.set_visible_child_name("message")
+            return False
+
+        # Start updating frames
+        GLib.timeout_add(33, self.update_frame)  # ~30 fps
+        return False
+
+    def update_frame(self):
+        if not self.get_visible():
+            return False
+
+        ret, frame = self.cap.read()
+        if ret:
+            self.current_frame = frame
+            # Mirror preview (selfie-style) without affecting captured image
+            preview_frame = cv2.flip(frame, 1)
+            # Convert BGR to RGB
+            frame_rgb = cv2.cvtColor(preview_frame, cv2.COLOR_BGR2RGB)
+            height, width, channels = frame_rgb.shape
+
+            # Convert to GdkPixbuf
+            pixbuf = GdkPixbuf.Pixbuf.new_from_data(
+                frame_rgb.tobytes(),
+                GdkPixbuf.Colorspace.RGB,
+                False,
+                8,
+                width,
+                height,
+                width * channels,
+                None,
+                None
+            )
+            # Scale to fit preview size
+            alloc = self.image.get_allocation()
+            target_w = alloc.width if alloc.width > 0 else 640
+            target_h = alloc.height if alloc.height > 0 else 480
+            if width != target_w or height != target_h:
+                scale = min(target_w / width, target_h / height)
+                scaled_w = max(1, int(width * scale))
+                scaled_h = max(1, int(height * scale))
+                pixbuf = pixbuf.scale_simple(scaled_w, scaled_h, GdkPixbuf.InterpType.BILINEAR)
+            self.image.set_from_pixbuf(pixbuf)
+
+            # Switch from message to preview on first frame
+            if self.preview_stack.get_visible_child_name() == "message":
+                self.preview_stack.set_visible_child_name("preview")
+                self.capture_button.set_sensitive(True)  # Enable capture button
+
+        return True
+
+    def on_response(self, dialog, response_id):
+        if response_id == Gtk.ResponseType.OK:
+            self.captured_frame = self.current_frame
+
+    def get_captured_image(self):
+        if self.captured_frame is None:
+            return None
+
+        frame = self.captured_frame
+        height, width = frame.shape[:2]
+
+        # Crop to square
         if width > height:
-            new_width = height
-            new_height = height
-        elif height > width:
-            new_width = width
-            new_height = width
+            size = height
+            x = (width - size) // 2
+            y = 0
         else:
-            new_width = width
-            new_height = height
-        left = (width - new_width) / 2
-        top = (height - new_height) / 2
-        right = (width + new_width) / 2
-        bottom = (height + new_height) / 2
-        image = image.crop((left, top, right, bottom))
-        image.thumbnail((512, 512), Image.LANCZOS)
-        temp_path = self.face_path + ".tmp"
-        image.save(temp_path, "png")
-        self.set_avatar(temp_path)
-        os.remove(temp_path)
-        # Clean up temporary webcam files
-        for temp_file in glob.glob("/tmp/temp-account-pic*.jpeg"):
-            try:
-                os.remove(temp_file)
-            except:
-                pass
+            size = width
+            x = 0
+            y = (height - size) // 2
+
+        cropped = frame[y:y+size, x:x+size]
+
+        # Resize to 512x512
+        resized = cv2.resize(cropped, (512, 512), interpolation=cv2.INTER_LANCZOS4)
+
+        # Convert BGR to RGB and create PIL Image
+        rgb = cv2.cvtColor(resized, cv2.COLOR_BGR2RGB)
+        return Image.fromarray(rgb)
+
+    def destroy(self):
+        if self.cap:
+            self.cap.release()
+        super().destroy()
 
 class PasswordDialog(Gtk.Dialog):
 

@@ -2,7 +2,6 @@
 import datetime
 import gi
 import os
-from PIL import Image, ImageOps
 import re
 import shutil
 import subprocess
@@ -14,6 +13,7 @@ gi.require_version("Gtk", "3.0")
 from common.user import PrivHelper, generate_password, get_password_strength, set_image_from_avatar
 from common.widgets import DimmedTable, EditableEntry
 from gi.repository import Gtk, Gdk, AccountsService
+from PIL import Image, ImageOps
 
 priv_helper = PrivHelper()
 
