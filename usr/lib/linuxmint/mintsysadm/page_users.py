@@ -11,7 +11,7 @@ import xapp.threading as xt
 import xapp.util
 gi.require_version("AccountsService", "1.0")
 gi.require_version("Gtk", "3.0")
-from common.user import PrivHelper, generate_password, get_circular_pixbuf_from_path, get_password_strength
+from common.user import PrivHelper, generate_password, get_password_strength, set_image_from_avatar
 from common.widgets import DimmedTable, EditableEntry
 from gi.repository import Gtk, Gdk, AccountsService
 
@@ -334,12 +334,8 @@ class UsersWidget(Gtk.Box):
                 pictures = sorted(os.listdir(face_dir))
                 for picture in pictures:
                     path = os.path.join(face_dir, picture)
-                    try:
-                        pixbuf = get_circular_pixbuf_from_path(path, ICON_SIZE_CHOOSE_MENU)
-                        image = Gtk.Image.new_from_pixbuf(pixbuf)
-                    except:
-                        image = Gtk.Image.new_from_icon_name("xsi-avatar-default-symbolic", ICON_SIZE_CHOOSE_MENU)
-                        image.set_pixel_size(ICON_SIZE_CHOOSE_MENU)
+                    image = Gtk.Image()
+                    set_image_from_avatar(image, path, ICON_SIZE_CHOOSE_MENU, fallback_icon_size=ICON_SIZE_CHOOSE_MENU)
                     menuitem = Gtk.MenuItem()
                     menuitem.add(image)
                     menuitem.connect('activate', self._on_face_menuitem_activated, path)
@@ -457,11 +453,7 @@ class UsersWidget(Gtk.Box):
             finally:
                 priv_helper.restore_privs()
             self.user.set_icon_file(face_path)
-
-            try:
-                self.face_image.set_from_pixbuf(get_circular_pixbuf_from_path(face_path, ICON_SIZE_CHOOSE_BUTTON))
-            except:
-                self.face_image.set_from_icon_name("xsi-avatar-default-symbolic", Gtk.IconSize.DIALOG)
+            set_image_from_avatar(self.face_image, face_path, ICON_SIZE_CHOOSE_BUTTON)
 
         dialog.destroy()
 
@@ -472,11 +464,9 @@ class UsersWidget(Gtk.Box):
         if filename is not None:
             if os.path.isfile(filename):
                 try:
-                    pixbuf = get_circular_pixbuf_from_path(filename, ICON_SIZE_DIALOG_PREVIEW)
-                    if pixbuf is not None:
-                        preview.set_from_pixbuf(pixbuf)
-                        self.frame.show()
-                        return
+                    set_image_from_avatar(preview, filename, ICON_SIZE_DIALOG_PREVIEW)
+                    self.frame.show()
+                    return
                 except:
                     print(f"Unable to generate preview for file '{filename}'")
 
@@ -486,11 +476,7 @@ class UsersWidget(Gtk.Box):
     def _on_face_menuitem_activated(self, menuitem, path):
         if os.path.exists(path):
             self.user.set_icon_file(path)
-            try:
-                self.face_image.set_from_pixbuf(get_circular_pixbuf_from_path(path, ICON_SIZE_CHOOSE_BUTTON))
-            except:
-                self.face_image.set_from_icon_name("xsi-avatar-default-symbolic", Gtk.IconSize.DIALOG)
-
+            set_image_from_avatar(self.face_image, path, ICON_SIZE_CHOOSE_BUTTON)
             face_path = os.path.join(self.user.get_home_dir(), ".face")
             try:
                 try:
@@ -582,11 +568,7 @@ class UsersWidget(Gtk.Box):
         else:
             self.account_type_switch.set_active(False)
         self.account_type_switch.handler_unblock(self.switch_handler_id)
-
-        try:
-            self.face_image.set_from_pixbuf(get_circular_pixbuf_from_path(user.get_icon_file(), ICON_SIZE_CHOOSE_BUTTON))
-        except:
-            self.face_image.set_from_icon_name("xsi-avatar-default-symbolic", Gtk.IconSize.DIALOG)
+        set_image_from_avatar(self.face_image, user.get_icon_file(), ICON_SIZE_CHOOSE_BUTTON)
 
         # Count the number of connections for the currently logged-in user
         connections = int(subprocess.check_output(["w", "-h", user.get_user_name()]).decode("utf-8").count("\n"))
@@ -635,13 +617,8 @@ class UsersWidget(Gtk.Box):
         box.set_margin_top(12)
         box.set_margin_bottom(12)
 
-        try:
-            pixbuf = get_circular_pixbuf_from_path(user.get_icon_file(), ICON_SIZE_FLOWBOX)
-            image = Gtk.Image.new_from_pixbuf(pixbuf)
-        except:
-            image = Gtk.Image.new_from_icon_name("xsi-avatar-default-symbolic", ICON_SIZE_FLOWBOX)
-            image.set_pixel_size(ICON_SIZE_FLOWBOX)
-
+        image = Gtk.Image()
+        set_image_from_avatar(image, user.get_icon_file(), ICON_SIZE_FLOWBOX, fallback_icon_size=ICON_SIZE_FLOWBOX)
         box.pack_start(image, False, False, 0)
 
         # Name

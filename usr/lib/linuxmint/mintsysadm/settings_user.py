@@ -14,7 +14,7 @@ import xapp.util
 gi.require_version('AccountsService', '1.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('XApp', '1.0')
-from common.user import generate_password, get_circular_pixbuf_from_path, get_password_strength
+from common.user import generate_password, get_password_strength, set_image_from_avatar
 from common.widgets import DimmedTable, EditableEntry
 from gi.repository import AccountsService, GLib, Gtk, Gio
 from PIL import Image
@@ -77,12 +77,8 @@ class MainWindow():
                 pictures = sorted(os.listdir(face_dir))
                 for picture in pictures:
                     path = os.path.join(face_dir, picture)
-                    try:
-                        pixbuf = get_circular_pixbuf_from_path(path, ICON_SIZE_CHOOSE_MENU)
-                        image = Gtk.Image.new_from_pixbuf(pixbuf)
-                    except:
-                        image = Gtk.Image.new_from_icon_name("xsi-avatar-default-symbolic", ICON_SIZE_CHOOSE_MENU)
-                        image.set_pixel_size(ICON_SIZE_CHOOSE_MENU)
+                    image = Gtk.Image()
+                    set_image_from_avatar(image, path, ICON_SIZE_CHOOSE_MENU, fallback_icon_size=ICON_SIZE_CHOOSE_MENU)
                     menuitem = Gtk.MenuItem()
                     menuitem.add(image)
                     menuitem.connect('activate', self.on_avatar_selected, path)
@@ -166,20 +162,13 @@ class MainWindow():
                 os.remove(self.face_path)
             image.save(self.face_path, "png")
             self.user.set_icon_file(self.face_path)
-            try:
-                self.face_image.set_from_pixbuf(get_circular_pixbuf_from_path(self.face_path, ICON_SIZE_CHOOSE_BUTTON))
-            except:
-                self.face_image.set_from_icon_name("xsi-avatar-default-symbolic", Gtk.IconSize.DIALOG)
-
+            set_image_from_avatar(self.face_image, self.face_path, ICON_SIZE_CHOOSE_BUTTON)
         dialog.destroy()
 
     def set_avatar(self, path):
         if os.path.exists(path):
             self.user.set_icon_file(path)
-            try:
-                self.face_image.set_from_pixbuf(get_circular_pixbuf_from_path(path, ICON_SIZE_CHOOSE_BUTTON))
-            except:
-                self.face_image.set_from_icon_name("xsi-avatar-default-symbolic", Gtk.IconSize.DIALOG)
+            set_image_from_avatar(self.face_image, path, ICON_SIZE_CHOOSE_BUTTON)
             try:
                 if os.path.exists(self.face_path):
                     os.remove(self.face_path)
@@ -202,11 +191,9 @@ class MainWindow():
         if filename is not None:
             if os.path.isfile(filename):
                 try:
-                    pixbuf = get_circular_pixbuf_from_path(filename, ICON_SIZE_DIALOG_PREVIEW)
-                    if pixbuf is not None:
-                        preview.set_from_pixbuf(pixbuf)
-                        self.frame.show()
-                        return
+                    set_image_from_avatar(preview, filename, ICON_SIZE_DIALOG_PREVIEW)
+                    self.frame.show()
+                    return
                 except:
                     print(f"Unable to generate preview for file '{filename}'")
 
@@ -250,10 +237,7 @@ class MainWindow():
         self.face_path = os.path.join(user.get_home_dir(), ".face")
         self.builder.get_object("label_username").set_text(user.get_user_name())
         self.realname_entry.set_text(user.get_real_name())
-        try:
-            self.face_image.set_from_pixbuf(get_circular_pixbuf_from_path(user.get_icon_file(), ICON_SIZE_CHOOSE_BUTTON))
-        except:
-            self.face_image.set_from_icon_name("xsi-avatar-default-symbolic", Gtk.IconSize.DIALOG)
+        set_image_from_avatar(self.face_image, user.get_icon_file(), ICON_SIZE_CHOOSE_BUTTON)
         if user.get_password_mode() == AccountsService.UserPasswordMode.REGULAR:
             self.password_button_label.set_text('\u2022\u2022\u2022\u2022\u2022\u2022')
         elif user.get_password_mode() == AccountsService.UserPasswordMode.NONE:

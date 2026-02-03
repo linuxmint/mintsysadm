@@ -38,27 +38,43 @@ class PrivHelper():
         os.setegid(self.orig_gid)
         os.setgroups(self.orig_groups)
 
-# Create a circular pixbuf from an image path
-# throws an exeption if the pixbuf cannot be created
-def get_circular_pixbuf_from_path(path, size):
-	pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(path, size, size)
-	size = min(pixbuf.get_width(), pixbuf.get_height())
-	if pixbuf.get_width() != pixbuf.get_height():
-		pixbuf = pixbuf.scale_simple(size, size, GdkPixbuf.InterpType.BILINEAR)
-	radius = size // 2
-	width = pixbuf.get_width()
-	height = pixbuf.get_height()
-	surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
-	ctx = cairo.Context(surface)
-	ctx.arc(radius, radius, radius, math.pi, 3 * math.pi / 2)
-	ctx.arc(width - radius, radius, radius, 3 * math.pi / 2, 0)
-	ctx.arc(width - radius, height - radius, radius, 0, math.pi / 2)
-	ctx.arc(radius, height - radius, radius, math.pi / 2, math.pi)
-	ctx.close_path()
-	ctx.clip()
-	Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0)
-	ctx.paint()
-	return Gdk.pixbuf_get_from_surface(surface, 0, 0, width, height)
+# Make a circular pixbuf and set the image with it
+# use a fallback icon name if it fails
+def set_image_from_avatar(image, path, size, fallback_icon_name="xsi-avatar-default-symbolic", fallback_icon_size=Gtk.IconSize.DIALOG):
+    scale = image.get_scale_factor()
+    scaled_size = size * scale
+    try:
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(path, scaled_size, scaled_size)
+        # Ensure the pixbuf is square
+        actual_size = min(pixbuf.get_width(), pixbuf.get_height())
+        if pixbuf.get_width() != pixbuf.get_height():
+            pixbuf = pixbuf.scale_simple(actual_size, actual_size, GdkPixbuf.InterpType.BILINEAR)
+
+        # Create a surface at the scaled size (physical pixels)
+        width = pixbuf.get_width()
+        height = pixbuf.get_height()
+        surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
+        # Set device scale so cairo works in logical coordinates
+        surface.set_device_scale(scale, scale)
+
+        ctx = cairo.Context(surface)
+        # Draw circular clipping path using logical coordinates (size, not scaled_size)
+        radius = size // 2
+        ctx.arc(radius, radius, radius, math.pi, 3 * math.pi / 2)
+        ctx.arc(size - radius, radius, radius, 3 * math.pi / 2, 0)
+        ctx.arc(size - radius, size - radius, radius, 0, math.pi / 2)
+        ctx.arc(radius, size - radius, radius, math.pi / 2, math.pi)
+        ctx.close_path()
+        ctx.clip()
+        # Scale down the pixbuf to logical size when drawing
+        ctx.scale(1.0 / scale, 1.0 / scale)
+        Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0)
+        ctx.paint()
+
+        image.set_from_surface(surface)
+    except Exception as e:
+        image.set_from_icon_name(fallback_icon_name, fallback_icon_size)
+        image.set_pixel_size(fallback_icon_size)
 
 def generate_password():
     characters = "!@#$%^&*()_-+{}|:<>?=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
