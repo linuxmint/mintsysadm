@@ -6,50 +6,21 @@ import pam
 import pexpect
 import setproctitle
 import shutil
+import subprocess
 import sys
 import time
 import xapp.util
 gi.require_version('AccountsService', '1.0')
-gi.require_version('Gst', '1.0')
-gi.require_version('GtkClutter', '1.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('XApp', '1.0')
-
-# Load cheese-gtk widgets using ctypes + pygobject
-import ctypes
-from gi._gi import pygobject_new_full
-
-# Initialize GStreamer and Clutter before widgets
-from gi.repository import Gst, GtkClutter
-Gst.init(None)
-GtkClutter.init(None)
-
-# Load libcheese-gtk
-try:
-    libcheese_gtk = ctypes.CDLL('libcheese-gtk.so.25')
-    libcheese_gtk.cheese_gtk_init.restype = None
-    libcheese_gtk.cheese_gtk_init.argtypes = [ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.POINTER(ctypes.c_char_p))]
-    libcheese_gtk.cheese_widget_get_type.restype = ctypes.c_size_t
-    libcheese_gtk.cheese_widget_new.restype = ctypes.c_void_p
-    libcheese_gtk.cheese_widget_new.argtypes = []
-    libcheese_gtk.cheese_avatar_widget_get_type.restype = ctypes.c_size_t  
-    libcheese_gtk.cheese_avatar_widget_new.restype = ctypes.c_void_p
-    libcheese_gtk.cheese_avatar_widget_new.argtypes = []
-    libcheese_gtk.cheese_avatar_widget_get_picture.restype = ctypes.c_void_p
-    libcheese_gtk.cheese_avatar_widget_get_picture.argtypes = [ctypes.c_void_p]
-    
-    # Initialize cheese-gtk
-    libcheese_gtk.cheese_gtk_init(None, None)
-    
-    HAS_CHEESE_GTK = True
-except Exception as e:
-    print(f"Could not load libcheese-gtk: {e}")
-    HAS_CHEESE_GTK = False
+gi.require_version('Gst', '1.0')
 
 from common.user import generate_password, get_password_strength, set_image_from_avatar
 from common.widgets import DimmedTable, EditableEntry
-from gi.repository import AccountsService, GLib, Gtk, Gio, Gdk, GdkPixbuf
-from PIL import Image, ImageOps
+from gi.repository import AccountsService, GLib, Gtk, Gio, Gdk, GdkPixbuf, Gst
+
+# Initialize GStreamer
+Gst.init(None)
 
 setproctitle.setproctitle("mintsysadm-settings-user")
 
@@ -279,49 +250,149 @@ class MainWindow():
             self.password_button_label.set_text(_("Set at login"))
 
     def on_take_picture(self, menuitem):
-        if not HAS_CHEESE_GTK:
-            print("cheese-gtk not available")
-            return
-            
         dialog = Gtk.Dialog(
             title=_("Take a Picture"),
             transient_for=self.window,
             modal=True
         )
         dialog.add_button(_("Cancel"), Gtk.ResponseType.CANCEL)
-        dialog.add_button(_("Select"), Gtk.ResponseType.OK)
+        dialog.add_button(_("Capture"), Gtk.ResponseType.OK)
         dialog.get_widget_for_response(Gtk.ResponseType.OK).get_style_context().add_class("suggested-action")
-        
+        dialog.set_default_size(512, 600)
+
         content = dialog.get_content_area()
-        
-        # Create CheeseAvatarWidget using libcheese-gtk
-        try:
-            widget_ptr = libcheese_gtk.cheese_avatar_widget_new()
-            avatar_widget = pygobject_new_full(widget_ptr, False)
-            avatar_widget.set_size_request(512, 400)
-            content.pack_start(avatar_widget, True, True, 0)
-            content.show_all()
-            
-            response = dialog.run()
-            if response == Gtk.ResponseType.OK:
-                # Get the pixbuf from avatar widget
-                pixbuf_ptr = libcheese_gtk.cheese_avatar_widget_get_picture(widget_ptr)
-                if pixbuf_ptr:
-                    pixbuf = pygobject_new_full(pixbuf_ptr, False)
-                    
-                    # Convert pixbuf to PIL Image
-                    width = pixbuf.get_width()
-                    height = pixbuf.get_height()
-                    stride = pixbuf.get_rowstride()
-                    pixels = pixbuf.get_pixels()
-                    has_alpha = pixbuf.get_has_alpha()
-                    
-                    mode = "RGBA" if has_alpha else "RGB"
-                    image = Image.frombytes(mode, (width, height), pixels, "raw", mode, stride)
-                    if mode == "RGBA":
-                        image = image.convert("RGB")
-                    
-                    # Crop to square and resize to 512x512
+
+        preview = Gtk.Image()
+        preview.set_size_request(512, 512)
+
+        loading_label = Gtk.Label(label=_("Loading camera..."))
+
+        # Add mirror toggle button
+        button_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        button_box.set_halign(Gtk.Align.CENTER)
+        button_box.set_margin_top(6)
+        button_box.set_margin_bottom(6)
+
+        mirror_toggle = Gtk.ToggleButton()
+        mirror_toggle.set_active(True)  # Default to mirrored
+        mirror_toggle.set_tooltip_text(_("Mirror Picture"))
+        mirror_icon = Gtk.Image.new_from_icon_name("xsi-object-flip-horizontal-symbolic", Gtk.IconSize.BUTTON)
+        mirror_toggle.set_image(mirror_icon)
+        button_box.pack_start(mirror_toggle, False, False, 0)
+
+        content.pack_start(loading_label, True, True, 0)
+        content.pack_start(preview, False, False, 0)
+        content.pack_start(button_box, False, False, 0)
+        content.show_all()
+
+        # Variables
+        pipeline = [None]
+        sample = [None]
+        update_id = [None]
+
+        def on_new_sample(sink):
+            sample[0] = sink.emit("pull-sample")
+            return Gst.FlowReturn.OK
+
+        def update_preview():
+            if sample[0] is None:
+                return True
+
+            try:
+                caps = sample[0].get_caps()
+                structure = caps.get_structure(0)
+                width = structure.get_value('width')
+                height = structure.get_value('height')
+
+                buffer = sample[0].get_buffer()
+                result, mapinfo = buffer.map(Gst.MapFlags.READ)
+
+                if result:
+                    # Create pixbuf from raw data
+                    pixbuf = GdkPixbuf.Pixbuf.new_from_data(
+                        mapinfo.data,
+                        GdkPixbuf.Colorspace.RGB,
+                        False,
+                        8,
+                        width,
+                        height,
+                        width * 3,
+                        None,
+                        None
+                    )
+
+                    # Mirror horizontally for selfie effect if enabled
+                    if mirror_toggle.get_active():
+                        pixbuf = pixbuf.flip(True)
+
+                    # Scale to fit 512x512
+                    if width > height:
+                        new_width = 512
+                        new_height = int(height * 512 / width)
+                    else:
+                        new_height = 512
+                        new_width = int(width * 512 / height)
+
+                    scaled = pixbuf.scale_simple(new_width, new_height, GdkPixbuf.InterpType.BILINEAR)
+                    preview.set_from_pixbuf(scaled)
+
+                    buffer.unmap(mapinfo)
+            except Exception as e:
+                print(f"Error updating preview: {e}")
+
+            return True
+
+        def init_camera():
+            loading_label.hide()
+
+            # Create GStreamer pipeline
+            pipeline_str = "v4l2src ! videoconvert ! video/x-raw,format=RGB ! appsink name=sink emit-signals=true"
+            pipeline[0] = Gst.parse_launch(pipeline_str)
+
+            sink = pipeline[0].get_by_name('sink')
+            sink.connect('new-sample', on_new_sample)
+
+            pipeline[0].set_state(Gst.State.PLAYING)
+            update_id[0] = GLib.timeout_add(33, update_preview)  # ~30 fps
+            return False
+
+        GLib.idle_add(init_camera)
+
+        response = dialog.run()
+
+        # Stop preview
+        if update_id[0]:
+            GLib.source_remove(update_id[0])
+
+        # Capture final image
+        if response == Gtk.ResponseType.OK and sample[0]:
+            try:
+                caps = sample[0].get_caps()
+                structure = caps.get_structure(0)
+                width = structure.get_value('width')
+                height = structure.get_value('height')
+
+                buffer = sample[0].get_buffer()
+                result, mapinfo = buffer.map(Gst.MapFlags.READ)
+
+                if result:
+                    pixbuf = GdkPixbuf.Pixbuf.new_from_data(
+                        mapinfo.data,
+                        GdkPixbuf.Colorspace.RGB,
+                        False,
+                        8,
+                        width,
+                        height,
+                        width * 3,
+                        None,
+                        None
+                    )
+
+                    # Mirror saved image if enabled
+                    if mirror_toggle.get_active():
+                        pixbuf = pixbuf.flip(True)
+
+                    # Crop to square
                     if width > height:
                         size = height
                         x = (width - size) // 2
@@ -331,19 +402,29 @@ class MainWindow():
                         x = 0
                         y = (height - size) // 2
                     
-                    cropped = image.crop((x, y, x + size, y + size))
-                    resized = cropped.resize((512, 512), Image.LANCZOS)
+                    cropped = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8, size, size)
+                    pixbuf.copy_area(x, y, size, size, cropped, 0, 0)
                     
-                    temp_path = self.face_path + ".tmp"
-                    resized.save(temp_path, "png")
-                    self.set_avatar(temp_path)
-                    os.remove(temp_path)
-        except Exception as e:
-            print(f"Error with cheese avatar widget: {e}")
-            import traceback
-            traceback.print_exc()
-        finally:
-            dialog.destroy()
+                    # Scale to 512x512
+                    scaled = cropped.scale_simple(512, 512, GdkPixbuf.InterpType.BILINEAR)
+                    
+                    # Save
+                    if os.path.exists(self.face_path):
+                        os.remove(self.face_path)
+                    scaled.savev(self.face_path, "png", [], [])
+                    self.set_avatar(self.face_path)
+                    
+                    buffer.unmap(mapinfo)
+            except Exception as e:
+                print(f"Error capturing image: {e}")
+                import traceback
+                traceback.print_exc()
+        
+        # Cleanup
+        if pipeline[0]:
+            pipeline[0].set_state(Gst.State.NULL)
+        
+        dialog.destroy()
 
 class PasswordDialog(Gtk.Dialog):
 
