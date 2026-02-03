@@ -44,7 +44,13 @@ def set_image_from_avatar(image, path, size, fallback_icon_name="xsi-avatar-defa
     scale = image.get_scale_factor()
     scaled_size = size * scale
     try:
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(path, scaled_size, scaled_size)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
+        pixbuf = pixbuf.apply_embedded_orientation()
+        original_width = pixbuf.get_width()
+        original_height = pixbuf.get_height()
+        if original_width != scaled_size or original_height != scaled_size:
+            pixbuf = pixbuf.scale_simple(scaled_size, scaled_size, GdkPixbuf.InterpType.BILINEAR)
+
         # Ensure the pixbuf is square
         actual_size = min(pixbuf.get_width(), pixbuf.get_height())
         if pixbuf.get_width() != pixbuf.get_height():

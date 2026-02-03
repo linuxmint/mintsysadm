@@ -2,7 +2,7 @@
 import datetime
 import gi
 import os
-import PIL
+from PIL import Image, ImageOps
 import re
 import shutil
 import subprocess
@@ -422,17 +422,19 @@ class UsersWidget(Gtk.Box):
         dialog.add_filter(filter)
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        self.frame = Gtk.Frame(visible=False, no_show_all=True)
         preview = Gtk.Image(visible=True)
 
-        box.pack_start(self.frame, False, False, 0)
-        self.frame.add(preview)
+        box.pack_start(preview, False, False, 0)
         dialog.set_preview_widget(box)
         dialog.set_preview_widget_active(True)
         dialog.set_use_preview_label(False)
 
-        box.set_margin_end(12)
-        box.set_margin_top(12)
+        box.set_margin_start(24)
+        box.set_margin_end(24)
+        box.set_margin_top(24)
+        box.set_margin_bottom(24)
+        box.set_halign(Gtk.Align.CENTER)
+        box.set_valign(Gtk.Align.CENTER)
         box.set_size_request(ICON_SIZE_DIALOG_PREVIEW, -1)
 
         dialog.connect("update-preview", self.update_preview_cb, preview)
@@ -440,8 +442,9 @@ class UsersWidget(Gtk.Box):
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             path = dialog.get_filename()
-            image = PIL.Image.open(path)
-            image.thumbnail((96, 96), PIL.Image.LANCZOS)
+            image = Image.open(path)
+            image = ImageOps.exif_transpose(image)
+            image.thumbnail((512, 512), Image.LANCZOS)
             face_path = os.path.join(self.user.get_home_dir(), ".face")
             try:
                 try:
@@ -465,13 +468,11 @@ class UsersWidget(Gtk.Box):
             if os.path.isfile(filename):
                 try:
                     set_image_from_avatar(preview, filename, ICON_SIZE_DIALOG_PREVIEW)
-                    self.frame.show()
                     return
                 except:
                     print(f"Unable to generate preview for file '{filename}'")
 
         preview.clear()
-        self.frame.hide()
 
     def _on_face_menuitem_activated(self, menuitem, path):
         if os.path.exists(path):
