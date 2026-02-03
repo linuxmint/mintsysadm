@@ -1,24 +1,27 @@
 #!/usr/bin/python3
-import cv2
+import cairo
 import gi
 import glob
+import math
 import os
 import pam
 import pexpect
-from PIL import Image, ImageOps
 import setproctitle
 import shutil
-import subprocess
 import sys
 import time
 import xapp.util
 gi.require_version('AccountsService', '1.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('XApp', '1.0')
+gi.require_version('Gst', '1.0')
 from common.user import generate_password, get_password_strength, set_image_from_avatar
 from common.widgets import DimmedTable, EditableEntry
-from gi.repository import AccountsService, GLib, Gtk, Gio, Gdk, GdkPixbuf
-from PIL import Image
+from gi.repository import AccountsService, GLib, Gtk, Gio, Gdk, GdkPixbuf, Gst
+from PIL import Image, ImageOps
+
+# Initialize GStreamer
+Gst.init(None)
 
 setproctitle.setproctitle("mintsysadm-settings-user")
 
@@ -27,6 +30,7 @@ _ = xapp.util.l10n("mintsysadm")
 ICON_SIZE_DIALOG_PREVIEW = 128
 ICON_SIZE_CHOOSE_BUTTON = 128
 ICON_SIZE_CHOOSE_MENU = 48
+ICON_SIZE_WEBCAM_PREVIEW = 512
 
 class MyApplication(Gtk.Application):
     # Main initialization routine
@@ -262,20 +266,21 @@ class MainWindow():
 class WebcamDialog(Gtk.Dialog):
     def __init__(self, parent):
         super().__init__(title=_("Take a Picture"), transient_for=parent, modal=True)
-        self.set_default_size(640, 480)
-
+        self.set_default_size(450, 450)
         self.add_button(_("Cancel"), Gtk.ResponseType.CANCEL)
         self.capture_button = self.add_button(_("Capture"), Gtk.ResponseType.OK)
         self.capture_button.get_style_context().add_class("suggested-action")
-        self.capture_button.set_sensitive(False)  # Disabled until camera loads
+        self.capture_button.set_sensitive(False)
 
         content = self.get_content_area()
-        content.set_spacing(12)
-        content.set_border_width(12)
+
+        # Use a box for better layout control
+        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        main_box.set_halign(Gtk.Align.CENTER)
+        content.pack_start(main_box, True, True, 0)
 
         # Create a stack to show loading icon or camera preview
         self.preview_stack = Gtk.Stack()
-        self.preview_stack.set_size_request(640, 480)
         self.preview_stack.set_transition_type(Gtk.StackTransitionType.SLIDE_DOWN)
 
         # Message page (for loading or error)
@@ -288,60 +293,104 @@ class WebcamDialog(Gtk.Dialog):
         self.message_box.pack_start(self.message_icon, False, False, 0)
         self.message_label = Gtk.Label(_("Accessing the webcam..."))
         self.message_label.get_style_context().add_class("dim-label")
-        self.message_label.set_line_wrap(True)
         self.message_label.set_max_width_chars(50)
         self.message_box.pack_start(self.message_label, False, False, 0)
         self.preview_stack.add_named(self.message_box, "message")
 
         # Camera preview
         self.image = Gtk.Image()
-        self.image.set_size_request(640, 480)
         self.preview_stack.add_named(self.image, "preview")
 
         # Show message (loading) initially
         self.preview_stack.set_visible_child_name("message")
-        content.pack_start(self.preview_stack, True, True, 0)
+        main_box.pack_start(self.preview_stack, True, True, 0)
 
-        self.show_all()
+        # Add mirror toggle button and zoom control
+        self.button_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+        self.button_box.set_halign(Gtk.Align.CENTER)
+        self.button_box.set_margin_top(6)
 
-        self.cap = None
-        self.current_frame = None
-        self.captured_frame = None
+        self.mirror_toggle = Gtk.ToggleButton()
+        self.mirror_toggle.set_active(True)  # Default to mirrored
+        self.mirror_toggle.set_tooltip_text(_("Mirror Picture"))
+        mirror_icon = Gtk.Image.new_from_icon_name("xsi-object-flip-horizontal-symbolic", Gtk.IconSize.BUTTON)
+        self.mirror_toggle.set_image(mirror_icon)
+        self.button_box.pack_start(self.mirror_toggle, False, False, 0)
+
+        # Zoom control
+        zoom_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        zoom_label = Gtk.Label(_("Zoom:"))
+        zoom_box.pack_start(zoom_label, False, False, 0)
+        self.zoom_scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 1.0, 3.0, 0.1)
+        self.zoom_scale.set_value(1.0)
+        self.zoom_scale.set_draw_value(False)
+        self.zoom_scale.set_size_request(150, -1)
+        zoom_box.pack_start(self.zoom_scale, False, False, 0)
+        self.button_box.pack_start(zoom_box, False, False, 0)
+
+        main_box.pack_start(self.button_box, False, False, 0)
+
+        self.pipeline = None
+        self.current_sample = None
+        self.captured_sample = None
 
         self.connect("response", self.on_response)
 
-        # Defer webcam init so the loading message is rendered first
-        GLib.idle_add(self.init_camera)
+        self.show_all()
+        self.button_box.hide()  # Hide until camera works
+
+        # Defer webcam init so the dialog renders first - use timeout to ensure visibility
+        GLib.timeout_add(200, self.init_camera)
 
     def init_camera(self):
         if not self.get_visible():
             return False
 
-        # Prefer GStreamer (similar to cheese) for better quality when available
+        # Try resolutions in descending order: 4K, 2K, 1080p, 720p
         print("Initializing webcam with GStreamer...")
-        target_width = 3840
-        target_height = 2160
-        gst_pipeline = (
-            f"v4l2src device=/dev/video0 ! "
-            f"image/jpeg,width={target_width},height={target_height},framerate=30/1 ! "
-            f"jpegdec ! videoconvert ! appsink drop=1"
-        )
+        resolutions = [(3840, 2160), (2560, 1440), (1920, 1080), (1280, 720)]
 
-        self.cap = cv2.VideoCapture(gst_pipeline, cv2.CAP_GSTREAMER)
+        for width, height in resolutions:
+            try:
+                pipeline_str = f"v4l2src ! image/jpeg,width={width},height={height} ! jpegdec ! videoconvert ! video/x-raw,format=RGB ! appsink name=sink emit-signals=true"
+                self.pipeline = Gst.parse_launch(pipeline_str)
 
-        # Fallback to V4L2 if GStreamer isn't available
-        if not self.cap.isOpened():
-            print("Falling back to V4L2...")
-            self.cap.release()
-            self.cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
-            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, target_width)
-            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, target_height)
-            self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
+                sink = self.pipeline.get_by_name('sink')
+                sink.connect('new-sample', self.on_new_sample)
+
+                ret = self.pipeline.set_state(Gst.State.PLAYING)
+                if ret == Gst.StateChangeReturn.FAILURE:
+                    raise Exception(f"{width}x{height} failed")
+
+                # Wait for async state change
+                if ret == Gst.StateChangeReturn.ASYNC:
+                    ret, state, pending = self.pipeline.get_state(5 * Gst.SECOND)
+                    if ret == Gst.StateChangeReturn.FAILURE:
+                        raise Exception(f"{width}x{height} failed after waiting")
+
+                print(f"Using {width}x{height}")
+                break
+            except Exception as e:
+                print(f"{width}x{height} not supported: {e}")
+                if self.pipeline:
+                    self.pipeline.set_state(Gst.State.NULL)
+                    self.pipeline = None
+                continue
+        else:
+            # Fallback to auto resolution
+            try:
+                print("Using auto resolution")
+                pipeline_str = "v4l2src ! videoconvert ! video/x-raw,format=RGB ! appsink name=sink emit-signals=true"
+                self.pipeline = Gst.parse_launch(pipeline_str)
+                sink = self.pipeline.get_by_name('sink')
+                sink.connect('new-sample', self.on_new_sample)
+                self.pipeline.set_state(Gst.State.PLAYING)
+            except Exception as e:
+                print(f"Auto resolution failed: {e}")
 
         # Check if camera opened successfully
-        if not self.cap.isOpened():
-            self.cap.release()
-            self.cap = None
+        if not self.pipeline or self.pipeline.get_state(0)[1] != Gst.State.PLAYING:
+            self.pipeline = None
             self.message_icon.set_from_icon_name("xsi-camera-hardware-disabled-symbolic", Gtk.IconSize.DIALOG)
             self.message_label.set_text(_("The webcam couldn't be accessed."))
             self.preview_stack.set_visible_child_name("message")
@@ -351,82 +400,189 @@ class WebcamDialog(Gtk.Dialog):
         GLib.timeout_add(33, self.update_frame)  # ~30 fps
         return False
 
+    def on_new_sample(self, sink):
+        self.current_sample = sink.emit("pull-sample")
+        return Gst.FlowReturn.OK
+
     def update_frame(self):
         if not self.get_visible():
             return False
 
-        ret, frame = self.cap.read()
-        if ret:
-            self.current_frame = frame
-            # Mirror preview (selfie-style) without affecting captured image
-            preview_frame = cv2.flip(frame, 1)
-            # Convert BGR to RGB
-            frame_rgb = cv2.cvtColor(preview_frame, cv2.COLOR_BGR2RGB)
-            height, width, channels = frame_rgb.shape
+        if self.current_sample is None:
+            return True
 
-            # Convert to GdkPixbuf
-            pixbuf = GdkPixbuf.Pixbuf.new_from_data(
-                frame_rgb.tobytes(),
-                GdkPixbuf.Colorspace.RGB,
-                False,
-                8,
-                width,
-                height,
-                width * channels,
-                None,
-                None
-            )
-            # Scale to fit preview size
-            alloc = self.image.get_allocation()
-            target_w = alloc.width if alloc.width > 0 else 640
-            target_h = alloc.height if alloc.height > 0 else 480
-            if width != target_w or height != target_h:
-                scale = min(target_w / width, target_h / height)
-                scaled_w = max(1, int(width * scale))
-                scaled_h = max(1, int(height * scale))
-                pixbuf = pixbuf.scale_simple(scaled_w, scaled_h, GdkPixbuf.InterpType.BILINEAR)
-            self.image.set_from_pixbuf(pixbuf)
+        try:
+            caps = self.current_sample.get_caps()
+            structure = caps.get_structure(0)
+            width = structure.get_value('width')
+            height = structure.get_value('height')
 
-            # Switch from message to preview on first frame
-            if self.preview_stack.get_visible_child_name() == "message":
-                self.preview_stack.set_visible_child_name("preview")
-                self.capture_button.set_sensitive(True)  # Enable capture button
+            buffer = self.current_sample.get_buffer()
+            result, mapinfo = buffer.map(Gst.MapFlags.READ)
+
+            if result:
+                # Create pixbuf from raw data
+                pixbuf = GdkPixbuf.Pixbuf.new_from_data(
+                    mapinfo.data,
+                    GdkPixbuf.Colorspace.RGB,
+                    False,
+                    8,
+                    width,
+                    height,
+                    width * 3,
+                    None,
+                    None
+                )
+
+                # Apply zoom by cropping center portion
+                zoom_level = self.zoom_scale.get_value()
+                if zoom_level > 1.0:
+                    crop_width = int(width / zoom_level)
+                    crop_height = int(height / zoom_level)
+                    x = (width - crop_width) // 2
+                    y = (height - crop_height) // 2
+                    zoomed_pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8, crop_width, crop_height)
+                    pixbuf.copy_area(x, y, crop_width, crop_height, zoomed_pixbuf, 0, 0)
+                    pixbuf = zoomed_pixbuf
+                    width = crop_width
+                    height = crop_height
+
+                # Mirror preview (selfie-style) if enabled
+                if self.mirror_toggle.get_active():
+                    preview_pixbuf = pixbuf.flip(True)
+                else:
+                    preview_pixbuf = pixbuf
+
+                # Scale to fit preview size
+                size = ICON_SIZE_WEBCAM_PREVIEW
+                if width != size or height != size:
+                    scale_factor = min(size / width, size / height)
+                    scaled_w = max(1, int(width * scale_factor))
+                    scaled_h = max(1, int(height * scale_factor))
+                    preview_pixbuf = preview_pixbuf.scale_simple(scaled_w, scaled_h, GdkPixbuf.InterpType.BILINEAR)
+                    width = scaled_w
+                    height = scaled_h
+
+                # Apply circular clipping
+                actual_size = min(width, height)
+                surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, actual_size, actual_size)
+                ctx = cairo.Context(surface)
+
+                # Draw circular clipping path
+                radius = actual_size // 2
+                ctx.arc(radius, radius, radius, math.pi, 3 * math.pi / 2)
+                ctx.arc(actual_size - radius, radius, radius, 3 * math.pi / 2, 0)
+                ctx.arc(actual_size - radius, actual_size - radius, radius, 0, math.pi / 2)
+                ctx.arc(radius, actual_size - radius, radius, math.pi / 2, math.pi)
+                ctx.close_path()
+                ctx.clip()
+
+                # Center the image if needed
+                x_offset = (actual_size - width) // 2
+                y_offset = (actual_size - height) // 2
+                Gdk.cairo_set_source_pixbuf(ctx, preview_pixbuf, x_offset, y_offset)
+                ctx.paint()
+
+                self.image.set_from_surface(surface)
+
+                # Switch from message to preview on first frame
+                if self.preview_stack.get_visible_child_name() == "message":
+                    self.preview_stack.set_visible_child_name("preview")
+                    self.capture_button.set_sensitive(True)  # Enable capture button
+                    self.button_box.show()  # Show mirror toggle
+
+                buffer.unmap(mapinfo)
+        except Exception as e:
+            print(f"Error updating preview: {e}")
 
         return True
 
     def on_response(self, dialog, response_id):
         if response_id == Gtk.ResponseType.OK:
-            self.captured_frame = self.current_frame
+            self.captured_sample = self.current_sample
 
     def get_captured_image(self):
-        if self.captured_frame is None:
+        if self.captured_sample is None:
             return None
 
-        frame = self.captured_frame
-        height, width = frame.shape[:2]
+        try:
+            caps = self.captured_sample.get_caps()
+            structure = caps.get_structure(0)
+            width = structure.get_value('width')
+            height = structure.get_value('height')
 
-        # Crop to square
-        if width > height:
-            size = height
-            x = (width - size) // 2
-            y = 0
-        else:
-            size = width
-            x = 0
-            y = (height - size) // 2
+            buffer = self.captured_sample.get_buffer()
+            result, mapinfo = buffer.map(Gst.MapFlags.READ)
 
-        cropped = frame[y:y+size, x:x+size]
+            if not result:
+                return None
 
-        # Resize to 512x512
-        resized = cv2.resize(cropped, (512, 512), interpolation=cv2.INTER_LANCZOS4)
+            # Create pixbuf from raw data
+            pixbuf = GdkPixbuf.Pixbuf.new_from_data(
+                mapinfo.data,
+                GdkPixbuf.Colorspace.RGB,
+                False,
+                8,
+                width,
+                height,
+                width * 3,
+                None,
+                None
+            )
 
-        # Convert BGR to RGB and create PIL Image
-        rgb = cv2.cvtColor(resized, cv2.COLOR_BGR2RGB)
-        return Image.fromarray(rgb)
+            # Apply zoom by cropping center portion
+            zoom_level = self.zoom_scale.get_value()
+            if zoom_level > 1.0:
+                crop_width = int(width / zoom_level)
+                crop_height = int(height / zoom_level)
+                x = (width - crop_width) // 2
+                y = (height - crop_height) // 2
+                zoomed_pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8, crop_width, crop_height)
+                pixbuf.copy_area(x, y, crop_width, crop_height, zoomed_pixbuf, 0, 0)
+                pixbuf = zoomed_pixbuf
+                width = crop_width
+                height = crop_height
+
+            # Mirror captured image if enabled
+            if self.mirror_toggle.get_active():
+                pixbuf = pixbuf.flip(True)
+
+            # Crop to square
+            if width > height:
+                size = height
+                x = (width - size) // 2
+                y = 0
+            else:
+                size = width
+                x = 0
+                y = (height - size) // 2
+
+            cropped = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8, size, size)
+            pixbuf.copy_area(x, y, size, size, cropped, 0, 0)
+
+            # Resize to 512x512
+            scaled = cropped.scale_simple(512, 512, GdkPixbuf.InterpType.HYPER)
+
+            buffer.unmap(mapinfo)
+
+            # Convert GdkPixbuf to PIL Image
+            data = scaled.get_pixels()
+            w = scaled.get_width()
+            h = scaled.get_height()
+            stride = scaled.get_rowstride()
+            mode = "RGB"
+            img = Image.frombytes(mode, (w, h), data, "raw", mode, stride)
+            return img
+
+        except Exception as e:
+            print(f"Error capturing image: {e}")
+            import traceback
+            traceback.print_exc()
+            return None
 
     def destroy(self):
-        if self.cap:
-            self.cap.release()
+        if self.pipeline:
+            self.pipeline.set_state(Gst.State.NULL)
         super().destroy()
 
 class PasswordDialog(Gtk.Dialog):
