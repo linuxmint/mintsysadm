@@ -66,6 +66,7 @@ class MainWindow():
         self.window = self.builder.get_object("main_window")
         self.window.set_title(_("Account Details"))
         self.window.set_icon_name("preferences-desktop-user")
+        self.window.set_wmclass("mintsysadm-settings-user", "mintsysadm-settings-user")
 
         self.face_button = self.builder.get_object("button_avatar")
         self.face_image = self.builder.get_object("image_avatar")

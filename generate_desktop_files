@@ -30,6 +30,7 @@ Terminal=false
 Type=Application
 Categories=Settings;
 NotShowIn=GNOME;KDE;XFCE;MATE;
+StartupWMClass=mintsysadm-settings-user
 """
 additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm-settings-user.desktop", prefix, _("Account details"), _("User account and password"), suffix, keywords=_("user;account;password;avatar")) # type: ignore
 
