@@ -83,7 +83,7 @@ class MainWindow():
                 for picture in pictures:
                     path = os.path.join(face_dir, picture)
                     image = Gtk.Image()
-                    set_image_from_avatar(image, path, ICON_SIZE_CHOOSE_MENU, fallback_icon_size=ICON_SIZE_CHOOSE_MENU)
+                    set_image_from_avatar(image, path, ICON_SIZE_CHOOSE_MENU, fallback_size=ICON_SIZE_CHOOSE_MENU)
                     menuitem = Gtk.MenuItem()
                     menuitem.add(image)
                     menuitem.connect('activate', self.on_avatar_selected, path)
