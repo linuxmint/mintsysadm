@@ -1,46 +1,22 @@
 #!/usr/bin/python3
-import subprocess
 import cairo
 import gi
 import math
 import os
-import pwd
 import random
 import xapp.util
-
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
-from common.widgets import DimmedTable
 
 _ = xapp.util.l10n("mintsysadm")
 
-# A helper to drop privileges. Necessary for
-# security when accessing/creating user controlled files as root.
-class PrivHelper():
-
-    def __init__(self):
-        self.orig_uid = os.getuid()
-        self.orig_gid = os.getgid()
-        self.orig_groups = os.getgroups()
-
-    def drop_privs(self, user):
-        uid = user.get_uid()
-        # the user's main group id
-        gid = pwd.getpwuid(uid).pw_gid
-
-        # initialize the user's supplemental groups and main group
-        os.initgroups(user.get_user_name(), gid)
-        os.setegid(gid)
-        os.seteuid(uid)
-
-    def restore_privs(self):
-        os.seteuid(self.orig_uid)
-        os.setegid(self.orig_gid)
-        os.setgroups(self.orig_groups)
-
 # Make a circular pixbuf and set the image with it
-# use a fallback icon name if it fails
-def set_image_from_avatar(image, path, size, fallback_icon_name="xsi-avatar-default-symbolic", fallback_icon_size=Gtk.IconSize.DIALOG):
+# use a a symbolic avatar icon and fallback size if it fails
+def set_image_from_avatar(image, path, size, fallback_size=Gtk.IconSize.DIALOG):
+    if path == "" or not os.path.exists(path):
+        image.set_from_icon_name("xsi-avatar-default-symbolic", fallback_size)
+        image.set_pixel_size(size)
+        return
     scale = image.get_scale_factor()
     scaled_size = size * scale
     try:
@@ -79,8 +55,18 @@ def set_image_from_avatar(image, path, size, fallback_icon_name="xsi-avatar-defa
 
         image.set_from_surface(surface)
     except Exception as e:
-        image.set_from_icon_name(fallback_icon_name, fallback_icon_size)
-        image.set_pixel_size(fallback_icon_size)
+        image.set_from_icon_name("xsi-avatar-default-symbolic", fallback_size)
+        image.set_pixel_size(size)
+
+def set_avatar(user, path, image, size, fallback_size=Gtk.IconSize.DIALOG):
+    print(f"Setting avatar '{path}' for user '{user.get_user_name()}'")
+    user.set_icon_file(path)
+    user.connect("changed", on_ac_user_changed, image, size, fallback_size)
+
+def on_ac_user_changed(user, image, size, fallback_size):
+    path = user.get_icon_file()
+    print(f"  --> New avatar path: '{path}'")
+    set_image_from_avatar(image, path, size, fallback_size)
 
 def generate_password():
     characters = "!@#$%^&*()_-+{}|:<>?=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"

@@ -7,15 +7,15 @@ import os
 import pam
 import pexpect
 import setproctitle
-import shutil
 import sys
+import tempfile
 import time
 import xapp.util
 gi.require_version('AccountsService', '1.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('XApp', '1.0')
 gi.require_version('Gst', '1.0')
-from common.user import generate_password, get_password_strength, set_image_from_avatar
+from common.user import generate_password, get_password_strength, set_image_from_avatar, set_avatar
 from common.widgets import DimmedTable, EditableEntry
 from gi.repository import AccountsService, GLib, Gtk, Gio, Gdk, GdkPixbuf, Gst
 from PIL import Image, ImageOps
@@ -166,31 +166,11 @@ class MainWindow():
             image = Image.open(path)
             image = ImageOps.exif_transpose(image)
             image.thumbnail((512, 512), Image.LANCZOS)
-            if os.path.exists(self.face_path):
-                os.remove(self.face_path)
-            image.save(self.face_path, "png")
-            self.user.set_icon_file(self.face_path)
-            set_image_from_avatar(self.face_image, self.face_path, ICON_SIZE_CHOOSE_BUTTON)
+            with tempfile.NamedTemporaryFile(mode='wb', suffix='.png', delete=True) as temp_file:
+                temp_path = temp_file.name
+                image.save(temp_path, "png")
+                set_avatar(self.user, temp_path, self.face_image, ICON_SIZE_CHOOSE_BUTTON)
         dialog.destroy()
-
-    def set_avatar(self, path):
-        if os.path.exists(path):
-            self.user.set_icon_file(path)
-            set_image_from_avatar(self.face_image, path, ICON_SIZE_CHOOSE_BUTTON)
-            try:
-                if os.path.exists(self.face_path):
-                    os.remove(self.face_path)
-                shutil.copy(path, self.face_path)
-            except Exception as e:
-                print(f"Error copying avatar in .face: {e}")
-        else:
-            self.user.set_icon_file("")
-            self.face_image.set_from_icon_name("xsi-avatar-default-symbolic", Gtk.IconSize.DIALOG)
-            try:
-                if os.path.exists(self.face_path):
-                    os.remove(self.face_path)
-            except Exception as e:
-                print(f"Error removing .face file: {e}")
 
     def update_preview_cb (self, dialog, preview):
         # Different widths make the dialog look really crappy as it resizes -
@@ -207,10 +187,10 @@ class MainWindow():
         preview.clear()
 
     def on_avatar_selected(self, menuitem, path):
-        self.set_avatar(path)
+        set_avatar(self.user, path, self.face_image, ICON_SIZE_CHOOSE_BUTTON, fallback_size=ICON_SIZE_CHOOSE_BUTTON)
 
     def on_avatar_removed(self, menuitem):
-        self.set_avatar("")
+        set_avatar(self.user, "", self.face_image, ICON_SIZE_CHOOSE_BUTTON, fallback_size=ICON_SIZE_CHOOSE_BUTTON)
 
     def show_menu(self, widget, event):
         if event.button == 1:
@@ -257,10 +237,10 @@ class MainWindow():
         if response == Gtk.ResponseType.OK:
             image_data = dialog.get_captured_image()
             if image_data:
-                temp_path = self.face_path + ".tmp"
-                image_data.save(temp_path, "png")
-                self.set_avatar(temp_path)
-                os.remove(temp_path)
+                with tempfile.NamedTemporaryFile(mode='wb', suffix='.png', delete=True) as temp_file:
+                    temp_path = temp_file.name
+                    image_data.save(temp_path, "png")
+                    set_avatar(self.user, temp_path, self.face_image, ICON_SIZE_CHOOSE_BUTTON)
         dialog.destroy()
 
 class WebcamDialog(Gtk.Dialog):

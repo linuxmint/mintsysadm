@@ -5,17 +5,16 @@ import os
 import re
 import shutil
 import subprocess
+import tempfile
 import xapp.SettingsWidgets as xs
 import xapp.threading as xt
 import xapp.util
 gi.require_version("AccountsService", "1.0")
 gi.require_version("Gtk", "3.0")
-from common.user import PrivHelper, generate_password, get_password_strength, set_image_from_avatar
+from common.user import generate_password, get_password_strength, set_image_from_avatar, set_avatar
 from common.widgets import DimmedTable, EditableEntry
 from gi.repository import Gtk, Gdk, AccountsService
 from PIL import Image, ImageOps
-
-priv_helper = PrivHelper()
 
 _ = xapp.util.l10n("mintsysadm")
 
@@ -335,7 +334,7 @@ class UsersWidget(Gtk.Box):
                 for picture in pictures:
                     path = os.path.join(face_dir, picture)
                     image = Gtk.Image()
-                    set_image_from_avatar(image, path, ICON_SIZE_CHOOSE_MENU, fallback_icon_size=ICON_SIZE_CHOOSE_MENU)
+                    set_image_from_avatar(image, path, ICON_SIZE_CHOOSE_MENU, fallback_size=ICON_SIZE_CHOOSE_MENU)
                     menuitem = Gtk.MenuItem()
                     menuitem.add(image)
                     menuitem.connect('activate', self._on_face_menuitem_activated, path)
@@ -445,18 +444,10 @@ class UsersWidget(Gtk.Box):
             image = Image.open(path)
             image = ImageOps.exif_transpose(image)
             image.thumbnail((512, 512), Image.LANCZOS)
-            face_path = os.path.join(self.user.get_home_dir(), ".face")
-            try:
-                try:
-                    os.remove(face_path)
-                except OSError:
-                    pass
-                priv_helper.drop_privs(self.user)
-                image.save(face_path, "png")
-            finally:
-                priv_helper.restore_privs()
-            self.user.set_icon_file(face_path)
-            set_image_from_avatar(self.face_image, face_path, ICON_SIZE_CHOOSE_BUTTON)
+            with tempfile.NamedTemporaryFile(mode='wb', suffix='.png', delete=True) as temp_file:
+                temp_path = temp_file.name
+                image.save(temp_path, "png")
+                set_avatar(self.user, temp_path, self.face_image, ICON_SIZE_CHOOSE_BUTTON)
 
         dialog.destroy()
 
@@ -476,31 +467,10 @@ class UsersWidget(Gtk.Box):
 
     def _on_face_menuitem_activated(self, menuitem, path):
         if os.path.exists(path):
-            self.user.set_icon_file(path)
-            set_image_from_avatar(self.face_image, path, ICON_SIZE_CHOOSE_BUTTON)
-            face_path = os.path.join(self.user.get_home_dir(), ".face")
-            try:
-                try:
-                    os.remove(face_path)
-                except OSError:
-                    pass
-                priv_helper.drop_privs(self.user)
-                shutil.copy(path, face_path)
-            finally:
-                priv_helper.restore_privs()
+            set_avatar(self.user, path, self.face_image, ICON_SIZE_CHOOSE_BUTTON)
 
     def _on_face_remove_menuitem_activated(self, menuitem):
-        self.user.set_icon_file("")
-        self.face_image.set_from_icon_name("xsi-avatar-default-symbolic", Gtk.IconSize.DIALOG)
-        face_path = os.path.join(self.user.get_home_dir(), ".face")
-        try:
-            priv_helper.drop_privs(self.user)
-            if os.path.exists(face_path):
-                os.remove(face_path)
-        except Exception as e:
-            print(f"Error removing avatar: {e}")
-        finally:
-            priv_helper.restore_privs()
+        set_avatar(self.user, "", self.face_image, ICON_SIZE_CHOOSE_BUTTON)
 
     def menu_display(self, widget, event):
         if event.button == 1:
@@ -619,7 +589,7 @@ class UsersWidget(Gtk.Box):
         box.set_margin_bottom(12)
 
         image = Gtk.Image()
-        set_image_from_avatar(image, user.get_icon_file(), ICON_SIZE_FLOWBOX, fallback_icon_size=ICON_SIZE_FLOWBOX)
+        set_image_from_avatar(image, user.get_icon_file(), ICON_SIZE_FLOWBOX, fallback_size=ICON_SIZE_FLOWBOX)
         box.pack_start(image, False, False, 0)
 
         # Name
