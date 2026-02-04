@@ -327,7 +327,7 @@ class UsersWidget(Gtk.Box):
         row = 0
         col = 0
         num_cols = 6
-        face_dirs = ["/usr/share/pixmaps/faces/linuxmint/"]
+        face_dirs = ["/usr/share/mintsysadm/avatars/"]
         for face_dir in face_dirs:
             if os.path.exists(face_dir):
                 pictures = sorted(os.listdir(face_dir))
