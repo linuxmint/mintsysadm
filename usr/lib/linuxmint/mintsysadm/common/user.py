@@ -4,9 +4,11 @@ import gi
 import math
 import os
 import random
+import tempfile
 import xapp.util
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
+from PIL import Image, ImageOps
 
 _ = xapp.util.l10n("mintsysadm")
 
@@ -70,6 +72,21 @@ def set_avatar(user, path, image, size, fallback_size=Gtk.IconSize.DIALOG):
     print(f"Setting avatar '{path}' for user '{user.get_user_name()}'")
     user.set_icon_file(path)
     user.connect("changed", on_ac_user_changed, image, size, fallback_size)
+
+def set_avatar_from_browsed_path(user, path, image, size, fallback_size=Gtk.IconSize.DIALOG):
+    pil_image = Image.open(path)
+    pil_image = ImageOps.exif_transpose(pil_image)
+    # Preserve transparency when possible
+    if pil_image.mode not in ("RGB", "RGBA"):
+        print(f"Converting image from mode {pil_image.mode} to RGB")
+        pil_image = pil_image.convert("RGBA" if "A" in pil_image.getbands() else "RGB")
+    print(f"Selected image size: {pil_image.size}, mode: {pil_image.mode}")
+    pil_image = ImageOps.fit(pil_image, (512, 512), method=Image.LANCZOS, centering=(0.5, 0.5))
+    print(f"Resized image size: {pil_image.size}, mode: {pil_image.mode}")
+    with tempfile.NamedTemporaryFile(mode='wb', suffix='.png', delete=True) as temp_file:
+        temp_path = temp_file.name
+        pil_image.save(temp_path, "png")
+        set_avatar(user, temp_path, image, size, fallback_size=fallback_size)
 
 def on_ac_user_changed(user, image, size, fallback_size):
     path = user.get_icon_file()
