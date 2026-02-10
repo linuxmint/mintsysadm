@@ -15,7 +15,7 @@ gi.require_version('AccountsService', '1.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('XApp', '1.0')
 gi.require_version('Gst', '1.0')
-from common.user import generate_password, get_password_strength, set_image_from_avatar, set_avatar, set_avatar_from_browsed_path
+from common.user import generate_password, get_password_strength, set_image_from_avatar, set_avatar, set_avatar_from_browsed_path, browse_avatar_dialog
 from common.widgets import DimmedTable, EditableEntry
 from gi.repository import AccountsService, GLib, Gtk, Gio, Gdk, GdkPixbuf, Gst
 from PIL import Image
@@ -137,49 +137,9 @@ class MainWindow():
         dialog.run()
 
     def on_browse_avatars(self, menuitem):
-        dialog = Gtk.FileChooserDialog(None, None, Gtk.FileChooserAction.OPEN, (_("Cancel"), Gtk.ResponseType.CANCEL, _("Open"), Gtk.ResponseType.OK))
-        filter = Gtk.FileFilter()
-        filter.set_name(_("Images"))
-        filter.add_mime_type("image/*")
-        dialog.add_filter(filter)
-
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        preview = Gtk.Image(visible=True)
-
-        box.pack_start(preview, False, False, 0)
-        dialog.set_preview_widget(box)
-        dialog.set_preview_widget_active(True)
-        dialog.set_use_preview_label(False)
-
-        box.set_margin_start(24)
-        box.set_margin_end(24)
-        box.set_margin_top(24)
-        box.set_margin_bottom(24)
-        box.set_halign(Gtk.Align.CENTER)
-        box.set_valign(Gtk.Align.CENTER)
-        box.set_size_request(ICON_SIZE_DIALOG_PREVIEW, -1)
-
-        dialog.connect("update-preview", self.update_preview_cb, preview)
-
-        response = dialog.run()
-        if response == Gtk.ResponseType.OK:
-            path = dialog.get_filename()
+        path = browse_avatar_dialog()
+        if path:
             set_avatar_from_browsed_path(self.user, path, self.face_image, ICON_SIZE_CHOOSE_BUTTON, fallback_size=ICON_SIZE_CHOOSE_BUTTON)
-        dialog.destroy()
-
-    def update_preview_cb (self, dialog, preview):
-        # Different widths make the dialog look really crappy as it resizes -
-        # constrain the width and adjust the height to keep perspective.
-        filename = dialog.get_preview_filename()
-        if filename is not None:
-            if os.path.isfile(filename):
-                try:
-                    set_image_from_avatar(preview, filename, ICON_SIZE_DIALOG_PREVIEW)
-                    return
-                except:
-                    print(f"Unable to generate preview for file '{filename}'")
-
-        preview.clear()
 
     def on_avatar_selected(self, menuitem, path):
         set_avatar(self.user, path, self.face_image, ICON_SIZE_CHOOSE_BUTTON, fallback_size=ICON_SIZE_CHOOSE_BUTTON)

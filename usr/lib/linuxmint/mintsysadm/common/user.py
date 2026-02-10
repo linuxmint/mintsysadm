@@ -12,6 +12,61 @@ from PIL import Image, ImageOps
 
 _ = xapp.util.l10n("mintsysadm")
 
+ICON_SIZE_DIALOG_PREVIEW = 128
+
+def browse_avatar_dialog():
+    """Show a file chooser dialog for browsing avatar images.
+    Returns the selected file path or None if cancelled."""
+    dialog = Gtk.FileChooserDialog(None, None, Gtk.FileChooserAction.OPEN, 
+                                    (_("Cancel"), Gtk.ResponseType.CANCEL, 
+                                     _("Open"), Gtk.ResponseType.OK))
+    filter = Gtk.FileFilter()
+    filter.set_name(_("Images"))
+    filter.add_mime_type("image/png")
+    filter.add_mime_type("image/jpeg")
+    filter.add_mime_type("image/jpg")
+    filter.add_mime_type("image/gif")
+    filter.add_mime_type("image/bmp")
+    filter.add_mime_type("image/tiff")
+    filter.add_mime_type("image/webp")
+    dialog.add_filter(filter)
+
+    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+    preview = Gtk.Image(visible=True)
+
+    box.pack_start(preview, False, False, 0)
+    dialog.set_preview_widget(box)
+    dialog.set_preview_widget_active(True)
+    dialog.set_use_preview_label(False)
+
+    box.set_margin_start(24)
+    box.set_margin_end(24)
+    box.set_margin_top(24)
+    box.set_margin_bottom(24)
+    box.set_halign(Gtk.Align.CENTER)
+    box.set_valign(Gtk.Align.CENTER)
+    box.set_size_request(ICON_SIZE_DIALOG_PREVIEW, -1)
+
+    def update_preview_cb(dialog, preview):
+        # Different widths make the dialog look really crappy as it resizes -
+        # constrain the width and adjust the height to keep perspective.
+        filename = dialog.get_preview_filename()
+        if filename is not None:
+            if os.path.isfile(filename):
+                try:
+                    set_image_from_avatar(preview, filename, ICON_SIZE_DIALOG_PREVIEW)
+                    return
+                except:
+                    print(f"Unable to generate preview for file '{filename}'")
+        preview.clear()
+
+    dialog.connect("update-preview", update_preview_cb, preview)
+
+    response = dialog.run()
+    path = dialog.get_filename() if response == Gtk.ResponseType.OK else None
+    dialog.destroy()
+    return path
+
 # Make a circular pixbuf and set the image with it
 # use a a symbolic avatar icon and fallback size if it fails
 def set_image_from_avatar(image, path, size, fallback_size=Gtk.IconSize.DIALOG):
