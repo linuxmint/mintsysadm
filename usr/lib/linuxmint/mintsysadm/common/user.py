@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import cairo
 import gi
+import glob
 import math
 import os
 import random
@@ -30,6 +31,11 @@ def browse_avatar_dialog():
     filter.add_mime_type("image/tiff")
     filter.add_mime_type("image/webp")
     dialog.add_filter(filter)
+
+    # Add shortcuts to Linux Mint backgrounds directories if they exist
+    for bg_dir in sorted(glob.glob("/usr/share/backgrounds/linuxmint*")):
+        if os.path.isdir(bg_dir):
+            dialog.add_shortcut_folder(bg_dir)
 
     box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
     preview = Gtk.Image(visible=True)
