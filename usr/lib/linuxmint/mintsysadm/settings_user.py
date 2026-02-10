@@ -15,10 +15,10 @@ gi.require_version('AccountsService', '1.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('XApp', '1.0')
 gi.require_version('Gst', '1.0')
-from common.user import generate_password, get_password_strength, set_image_from_avatar, set_avatar
+from common.user import generate_password, get_password_strength, set_image_from_avatar, set_avatar, set_avatar_from_browsed_path
 from common.widgets import DimmedTable, EditableEntry
 from gi.repository import AccountsService, GLib, Gtk, Gio, Gdk, GdkPixbuf, Gst
-from PIL import Image, ImageOps
+from PIL import Image
 
 # Initialize GStreamer
 Gst.init(None)
@@ -164,13 +164,7 @@ class MainWindow():
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             path = dialog.get_filename()
-            image = Image.open(path)
-            image = ImageOps.exif_transpose(image)
-            image.thumbnail((512, 512), Image.LANCZOS)
-            with tempfile.NamedTemporaryFile(mode='wb', suffix='.png', delete=True) as temp_file:
-                temp_path = temp_file.name
-                image.save(temp_path, "png")
-                set_avatar(self.user, temp_path, self.face_image, ICON_SIZE_CHOOSE_BUTTON)
+            set_avatar_from_browsed_path(self.user, path, self.face_image, ICON_SIZE_CHOOSE_BUTTON, fallback_size=ICON_SIZE_CHOOSE_BUTTON)
         dialog.destroy()
 
     def update_preview_cb (self, dialog, preview):
