@@ -166,11 +166,17 @@ class MainWindow():
             path = dialog.get_filename()
             image = Image.open(path)
             image = ImageOps.exif_transpose(image)
-            image.thumbnail((512, 512), Image.LANCZOS)
+            # Preserve transparency when possible
+            if image.mode not in ("RGB", "RGBA"):
+                print(f"Converting image from mode {image.mode} to RGB")
+                image = image.convert("RGBA" if "A" in image.getbands() else "RGB")
+            print(f"Selected image size: {image.size}, mode: {image.mode}")
+            image = ImageOps.fit(image, (512, 512), method=Image.LANCZOS, centering=(0.5, 0.5))
+            print(f"Resized image size: {image.size}, mode: {image.mode}")
             with tempfile.NamedTemporaryFile(mode='wb', suffix='.png', delete=True) as temp_file:
                 temp_path = temp_file.name
                 image.save(temp_path, "png")
-                set_avatar(self.user, temp_path, self.face_image, ICON_SIZE_CHOOSE_BUTTON)
+                set_avatar(self.user, temp_path, self.face_image, ICON_SIZE_CHOOSE_BUTTON, fallback_size=ICON_SIZE_CHOOSE_BUTTON)
         dialog.destroy()
 
     def update_preview_cb (self, dialog, preview):

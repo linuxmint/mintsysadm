@@ -24,13 +24,21 @@ def set_image_from_avatar(image, path, size, fallback_size=Gtk.IconSize.DIALOG):
         pixbuf = pixbuf.apply_embedded_orientation()
         original_width = pixbuf.get_width()
         original_height = pixbuf.get_height()
-        if original_width != scaled_size or original_height != scaled_size:
-            pixbuf = pixbuf.scale_simple(scaled_size, scaled_size, GdkPixbuf.InterpType.BILINEAR)
 
-        # Ensure the pixbuf is square
-        actual_size = min(pixbuf.get_width(), pixbuf.get_height())
+        # Scale without distortion: cover the square then center-crop.
+        if original_width != scaled_size or original_height != scaled_size:
+            scale_factor = scaled_size / min(original_width, original_height)
+            scaled_width = max(scaled_size, int(round(original_width * scale_factor)))
+            scaled_height = max(scaled_size, int(round(original_height * scale_factor)))
+            pixbuf = pixbuf.scale_simple(scaled_width, scaled_height, GdkPixbuf.InterpType.BILINEAR)
+
         if pixbuf.get_width() != pixbuf.get_height():
-            pixbuf = pixbuf.scale_simple(actual_size, actual_size, GdkPixbuf.InterpType.BILINEAR)
+            offset_x = max(0, (pixbuf.get_width() - scaled_size) // 2)
+            offset_y = max(0, (pixbuf.get_height() - scaled_size) // 2)
+            pixbuf = pixbuf.new_subpixbuf(offset_x, offset_y, scaled_size, scaled_size)
+
+        if pixbuf.get_width() != scaled_size or pixbuf.get_height() != scaled_size:
+            pixbuf = pixbuf.scale_simple(scaled_size, scaled_size, GdkPixbuf.InterpType.BILINEAR)
 
         # Create a surface at the scaled size (physical pixels)
         width = pixbuf.get_width()
