@@ -20,6 +20,7 @@ setproctitle.setproctitle("mintsysadm")
 _ = xapp.util.l10n("mintsysadm")
 
 GRUB_FILE = "/etc/default/grub.d/98_mintsysadm.cfg"
+DEFAULT_GRUB_FILE = "/etc/default/grub"
 
 class MyApplication(Gtk.Application):
     # Main initialization routine
@@ -143,8 +144,17 @@ class MintSysadmWindow():
             self.builder.get_object("grub_timeout_spinner").get_adjustment().set_lower(0.0)
         self.builder.get_object("grub_timeout_spinner").update()
 
+    def get_existing_grub_path(self):
+        # Return the Mint-relevant GRUB file to use.
+        # Checks mintsysadm first, then falls back to default grub.
+        for path in [GRUB_FILE, DEFAULT_GRUB_FILE]:
+            if os.path.exists(path):
+                return path
+        return None
+
     def get_boot_config(self):
-        if not os.path.exists(GRUB_FILE):
+        file_to_read = self.get_existing_grub_path()
+        if not file_to_read:
             return
         menu_visible = False
         menu_timeout = 0
@@ -153,7 +163,7 @@ class MintSysadmWindow():
         # but since we're making this file we can assume if one is here the other is.
         savedefault_present = False
         boot_args = []
-        with open(GRUB_FILE, "r") as grub_file:
+        with open(file_to_read, "r") as grub_file:
             for line in grub_file:
                 line = line.strip()
                 if "GRUB_TIMEOUT=" in line:
