@@ -674,9 +674,9 @@
                                                             <property name="visible">True</property>
                                                             <property name="can-focus">True</property>
                                                             <property name="halign">start</property>
-                                                            <property name="text" translatable="yes">-1</property>
+                                                            <property name="text" translatable="yes">0</property>
                                                             <property name="adjustment">grub_timeout_adjustment</property>
-                                                            <property name="value">-1</property>
+                                                            <property name="value">0</property>
                                                             </object>
                                                             <packing>
                                                             <property name="expand">False</property>

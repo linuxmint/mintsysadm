@@ -144,34 +144,55 @@ class MintSysadmWindow():
         self.builder.get_object("grub_timeout_spinner").update()
 
     def get_boot_config(self):
-        if not os.path.exists(GRUB_FILE):
-            return
-        menu_visible = False
-        menu_timeout = 0
-
+        # Read the boot arguments and "remember last" setting from our grub config file
+        # We don't want to expose all the settings in system grub conf here because
+        # we can't easily revert them in our file without knowing their value ranges and we only want to let
+        # the user change the list of custom boot args, not the ones set by packages.
         # GRUB_DEFAULT and GRUB_SAVEDEFAULT are both required for the 'remember last' option
         # but since we're making this file we can assume if one is here the other is.
         savedefault_present = False
         boot_args = []
-        with open(GRUB_FILE, "r") as grub_file:
-            for line in grub_file:
-                line = line.strip()
-                if "GRUB_TIMEOUT=" in line:
-                    print(line)
-                    menu_timeout = float(line.split("=")[-1])
-                    print(menu_timeout)
-                elif line == "GRUB_TIMEOUT_STYLE=menu":
-                    menu_visible = True
-                elif line.startswith("GRUB_CMDLINE_LINUX_DEFAULT="):
-                    match = re.search(r'GRUB_CMDLINE_LINUX_DEFAULT="\$GRUB_CMDLINE_LINUX_DEFAULT\s*([^"]*)"', line)
-                    if match:
-                        boot_args = match.group(1).strip().split()
-                elif line.startswith("GRUB_SAVEDEFAULT="):
-                    savedefault_present = True
-        self.builder.get_object("grub_switch").set_active(menu_visible)
+        if os.path.exists(GRUB_FILE):
+            with open(GRUB_FILE, "r", errors="replace") as grub_file:
+                for line in grub_file:
+                    line = line.strip()
+                    if line.startswith("GRUB_CMDLINE_LINUX_DEFAULT="):
+                        match = re.search(r'GRUB_CMDLINE_LINUX_DEFAULT="\$GRUB_CMDLINE_LINUX_DEFAULT\s*([^"]*)"', line)
+                        if match:
+                            boot_args = match.group(1).strip().split()
+                    elif line.startswith("GRUB_SAVEDEFAULT="):
+                        savedefault_present = True
+
         self.builder.get_object("grub_remember_last_switch").set_active(savedefault_present)
-        self.builder.get_object("grub_timeout_spinner").set_value(menu_timeout)
         self.boot_args_editor.set_strings(boot_args)
+
+        # Read menu style and timeout from actual grub config (including our own file)
+        # because these can be changed directly during installation
+        menu_visible = False
+        menu_timeout = 0
+        grub_files = ["/etc/default/grub"]
+        grub_d = "/etc/default/grub.d"
+        if os.path.isdir(grub_d):
+            for fname in sorted(os.listdir(grub_d)):
+                grub_files.append(os.path.join(grub_d, fname))
+        for path in grub_files:
+            with open(path, "r", errors="replace") as grub_file:
+                for line in grub_file:
+                    line = line.strip()
+                    if line.startswith("#"):
+                        continue
+                    if line.startswith("GRUB_TIMEOUT="):
+                        try:
+                            menu_timeout = float(line.split("=")[-1])
+                        except ValueError:
+                            pass
+                    elif line.startswith("GRUB_TIMEOUT_STYLE=menu"):
+                        menu_visible = True
+                    elif line.startswith("GRUB_TIMEOUT_STYLE="):
+                        menu_visible = False
+
+        self.builder.get_object("grub_switch").set_active(menu_visible)
+        self.builder.get_object("grub_timeout_spinner").set_value(menu_timeout)
 
     def save_boot_config(self, button):
         menu = "hidden"
