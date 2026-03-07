@@ -1,23 +1,214 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: mintsysadm
-Upstream-Contact: Clement Lefebvre <root@linuxmint.com>
+Upstream-Contact: Linux Mint <root@linuxmint.com>
 Source: https://github.com/linuxmint/mintsysadm
 
 Files: *
-Copyright: 2013-2014 Clement Lefebvre <root@linuxmint.com>
+Copyright: 2026 Linux Mint <root@linuxmint.com>
 License: GPL-3+
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or (at
- your option) any later version.
+
+
+Files: 
+ usr/share/pixmaps/faces/linuxmint/130_coffee.jpg
+ usr/share/pixmaps/faces/linuxmint/240_football.jpg
+ usr/share/pixmaps/faces/linuxmint/260_motorsports.jpg
+ usr/share/pixmaps/faces/linuxmint/330_hummingbird.jpg
+ usr/share/pixmaps/faces/linuxmint/340_kitten.jpg
+ usr/share/pixmaps/faces/linuxmint/360_puppy.jpg
+ usr/share/pixmaps/faces/linuxmint/460_flower.jpg
+Copyright:
+ 2018 Alan Day
+ 2018 Felipe Borges
+License: GPL-3+
+
+
+Files: usr/share/pixmaps/faces/linuxmint/110_book.jpg
+Copyright: 2026, Clay Banks
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/120_chess.jpg
+Copyright: 2026, Alan Light
+License: CC-BY-SA-3.0
+
+
+Files: usr/share/pixmaps/faces/linuxmint/140_cinema.jpg
+Copyright: 2026, Denise Jans
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/150_gaming.jpg
+Copyright: 2026, Lorenzo Herrera
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/160_music.jpg
+Copyright: 2026, Daniel Lazar
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/210_soccer.jpg
+Copyright: 2026, Sandro Schuh
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/220_basketball.jpg
+Copyright: 2026, Tom Briskey
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/230_baseball.jpg
+Copyright: 2026, Wonder Kim
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/250_tennis.jpg
+Copyright: 2026, Kateryna Hliznitsova
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/310_butterfly.jpg
+Copyright: 2026, Aarn Giri
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/320_guineapig.jpg
+Copyright: 2026, Karlijn Prot
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/350_monkey.jpg
+Copyright: 2026, Syed Ahmad
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/410_cone.jpg
+Copyright: 2026, Jens Enemark
+License: CC0
+
+
+Files: usr/share/pixmaps/faces/linuxmint/420_nature.jpg
+Copyright: 2026, Elizaveta Dushechkina
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/430_leaves.jpg
+Copyright: 2026, dking
+License: CC-BY-3.0
+
+
+Files: usr/share/pixmaps/faces/linuxmint/440_leaf_palm.jpg
+Copyright: 2026, Marek Piwnicki
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/450_lilium.jpg
+Copyright: 2026, Graziano Capelli
+License: CC-BY-SA
+
+
+Files: usr/share/pixmaps/faces/linuxmint/510_beach.jpg
+Copyright: 2026, Alessandro Caproni
+License: CC-BY-4.0
+
+
+Files: usr/share/pixmaps/faces/linuxmint/520_clouds.jpg
+Copyright: 2026, Sam Schooler
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/530_mountain.jpg
+Copyright: 2026, Patrick Fore
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/540_night.jpg
+Copyright: 2026, Mohamed Nohassi
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/550_sunset.jpg
+Copyright: 2026, Rahul Pandit
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/560_earth.jpg
+Copyright: 2026, Carl Wang
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/610_abstract_blue.jpg
+Copyright: 2026, Codioful
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/620_abstract_brown.jpg
+Copyright: 2026, Hans
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/630_abstract_green.jpg
+Copyright: 2026, Ilgmyzin
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/640_abstract_orange.jpg
+Copyright: 2026, Li Zhang
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/650_abstract_pink.jpg
+Copyright: 2026, A chosen soul
+License: Unsplash
+
+
+Files: usr/share/pixmaps/faces/linuxmint/660_abstract_white.jpg
+Copyright: 2026, Debora Pilati
+License: Unsplash
+
+
+License: Unsplash
+ All photos published on Unsplash can be used for free. You can use
+ them for commercial and noncommercial purposes. You do not need to
+ ask permission from or provide credit to the photographer or
+ Unsplash, although it is appreciated when possible.
  .
- This program is distributed in the hope that it will be useful, but
- WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- General Public License for more details.
+ This license does not include the right to compile photos from
+ Unsplash to replicate a similar or competing service.
  .
- You should have received a copy of the GNU General Public License
- along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+
+License: GPL-3+
+ On Debian systems, the complete text of the GNU General Public License
+ version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+
+License: CC0
+ On Debian systems, the complete text of this license can be found in
+ "/usr/share/common-licenses/CC0".
+
+
+License: CC-BY-3.0
+ On Debian systems, the complete text of this license can be found in
+ "/usr/share/common-licenses/CC-BY-3.0".
+
+License: CC-BY-4.0
+ On Debian systems, the complete text of this license can be found in
+ "/usr/share/common-licenses/CC-BY-4.0".
+
+
+License: CC-BY-SA
+ This work is licensed under the Creative Commons Attribution-ShareAlike
+ license. The specific version of the license was not specified by the
+ original author.
  .
- On Debian systems, the complete text of the GNU General
- Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+ On Debian systems, the complete text of Creative Commons Attribution-
+ ShareAlike licenses can be found in:
+ /usr/share/common-licenses/CC-BY-SA-3.0
+ /usr/share/common-licenses/CC-BY-SA-4.0
+
+
+License: CC-BY-SA-3.0
+ On Debian systems, the complete text of this license can be found in
+ "/usr/share/common-licenses/CC-BY-SA-3.0".
+
