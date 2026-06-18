@@ -17,7 +17,7 @@ gi.require_version('XApp', '1.0')
 gi.require_version('Gst', '1.0')
 from common.user import generate_password, get_password_strength, set_image_from_avatar, set_avatar, set_avatar_from_browsed_path, browse_avatar_dialog
 from common.widgets import DimmedTable, EditableEntry
-from gi.repository import AccountsService, GLib, Gtk, Gio, Gdk, GdkPixbuf, Gst
+from gi.repository import AccountsService, GLib, Gtk, Gio, Gdk, GdkPixbuf, Gst, GLib
 from PIL import Image
 
 # Initialize GStreamer
@@ -66,7 +66,7 @@ class MainWindow():
         self.window = self.builder.get_object("main_window")
         self.window.set_title(_("Account Details"))
         self.window.set_icon_name("preferences-desktop-user")
-        self.window.set_wmclass("mintsysadm-settings-user", "mintsysadm-settings-user")
+        GLib.set_prgname("mintsysadm-settings-user")
 
         self.face_button = self.builder.get_object("button_avatar")
         self.face_image = self.builder.get_object("image_avatar")
