@@ -21,7 +21,7 @@ setproctitle.setproctitle("mintsysadm")
 _ = xapp.util.l10n("mintsysadm")
 
 GRUB_FILE = "/etc/default/grub.d/98_mintsysadm.cfg"
-ENVIRONMENT_FILE = "/etc/X11/Xsession.d/98_mintsysadm"
+ENVIRONMENT_FILE = "/etc/X11/Xsession.d/90_mintsysadm"
 
 class MyApplication(Gtk.Application):
     # Main initialization routine
