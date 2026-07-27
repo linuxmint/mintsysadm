@@ -1,0 +1,186 @@
+#!/usr/bin/python3
+
+import os
+import sys
+import tempfile
+import unittest
+
+
+sys.path.insert(
+    0,
+    os.path.join(os.path.dirname(__file__), "usr/lib/linuxmint/mintsysadm"),
+)
+
+from common.kernel_cleanup import (
+    CleanupCandidate,
+    CleanupSettings,
+    get_cleanup_candidates,
+    load_cleanup_settings,
+    prepare_candidate,
+    save_cleanup_settings,
+)
+from common.kernels import Series
+
+
+class CleanupPlannerTests(unittest.TestCase):
+
+    def setUp(self):
+        self.packages = [
+            "linux-headers-6.8.0-40",
+            "linux-headers-6.8.0-40-generic",
+            "linux-image-6.8.0-40-generic",
+            "linux-modules-6.8.0-40-generic",
+            "linux-headers-6.8.0-41",
+            "linux-headers-6.8.0-41-generic",
+            "linux-image-6.8.0-41-generic",
+            "linux-modules-6.8.0-41-generic",
+            "linux-headers-6.8.0-42",
+            "linux-headers-6.8.0-42-generic",
+            "linux-image-6.8.0-42-generic",
+            "linux-modules-6.8.0-42-generic",
+        ]
+
+    def test_tracked_series_keeps_newest_installed_versions(self):
+        series = Series(
+            name="6.8",
+            version="6.8",
+            flavor="generic",
+            tracked=True,
+            installed_versions={
+                "6.8.0-40",
+                "6.8.0-41",
+                "6.8.0-42",
+            },
+        )
+        candidates = get_cleanup_candidates(
+            [series],
+            2,
+            "6.8.0-42-generic",
+            self.packages,
+        )
+        self.assertEqual(len(candidates), 1)
+        self.assertEqual(candidates[0].kernel_version, "6.8.0-40")
+        self.assertEqual(
+            candidates[0].packages,
+            {
+                "linux-headers-6.8.0-40",
+                "linux-headers-6.8.0-40-generic",
+                "linux-image-6.8.0-40-generic",
+                "linux-modules-6.8.0-40-generic",
+            },
+        )
+
+    def test_untracked_series_does_not_retain_old_versions(self):
+        series = Series(
+            name="6.8",
+            version="6.8",
+            flavor="generic",
+            installed_versions={"6.8.0-40", "6.8.0-41"},
+        )
+        candidates = get_cleanup_candidates(
+            [series],
+            2,
+            "6.8.0-42-generic",
+            self.packages,
+        )
+        versions = set()
+        for candidate in candidates:
+            versions.add(candidate.kernel_version)
+        self.assertEqual(versions, {"6.8.0-40", "6.8.0-41"})
+
+    def test_running_kernel_is_never_a_candidate(self):
+        series = Series(
+            name="6.8",
+            version="6.8",
+            flavor="generic",
+            installed_versions={"6.8.0-40"},
+        )
+        candidates = get_cleanup_candidates(
+            [series],
+            2,
+            "6.8.0-40-generic",
+            self.packages,
+        )
+        self.assertEqual(candidates, [])
+
+    def test_duplicate_tracks_share_tracked_state(self):
+        hwe = Series(
+            name="6.8",
+            version="6.8",
+            flavor="generic",
+            track="hwe",
+            tracked=True,
+            installed_versions={"6.8.0-40", "6.8.0-41"},
+        )
+        edge = Series(
+            name="6.8",
+            version="6.8",
+            flavor="generic",
+            track="hwe",
+            edge=True,
+            installed_versions={"6.8.0-40", "6.8.0-41"},
+        )
+        candidates = get_cleanup_candidates(
+            [hwe, edge],
+            1,
+            "different-kernel",
+            self.packages,
+        )
+        self.assertEqual(len(candidates), 1)
+        self.assertEqual(candidates[0].kernel_version, "6.8.0-40")
+
+    def test_settings_round_trip(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "cleanup.conf")
+            save_cleanup_settings(
+                CleanupSettings(enabled=True, retain=3),
+                path,
+            )
+            self.assertEqual(
+                load_cleanup_settings(path),
+                CleanupSettings(enabled=True, retain=3),
+            )
+
+    def test_candidate_is_rejected_if_apt_would_remove_tracked_meta(self):
+        class FakePackage:
+
+            def __init__(self, name, cache):
+                self.name = name
+                self.cache = cache
+                self.is_installed = True
+                self.marked_delete = False
+
+            def mark_delete(self, auto_fix=True, purge=True):
+                self.marked_delete = True
+                self.cache["linux-generic"].marked_delete = True
+
+        class FakeCache(dict):
+
+            def get_changes(self):
+                changes = []
+                for package in self.values():
+                    if package.marked_delete:
+                        changes.append(package)
+                return changes
+
+        cache = FakeCache()
+        cache["linux-generic"] = FakePackage("linux-generic", cache)
+        package_name = "linux-image-6.8.0-40-generic"
+        cache[package_name] = FakePackage(package_name, cache)
+        candidate = CleanupCandidate(
+            series_version="6.8",
+            flavor="generic",
+            kernel_version="6.8.0-40",
+            packages={package_name},
+        )
+        removals, reason = prepare_candidate(
+            cache,
+            candidate,
+            {"linux-generic"},
+        )
+        self.assertIsNone(removals)
+        self.assertIn("linux-generic", reason)
+
+
+if __name__ == "__main__":
+    unittest.main()

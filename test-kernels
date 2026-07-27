@@ -1,0 +1,251 @@
+#!/usr/bin/python3
+
+import os
+import sys
+import tempfile
+import unittest
+from unittest.mock import patch
+
+
+sys.path.insert(
+    0,
+    os.path.join(os.path.dirname(__file__), "usr/lib/linuxmint/mintsysadm"),
+)
+
+from common.kernels import (
+    Series,
+    format_available_series,
+    get_available_series,
+    get_installed_series,
+    get_manually_tracked_series,
+    set_series_manually_tracked,
+)
+
+
+class FakeVersion:
+
+    def __init__(self, version, source_name):
+        self.version = version
+        self.source_name = source_name
+
+
+class FakePackage:
+
+    def __init__(self, version, source_name, is_installed=False):
+        self.candidate = FakeVersion(version, source_name)
+        self.is_installed = is_installed
+
+
+class FakeCache(dict):
+
+    def keys(self):
+        return super().keys()
+
+
+class InstalledSeriesTests(unittest.TestCase):
+
+    @patch(
+        "common.kernels.get_manually_tracked_series",
+        return_value=set(),
+    )
+    @patch(
+        "common.kernels.get_installed_kernel_or_header_packages",
+        return_value=[
+            "linux-headers-6.8.0-57",
+            "linux-headers-6.8.0-57-generic",
+            "linux-image-6.8.0-57-generic",
+            "linux-headers-6.14.0-24-oem",
+            "linux-headers-7.1.4+deb14-common",
+            "linux-headers-7.1.4+deb14-amd64",
+            "linux-image-7.1.4+deb14-amd64",
+        ],
+    )
+    def test_builds_series(self, _get_packages, _get_manually_tracked):
+        self.assertEqual(
+            get_installed_series([]),
+            [
+                Series(
+                    name="7.1 (amd64)",
+                    version="7.1",
+                    flavor="amd64",
+                    installed_packages={
+                        "linux-headers-7.1.4+deb14-amd64",
+                        "linux-headers-7.1.4+deb14-common",
+                        "linux-image-7.1.4+deb14-amd64",
+                    },
+                    installed_versions={"7.1.4+deb14"},
+                ),
+                Series(
+                    name="6.14 (oem)",
+                    version="6.14",
+                    flavor="oem",
+                    installed_packages={"linux-headers-6.14.0-24-oem"},
+                    installed_versions={"6.14.0-24"},
+                ),
+                Series(
+                    name="6.8",
+                    version="6.8",
+                    flavor="generic",
+                    installed_packages={
+                        "linux-headers-6.8.0-57",
+                        "linux-headers-6.8.0-57-generic",
+                        "linux-image-6.8.0-57-generic",
+                    },
+                    installed_versions={"6.8.0-57"},
+                ),
+            ],
+        )
+
+    @patch(
+        "common.kernels.get_installed_kernel_or_header_packages",
+        return_value=[
+            "linux-headers-6.8.0-57",
+            "linux-headers-6.8.0-57-generic",
+            "linux-image-6.8.0-57-generic",
+        ],
+    )
+    def test_matches_installed_packages_to_available_series(self, _get_packages):
+        available = Series(
+            name="6.8",
+            version="6.8",
+            flavor="generic",
+            track="ga",
+            meta_packages={"linux-generic"},
+        )
+        series_list = get_installed_series([available])
+        self.assertEqual(series_list, [available])
+        self.assertEqual(
+            available.installed_packages,
+            {
+                "linux-headers-6.8.0-57",
+                "linux-headers-6.8.0-57-generic",
+                "linux-image-6.8.0-57-generic",
+            },
+        )
+        self.assertEqual(available.installed_versions, {"6.8.0-57"})
+
+    @patch("common.kernels.get_ubuntu_base_release", return_value="24.04")
+    @patch("common.kernels.IS_LMDE", False)
+    @patch("common.kernels.apt.Cache")
+    def test_gets_available_ubuntu_series(self, cache, _get_ubuntu_release):
+        cache.return_value = FakeCache(
+            {
+                "linux-generic": FakePackage(
+                    "6.8.0-136.136",
+                    "linux-meta",
+                    True,
+                ),
+                "linux-generic-6.8": FakePackage("6.8.0-136.136", "linux-meta"),
+                "linux-generic-6.14": FakePackage(
+                    "6.14.0-37.37~24.04.1",
+                    "linux-meta-hwe-6.14",
+                ),
+                "linux-generic-hwe-24.04": FakePackage(
+                    "7.0.0-28.28~24.04.1",
+                    "linux-meta-hwe-7.0",
+                ),
+                "linux-generic-hwe-24.04-edge": FakePackage(
+                    "7.0.0-28.28~24.04.1",
+                    "linux-meta-hwe-7.0",
+                    True,
+                ),
+                "linux-generic-hwe-22.04": FakePackage(
+                    "6.8.0-90.90~22.04.1",
+                    "linux-meta-hwe-6.8",
+                ),
+            }
+        )
+        self.assertEqual(
+            get_available_series(),
+            [
+                Series(
+                    name="7.0",
+                    version="7.0",
+                    flavor="generic",
+                    track="hwe",
+                    meta_packages={"linux-generic-hwe-24.04"},
+                ),
+                Series(
+                    name="7.0",
+                    version="7.0",
+                    flavor="generic",
+                    track="hwe",
+                    edge=True,
+                    tracked=True,
+                    meta_packages={"linux-generic-hwe-24.04-edge"},
+                ),
+                Series(
+                    name="6.8",
+                    version="6.8",
+                    flavor="generic",
+                    track="ga",
+                    tracked=True,
+                    meta_packages={"linux-generic"},
+                ),
+            ],
+        )
+
+    @patch("common.kernels.IS_LMDE", True)
+    @patch("common.kernels.apt.Cache")
+    def test_gets_available_debian_ga_series(self, cache):
+        cache.return_value = FakeCache(
+            {
+                "linux-image-amd64": FakePackage("7.1.4-1", "linux-signed-amd64"),
+                "linux-headers-amd64": FakePackage("7.1.4-1", "linux-meta"),
+            }
+        )
+        self.assertEqual(
+            get_available_series(),
+            [
+                Series(
+                    name="7.1 (amd64)",
+                    version="7.1",
+                    flavor="amd64",
+                    track="ga",
+                    meta_packages={"linux-headers-amd64", "linux-image-amd64"},
+                )
+            ],
+        )
+
+    def test_formats_available_series(self):
+        self.assertEqual(
+            format_available_series(
+                Series(
+                    name="7.0",
+                    version="7.0",
+                    flavor="generic",
+                    track="hwe",
+                    edge=True,
+                    meta_packages={
+                        "linux-generic-hwe-24.04",
+                        "linux-generic-hwe-24.04-edge",
+                    },
+                )
+            ),
+            "7.0 - HWE EDGE - linux-generic-hwe-24.04, "
+            "linux-generic-hwe-24.04-edge",
+        )
+
+    def test_persists_manually_tracked_series(self):
+        series = Series(
+            name="6.14",
+            version="6.14",
+            flavor="generic",
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "mintsysadm", "kernels.conf")
+            with patch(
+                "common.kernels.MANUALLY_TRACKED_SERIES_FILE",
+                path,
+            ):
+                set_series_manually_tracked(series, True)
+                self.assertEqual(
+                    get_manually_tracked_series(),
+                    {"6.14:generic"},
+                )
+                set_series_manually_tracked(series, False)
+                self.assertEqual(get_manually_tracked_series(), set())
+
+
+if __name__ == "__main__":
+    unittest.main()

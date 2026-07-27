@@ -1,0 +1,6 @@
+[Unit]
+Description=Clean up older Linux kernel versions
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/linuxmint/mintsysadm/kernel_cleanup.py
