@@ -14,6 +14,7 @@ gi.require_version("Gtk", "3.0")
 gi.require_version('GtkSource', '3.0')
 gi.require_version('XApp', '1.0')
 from gi.repository import Gtk, Gdk, GtkSource, Gio, XApp
+from page_kernels import KernelsWidget
 from page_users import UsersWidget
 
 setproctitle.setproctitle("mintsysadm")
@@ -38,6 +39,7 @@ class MyApplication(Gtk.Application):
         group = parser.add_mutually_exclusive_group()
         group.add_argument("--boot", action="store_const", dest="page", const="boot")
         group.add_argument("--environment", action="store_const", dest="page", const="environment")
+        group.add_argument("--kernels", action="store_const", dest="page", const="kernels")
         group.add_argument("--users", action="store_const", dest="page", const="users")
         argv = command_line.get_arguments()[1:]
         args, _ = parser.parse_known_args(argv)
@@ -73,6 +75,13 @@ class MintSysadmWindow():
 
 
         self.stack = self.builder.get_object("main_stack")
+        self.kernels_widget = KernelsWidget(self.window)
+        self.stack.add_titled(self.kernels_widget, "page_kernels", _("Kernels"))
+        self.stack.child_set_property(
+            self.kernels_widget,
+            "icon-name",
+            "mintupdate-type-kernel-symbolic",
+        )
         self.builder.get_object("grub_switch").connect("notify::active", self.grub_switch_toggled)
 
         # Fill in the boot page

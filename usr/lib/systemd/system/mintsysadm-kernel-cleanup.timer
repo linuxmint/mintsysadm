@@ -1,0 +1,11 @@
+[Unit]
+Description=Clean up older Linux kernel versions weekly
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=7d
+Persistent=true
+RandomizedDelaySec=30min
+
+[Install]
+WantedBy=timers.target
