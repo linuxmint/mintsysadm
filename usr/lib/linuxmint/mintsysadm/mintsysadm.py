@@ -80,7 +80,7 @@ class MintSysadmWindow():
         self.stack.child_set_property(
             self.kernels_widget,
             "icon-name",
-            "mintupdate-type-kernel-symbolic",
+            "xsi-cpu",
         )
         self.builder.get_object("grub_switch").connect("notify::active", self.grub_switch_toggled)
 
