@@ -1066,7 +1066,7 @@
                   <packing>
                     <property name="name">page_environment</property>
                     <property name="title" translatable="yes">Environment Variables</property>
-                    <property name="icon-name">lang-variable-symbolic</property>
+                    <property name="icon-name">xsi-utilities-terminal-symbolic</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
