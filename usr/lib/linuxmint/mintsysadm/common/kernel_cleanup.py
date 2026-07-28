@@ -305,6 +305,17 @@ def prepare_candidate(cache, candidate, tracked_meta_packages):
         packages = sorted(endangered_metas)
         reason = "would remove tracked metapackage(s): " + ", ".join(packages)
         return None, reason
+
+    non_kernel_packages = sorted(
+        package_name
+        for package_name in removals
+        if VERSIONED_KERNEL_PACKAGE_RE.fullmatch(package_name) is None
+    )
+    if non_kernel_packages:
+        reason = "would remove non-kernel package(s): " + ", ".join(
+            non_kernel_packages
+        )
+        return None, reason
     return removals, ""
 
 

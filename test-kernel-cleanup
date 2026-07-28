@@ -181,6 +181,45 @@ class CleanupPlannerTests(unittest.TestCase):
         self.assertIsNone(removals)
         self.assertIn("linux-generic", reason)
 
+    def test_candidate_is_rejected_if_apt_would_remove_non_kernel_package(self):
+        class FakePackage:
+
+            def __init__(self, name, cache):
+                self.name = name
+                self.cache = cache
+                self.is_installed = True
+                self.marked_delete = False
+
+            def mark_delete(self, auto_fix=True, purge=True):
+                self.marked_delete = True
+                self.cache["unrelated-package"].marked_delete = True
+
+        class FakeCache(dict):
+
+            def get_changes(self):
+                return [
+                    package
+                    for package in self.values()
+                    if package.marked_delete
+                ]
+
+        cache = FakeCache()
+        package_name = "linux-image-6.8.0-40-generic"
+        cache[package_name] = FakePackage(package_name, cache)
+        cache["unrelated-package"] = FakePackage(
+            "unrelated-package",
+            cache,
+        )
+        candidate = CleanupCandidate(
+            series_version="6.8",
+            flavor="generic",
+            kernel_version="6.8.0-40",
+            packages={package_name},
+        )
+        removals, reason = prepare_candidate(cache, candidate, set())
+        self.assertIsNone(removals)
+        self.assertIn("unrelated-package", reason)
+
 
 if __name__ == "__main__":
     unittest.main()
