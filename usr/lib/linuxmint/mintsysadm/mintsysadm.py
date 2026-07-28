@@ -99,12 +99,9 @@ class MintSysadmWindow():
 
 
         self.stack = self.builder.get_object("main_stack")
-        self.kernels_widget = KernelsWidget(self.window)
-        self.stack.add_titled(self.kernels_widget, "page_kernels", _("Kernels"))
-        self.stack.child_set_property(
-            self.kernels_widget,
-            "icon-name",
-            "xsi-cpu",
+        self.kernels_widget = KernelsWidget(
+            self.window,
+            self.builder,
         )
         self.builder.get_object("grub_switch").connect("notify::active", self.grub_switch_toggled)
 

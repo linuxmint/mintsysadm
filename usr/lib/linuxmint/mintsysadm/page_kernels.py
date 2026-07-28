@@ -34,14 +34,12 @@ from common.kernel_cleanup import (
 _ = xapp.util.l10n("mintsysadm")
 
 
-class KernelsWidget(Gtk.Box):
+class KernelsWidget:
 
-    def __init__(self, parent_window=None):
-        Gtk.Box.__init__(self, orientation=Gtk.Orientation.VERTICAL, spacing=12)
+    def __init__(self, parent_window, builder):
         self.parent_window = parent_window
+        self.builder = builder
         self.apt_client = None
-        self.set_margin_start(20)
-        self.set_margin_end(20)
 
         self.tracked_row_css = Gtk.CssProvider()
         self.tracked_row_css.load_from_data(
@@ -53,133 +51,41 @@ class KernelsWidget(Gtk.Box):
             """
         )
 
-        header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
-        header_box.set_margin_top(12)
-        self.pack_start(header_box, False, False, 0)
-
-        active_kernel = Gtk.Label()
-        active_kernel.set_xalign(1)
-        active_kernel.set_markup(
-            "<b>%s</b> %s" % (_("Active kernel:"), os.uname().release)
+        self.builder.get_object("label_active_kernel").set_text(
+            os.uname().release
         )
-        header_box.pack_end(active_kernel, False, False, 0)
-
-        description = Gtk.Label()
-        description.set_markup("<b>%s</b>" % _("Kernel series"))
-        description.set_xalign(0)
-        description.set_line_wrap(True)
-        self.pack_start(description, False, False, 0)
-
-        self.tracking_warning = Gtk.InfoBar()
-        self.tracking_warning.set_message_type(Gtk.MessageType.WARNING)
-        self.tracking_warning.set_no_show_all(True)
-        warning_label = Gtk.Label(
-            label=_(
-                "This computer is not following a supported kernel series "
-                "and may not receive future kernel security updates."
-            )
+        self.tracking_warning = self.builder.get_object(
+            "infobar_tracking_warning"
         )
-        warning_label.set_xalign(0)
-        warning_label.set_line_wrap(True)
-        warning_content = self.tracking_warning.get_content_area()
-        warning_content.add(warning_label)
-        warning_content.show_all()
-        self.pack_start(self.tracking_warning, False, False, 0)
-
-        scrolled_window = Gtk.ScrolledWindow()
-        scrolled_window.set_policy(
-            Gtk.PolicyType.NEVER,
-            Gtk.PolicyType.AUTOMATIC,
-        )
-        scrolled_window.set_shadow_type(Gtk.ShadowType.IN)
-        self.pack_start(scrolled_window, True, True, 0)
 
         self.listbox = Gtk.ListBox()
         self.listbox.set_selection_mode(Gtk.SelectionMode.NONE)
         self.listbox.set_activate_on_single_click(True)
         self.listbox.set_header_func(self.add_row_separator)
         self.listbox.connect("row_activated", self.on_row_activated)
-        scrolled_window.add(self.listbox)
+        self.builder.get_object("scrolledview_kernels").add(self.listbox)
 
-        self.add_cleanup_controls()
-
-        self.load_series()
-
-    def add_cleanup_controls(self):
-        heading = Gtk.Label()
-        heading.set_markup("<b>%s</b>" % _("Automatic Cleanup"))
-        heading.set_xalign(0)
-        self.pack_start(heading, False, False, 0)
-
-        explanation = Gtk.Label(
-            label=_(
-                "Cleanup runs weekly. The active kernel and tracked "
-                "metapackages are always protected."
-            ),
+        self.cleanup_switch = self.builder.get_object(
+            "switch_cleanup_enabled"
         )
-        explanation.set_xalign(0)
-        explanation.set_line_wrap(True)
-        explanation.get_style_context().add_class("dim-label")
-        self.pack_start(explanation, False, False, 0)
-
-        cleanup_box = Gtk.Box(
-            orientation=Gtk.Orientation.VERTICAL,
-            spacing=8,
+        self.retain_spin = self.builder.get_object(
+            "spinner_num_kernels_to_keep"
         )
-        cleanup_box.set_margin_start(12)
-        cleanup_box.set_margin_end(12)
-        cleanup_box.set_margin_top(8)
-        cleanup_box.set_margin_bottom(8)
-
-        cleanup_frame = Gtk.Frame()
-        cleanup_frame.set_shadow_type(Gtk.ShadowType.IN)
-        cleanup_frame.add(cleanup_box)
-        self.pack_start(cleanup_frame, False, False, 0)
-
-        enable_box = Gtk.Box(
-            orientation=Gtk.Orientation.HORIZONTAL,
-            spacing=12,
-        )
-        cleanup_box.pack_start(enable_box, False, False, 0)
-        enable_label = Gtk.Label(
-            label=_("Remove older kernels automatically"),
-        )
-        enable_label.set_xalign(0)
-        enable_box.pack_start(enable_label, True, True, 0)
-        self.cleanup_switch = Gtk.Switch()
-        enable_box.pack_end(self.cleanup_switch, False, False, 0)
-
-        retain_box = Gtk.Box(
-            orientation=Gtk.Orientation.HORIZONTAL,
-            spacing=12,
-        )
-        cleanup_box.pack_start(retain_box, False, False, 0)
-        retain_label = Gtk.Label(
-            label=_("Number of installed kernels to keep in each tracked series"),
-        )
-        retain_label.set_xalign(0)
-        retain_box.pack_start(retain_label, True, True, 0)
-        adjustment = Gtk.Adjustment(
+        self.retain_spin.set_adjustment(Gtk.Adjustment(
             value=2,
             lower=1,
             upper=10,
             step_increment=1,
             page_increment=1,
+        ))
+        self.builder.get_object("button_history").connect(
+            "clicked",
+            self.on_history_clicked,
         )
-        self.retain_spin = Gtk.SpinButton(adjustment=adjustment)
-        retain_box.pack_end(self.retain_spin, False, False, 0)
-
-        button_box = Gtk.ButtonBox(orientation=Gtk.Orientation.HORIZONTAL)
-        button_box.set_layout(Gtk.ButtonBoxStyle.END)
-        button_box.set_spacing(8)
-        cleanup_box.pack_start(button_box, False, False, 0)
-        history_button = Gtk.Button(label=_("History"))
-        history_button.connect("clicked", self.on_history_clicked)
-        button_box.add(history_button)
-        cleanup_button = Gtk.Button(label=_("Clean up now"))
-        cleanup_button.get_style_context().add_class("suggested-action")
-        cleanup_button.connect("clicked", self.on_cleanup_clicked)
-        button_box.add(cleanup_button)
+        self.builder.get_object("button_cleanup").connect(
+            "clicked",
+            self.on_cleanup_clicked,
+        )
 
         settings = load_cleanup_settings()
         self.cleanup_switch.set_active(settings.enabled)
@@ -192,6 +98,7 @@ class KernelsWidget(Gtk.Box):
             "value-changed",
             self.on_cleanup_settings_changed,
         )
+        self.load_series()
 
     def on_cleanup_settings_changed(self, widget, parameter=None):
         settings = CleanupSettings(
@@ -599,7 +506,7 @@ class KernelsWidget(Gtk.Box):
 
     def add_history_info(self, grid, row, title, value):
         title_label = Gtk.Label()
-        title_label.set_markup("<b>%s</b>" % title)
+        title_label.set_text(title)
         title_label.set_xalign(0)
         grid.attach(title_label, 0, row, 1, 1)
         value_label = Gtk.Label(label=value)
@@ -663,7 +570,7 @@ class KernelsWidget(Gtk.Box):
         if self.parent_window is not None:
             self.parent_window.set_sensitive(sensitive)
         else:
-            self.set_sensitive(sensitive)
+            self.builder.get_object("page_kernels").set_sensitive(sensitive)
 
     def load_series(self):
         for child in self.listbox.get_children():
@@ -842,8 +749,7 @@ class KernelsWidget(Gtk.Box):
         dialog.format_secondary_text(
             _(
                 "Without tracking, this computer will no longer receive "
-                "security updates for this kernel series. Installed kernels "
-                "and headers will not be removed."
+                "security updates for this kernel series."
             )
         )
         dialog.add_button(_("Untrack"), Gtk.ResponseType.OK)
@@ -866,8 +772,7 @@ class KernelsWidget(Gtk.Box):
         )
         dialog.format_secondary_text(
             _(
-                "This series will be considered tracked, but System "
-                "Administration cannot manage its updates. It is your "
+                "This series will be considered manually tracked. It is your "
                 "responsibility to ensure that an appropriate metapackage is "
                 "installed or that kernel updates are handled another way."
             )
@@ -902,10 +807,11 @@ class KernelsWidget(Gtk.Box):
 
 
 def main():
-    window = Gtk.Window()
-    viewer = KernelsWidget(window)
-    window.add(viewer)
-    window.set_default_size(800, 500)
+    builder = Gtk.Builder()
+    builder.set_translation_domain("mintsysadm")
+    builder.add_from_file("/usr/share/mintsysadm/mintsysadm.ui")
+    window = builder.get_object("main_window")
+    KernelsWidget(window, builder)
     window.connect("destroy", Gtk.main_quit)
     window.show_all()
     Gtk.main()
