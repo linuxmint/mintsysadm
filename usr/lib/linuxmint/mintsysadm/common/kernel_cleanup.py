@@ -27,7 +27,8 @@ HISTORY_LIMIT = 20
 
 VERSIONED_KERNEL_PACKAGE_RE = re.compile(
     r"^linux-(?:"
-    r"image(?:-unsigned)?|modules(?:-extra)?|headers|tools|cloud-tools|buildinfo"
+    r"image(?:-unsigned)?|modules(?:-extra)?|headers|tools|cloud-tools|buildinfo|"
+    r"main-modules-[a-z0-9][a-z0-9+.-]*"
     r")-"
     r"(?P<version>\d+\.\d+\.\d+(?:-\d+|\+deb\d+))"
     r"(?:-(?P<flavor>[^:]+))?"
@@ -39,6 +40,7 @@ VERSIONED_KERNEL_PACKAGE_RE = re.compile(
 class CleanupSettings:
     enabled: bool = True
     retain: int = DEFAULT_RETAIN_COUNT
+    protected_kernels: set[str] = field(default_factory=set)
 
 
 @dataclass
@@ -91,6 +93,13 @@ def load_cleanup_settings(path=CLEANUP_CONFIG_FILE):
     )
     if settings.retain < 1:
         settings.retain = 1
+    settings.protected_kernels = set(
+        parser.get(
+            "Cleanup",
+            "ProtectedKernels",
+            fallback="",
+        ).split()
+    )
     return settings
 
 
@@ -99,6 +108,11 @@ def save_cleanup_settings(settings, path=CLEANUP_CONFIG_FILE):
     parser.add_section("Cleanup")
     parser.set("Cleanup", "Enabled", str(settings.enabled).lower())
     parser.set("Cleanup", "Retain", str(max(1, settings.retain)))
+    parser.set(
+        "Cleanup",
+        "ProtectedKernels",
+        " ".join(sorted(settings.protected_kernels)),
+    )
 
     config_path = Path(path)
     config_path.parent.mkdir(parents=True, exist_ok=True)
@@ -185,12 +199,15 @@ def get_cleanup_candidates(
     retain,
     running_release,
     installed_packages=None,
+    protected_kernels=None,
 ):
     """Return installed versions that may be removed, without changing APT."""
     if installed_packages is None:
         installed_packages = get_installed_versioned_kernel_packages()
     if retain < 1:
         retain = 1
+    if protected_kernels is None:
+        protected_kernels = set()
 
     states = _get_series_states(series_list)
     removable_versions = []
@@ -214,6 +231,12 @@ def get_cleanup_candidates(
                 index += 1
 
         for kernel_version in versions:
+            kernel_identifier = kernel_version
+            if key[1]:
+                kernel_identifier += "-" + key[1]
+            if kernel_identifier in protected_kernels:
+                protected_versions.add(kernel_version)
+                continue
             if kernel_version in kept:
                 protected_versions.add(kernel_version)
                 continue
@@ -378,6 +401,7 @@ def run_cleanup(progress_callback=None):
         series_list,
         settings.retain,
         running_release,
+        protected_kernels=settings.protected_kernels,
     )
     tracked_meta_packages = get_tracked_meta_packages(series_list)
     record = {

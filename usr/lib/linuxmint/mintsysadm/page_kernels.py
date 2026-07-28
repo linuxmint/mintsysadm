@@ -4,9 +4,13 @@ from datetime import datetime
 from functools import cmp_to_key
 import gi
 import os
+import pwd
+import subprocess
+from urllib.parse import quote
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
 
+import apt
 import aptkit.simpleclient
 import xapp.util
 import xapp.threading as xt
@@ -18,7 +22,9 @@ from common.kernels import (
     set_series_manually_tracked,
 )
 from common.kernel_cleanup import (
+    CleanupCandidate,
     CleanupSettings,
+    VERSIONED_KERNEL_PACKAGE_RE,
     get_cleanup_candidates,
     get_installed_versioned_kernel_packages,
     get_kernel_package_version,
@@ -86,6 +92,10 @@ class KernelsWidget:
             "clicked",
             self.on_cleanup_clicked,
         )
+        self.builder.get_object("button_all_kernels").connect(
+            "clicked",
+            self.on_all_kernels_clicked,
+        )
 
         settings = load_cleanup_settings()
         self.cleanup_switch.set_active(settings.enabled)
@@ -100,11 +110,522 @@ class KernelsWidget:
         )
         self.load_series()
 
-    def on_cleanup_settings_changed(self, widget, parameter=None):
-        settings = CleanupSettings(
-            enabled=self.cleanup_switch.get_active(),
-            retain=self.retain_spin.get_value_as_int(),
+    def get_available_kernels(self):
+        cache = apt.Cache()
+        protected_kernels = load_cleanup_settings().protected_kernels
+        kernels = []
+        seen = set()
+        running_release = os.uname().release
+
+        for package_name in cache.keys():
+            match = VERSIONED_KERNEL_PACKAGE_RE.fullmatch(package_name)
+            if match is None or not package_name.startswith("linux-image-"):
+                continue
+
+            package = cache[package_name]
+            if not package.is_installed and package.candidate is None:
+                continue
+
+            if package_name.startswith("linux-image-unsigned-"):
+                signed_name = package_name.replace(
+                    "linux-image-unsigned-",
+                    "linux-image-",
+                    1,
+                )
+                if signed_name in cache and cache[signed_name].candidate is not None:
+                    continue
+
+            kernel_version = match.group("version")
+            flavor = match.group("flavor") or ""
+            identifier = (kernel_version, flavor)
+            if identifier in seen:
+                continue
+            seen.add(identifier)
+
+            installed = package.is_installed
+            package_version = package.installed or package.candidate
+            changelog_version = package_version.version
+            if ":" in changelog_version:
+                changelog_version = changelog_version.split(":", 1)[1]
+            debian_origin = next(
+                (
+                    origin
+                    for origin in package_version.origins
+                    if (origin.origin or "").lower() == "debian"
+                ),
+                None,
+            )
+            if debian_origin is not None:
+                source_name = package_version.source_name
+                component = debian_origin.component or "main"
+                if source_name.startswith("lib"):
+                    prefix = source_name[:4]
+                else:
+                    prefix = source_name[0]
+                changelog_url = (
+                    "https://metadata.ftp-master.debian.org/changelogs/"
+                    f"/{component}/{prefix}/{source_name}/"
+                    f"{source_name}_{changelog_version}_changelog"
+                )
+                bug_reports_url = (
+                    "https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg="
+                    f"{quote(package_name, safe='')}"
+                )
+            else:
+                changelog_version = changelog_version.split("~", 1)[0]
+                changelog_url = (
+                    "https://changelogs.ubuntu.com/changelogs/pool/main/l/"
+                    f"linux/linux_{changelog_version}/changelog"
+                )
+                bug_reports_url = (
+                    "https://launchpad.net/ubuntu/+source/linux/+bugs"
+                    f"?field.searchtext={kernel_version}"
+                )
+            active = self._is_kernel_active(
+                kernel_version,
+                flavor,
+                running_release,
+            )
+            kernels.append({
+                "version": kernel_version,
+                "flavor": flavor,
+                "image": package_name,
+                "installed": installed,
+                "active": active,
+                "available": package.candidate is not None,
+                "protected": self.get_kernel_identifier(
+                    kernel_version,
+                    flavor,
+                ) in protected_kernels,
+                "bug_reports_url": bug_reports_url,
+                "changelog_url": changelog_url,
+            })
+        return kernels
+
+    @staticmethod
+    def get_kernel_identifier(kernel_version, flavor):
+        identifier = kernel_version
+        if flavor:
+            identifier += "-" + flavor
+        return identifier
+
+    @staticmethod
+    def _is_kernel_active(kernel_version, flavor, running_release):
+        release = kernel_version
+        if flavor:
+            release += "-" + flavor
+        return release == running_release
+
+    def get_kernel_packages(self, kernel):
+        cache = apt.Cache()
+        packages = set()
+        for package_name in cache.keys():
+            match = VERSIONED_KERNEL_PACKAGE_RE.fullmatch(package_name)
+            if match is None:
+                continue
+            if match.group("version") != kernel["version"]:
+                continue
+
+            flavor = match.group("flavor")
+            if flavor not in (None, "common", kernel["flavor"]):
+                continue
+
+            if package_name.startswith("linux-image-"):
+                if package_name != kernel["image"]:
+                    continue
+
+            package = cache[package_name]
+            if package.is_installed or package.candidate is not None:
+                packages.add(package_name)
+        return packages
+
+    def on_all_kernels_clicked(self, button):
+        dialog = Gtk.Dialog(
+            title=_("All kernels"),
+            transient_for=self.parent_window,
+            modal=True,
         )
+        dialog.set_border_width(12)
+        dialog.set_default_size(700, 500)
+        dialog.add_button(_("Close"), Gtk.ResponseType.CLOSE)
+        protect_button = dialog.add_button(
+            _("Protect"),
+            Gtk.ResponseType.APPLY,
+        )
+        protect_button.set_tooltip_text(
+            _("Protected kernels are never removed during cleanup.")
+        )
+        protect_button.set_sensitive(False)
+        action_button = dialog.add_button(_("Install"), Gtk.ResponseType.OK)
+        action_button.set_sensitive(False)
+
+        content_area = dialog.get_content_area()
+        content_area.set_spacing(8)
+        kernels = self.get_available_kernels()
+
+        filters_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        filters_box.pack_start(Gtk.Label(label=_("Series")), False, False, 0)
+        series_combo = Gtk.ComboBoxText()
+        series_combo.append("", _("All"))
+        series = {".".join(kernel["version"].split(".")[:2]) for kernel in kernels}
+        for value in sorted(
+                series,
+                key=cmp_to_key(apt_pkg.version_compare),
+                reverse=True):
+            series_combo.append(value, value)
+        series_combo.set_active_id("")
+        filters_box.pack_start(series_combo, False, False, 0)
+
+        filters_box.pack_start(Gtk.Label(label=_("Flavor")), False, False, 0)
+        flavor_combo = Gtk.ComboBoxText()
+        flavor_combo.append("", _("All"))
+        flavors = sorted({kernel["flavor"] for kernel in kernels})
+        for flavor in flavors:
+            flavor_combo.append(flavor, flavor)
+        if "generic" in flavors:
+            flavor_combo.set_active_id("generic")
+        elif "amd64" in flavors:
+            flavor_combo.set_active_id("amd64")
+        else:
+            flavor_combo.set_active_id("")
+        filters_box.pack_start(flavor_combo, False, False, 0)
+
+        filters_box.pack_start(Gtk.Label(label=_("Status")), False, False, 0)
+        status_combo = Gtk.ComboBoxText()
+        status_combo.append("", _("All"))
+        status_combo.append("active", _("Active"))
+        status_combo.append("active-protected", _("Active, protected"))
+        status_combo.append("installed", _("Installed"))
+        status_combo.append(
+            "installed-protected",
+            _("Installed, protected"),
+        )
+        status_combo.append("available", _("Available"))
+        status_combo.set_active_id("")
+        filters_box.pack_start(status_combo, False, False, 0)
+        content_area.pack_start(filters_box, False, False, 0)
+
+        store = Gtk.ListStore(str, str, str, bool, bool, object, int, str)
+        for kernel in kernels:
+            if kernel["active"]:
+                if kernel["protected"]:
+                    status = _("Active, protected")
+                else:
+                    status = _("Active")
+                status_rank = 0
+            elif kernel["installed"]:
+                if kernel["protected"]:
+                    status = _("Installed, protected")
+                else:
+                    status = _("Installed")
+                status_rank = 1
+            else:
+                status = _("Available")
+                status_rank = 2
+            store.append((
+                kernel["version"],
+                kernel["flavor"],
+                status,
+                kernel["installed"],
+                kernel["active"],
+                kernel,
+                status_rank,
+                ".".join(kernel["version"].split(".")[:2]),
+            ))
+        filtered = store.filter_new()
+
+        def filter_kernel(model, tree_iter, _data=None):
+            selected_series = series_combo.get_active_id() or ""
+            selected_flavor = flavor_combo.get_active_id() or ""
+            selected_status = status_combo.get_active_id() or ""
+            if selected_series and model.get_value(tree_iter, 7) != selected_series:
+                return False
+            if selected_flavor and model.get_value(tree_iter, 1) != selected_flavor:
+                return False
+            if selected_status:
+                kernel = model.get_value(tree_iter, 5)
+                if kernel["active"]:
+                    status_id = "active"
+                elif kernel["installed"]:
+                    status_id = "installed"
+                else:
+                    status_id = "available"
+                if kernel["protected"]:
+                    status_id += "-protected"
+                if status_id != selected_status:
+                    return False
+            return True
+
+        filtered.set_visible_func(filter_kernel)
+        for combo in (series_combo, flavor_combo, status_combo):
+            combo.connect("changed", lambda widget: filtered.refilter())
+
+        sorted_model = Gtk.TreeModelSort(model=filtered)
+        sorted_model.set_sort_func(0, self.compare_kernel_versions)
+        sorted_model.set_sort_func(6, self.compare_kernel_status)
+        sorted_model.set_sort_column_id(6, Gtk.SortType.ASCENDING)
+
+        treeview = Gtk.TreeView(model=sorted_model)
+        for title, column_id, sort_column_id in (
+            (_("Version"), 0, 0),
+            (_("Flavor"), 1, 1),
+            (_("Status"), 2, 6),
+        ):
+            renderer = Gtk.CellRendererText()
+            column = Gtk.TreeViewColumn(title, renderer, text=column_id)
+            column.set_sort_column_id(sort_column_id)
+            treeview.append_column(column)
+
+        selection = treeview.get_selection()
+
+        links_column = Gtk.TreeViewColumn(_("Links"))
+        bug_reports_renderer = Gtk.CellRendererText(
+            text=_("Bug reports"),
+            underline=Pango.Underline.SINGLE,
+            foreground="#3584e4",
+            xpad=6,
+        )
+        changelog_renderer = Gtk.CellRendererText(
+            text=_("Changelog"),
+            underline=Pango.Underline.SINGLE,
+            foreground="#3584e4",
+            xpad=6,
+        )
+        links_column.pack_start(bug_reports_renderer, False)
+        links_column.pack_start(changelog_renderer, False)
+        treeview.append_column(links_column)
+
+        def link_clicked(widget, event):
+            if event.button != 1:
+                return False
+            result = treeview.get_path_at_pos(int(event.x), int(event.y))
+            if result is None:
+                return False
+            path, column, cell_x, _cell_y = result
+            if column is not links_column:
+                return False
+
+            model = treeview.get_model()
+            kernel = model.get_value(model.get_iter(path), 5)
+            for renderer, url_key in (
+                (bug_reports_renderer, "bug_reports_url"),
+                (changelog_renderer, "changelog_url"),
+            ):
+                x_offset, width = links_column.cell_get_position(renderer)
+                if x_offset <= cell_x < x_offset + width:
+                    self.open_url_as_user(kernel[url_key])
+                    return True
+            return False
+
+        treeview.connect("button-release-event", link_clicked)
+
+        def selection_changed(tree_selection):
+            model, tree_iter = tree_selection.get_selected()
+            if tree_iter is None:
+                action_button.set_sensitive(False)
+                protect_button.set_sensitive(False)
+                return
+            installed = model.get_value(tree_iter, 3)
+            active = model.get_value(tree_iter, 4)
+            kernel = model.get_value(tree_iter, 5)
+            action_button.set_label(_("Remove") if installed else _("Install"))
+            action_button.set_sensitive(not active)
+            protect_button.set_label(
+                _("Unprotect") if kernel["protected"] else _("Protect")
+            )
+            protect_button.set_sensitive(installed)
+
+        selection.connect("changed", selection_changed)
+
+        scrolled_window = Gtk.ScrolledWindow()
+        scrolled_window.set_policy(
+            Gtk.PolicyType.AUTOMATIC,
+            Gtk.PolicyType.AUTOMATIC,
+        )
+        scrolled_window.set_shadow_type(Gtk.ShadowType.IN)
+        scrolled_window.add(treeview)
+        content_area.pack_start(scrolled_window, True, True, 0)
+
+        dialog.show_all()
+        kernel = None
+        while True:
+            response = dialog.run()
+            model, tree_iter = selection.get_selected()
+            if response != Gtk.ResponseType.APPLY:
+                if response == Gtk.ResponseType.OK and tree_iter is not None:
+                    kernel = model.get_value(tree_iter, 5)
+                break
+            if tree_iter is None:
+                continue
+
+            selected_kernel = model.get_value(tree_iter, 5)
+            if not selected_kernel["installed"]:
+                continue
+            settings = load_cleanup_settings()
+            identifier = self.get_kernel_identifier(
+                selected_kernel["version"],
+                selected_kernel["flavor"],
+            )
+            selected_kernel["protected"] = not selected_kernel["protected"]
+            if selected_kernel["protected"]:
+                settings.protected_kernels.add(identifier)
+            else:
+                settings.protected_kernels.discard(identifier)
+            save_cleanup_settings(settings)
+
+            for row in store:
+                if row[5] is not selected_kernel:
+                    continue
+                if selected_kernel["active"]:
+                    row[2] = (
+                        _("Active, protected")
+                        if selected_kernel["protected"]
+                        else _("Active")
+                    )
+                else:
+                    row[2] = (
+                        _("Installed, protected")
+                        if selected_kernel["protected"]
+                        else _("Installed")
+                    )
+                break
+            protect_button.set_label(
+                _("Unprotect")
+                if selected_kernel["protected"]
+                else _("Protect")
+            )
+            filtered.refilter()
+        dialog.destroy()
+
+        if kernel is None:
+            return
+        if kernel["installed"]:
+            self.remove_individual_kernel(kernel)
+        else:
+            cache = apt.Cache()
+            packages = sorted(
+                package_name
+                for package_name in self.get_kernel_packages(kernel)
+                if not cache[package_name].is_installed
+                if package_name.startswith((
+                    "linux-image-",
+                    "linux-modules-",
+                    "linux-headers-",
+                ))
+            )
+            if packages:
+                self.start_package_transaction(packages, True)
+
+    @staticmethod
+    def open_url_as_user(url):
+        try:
+            uid = int(
+                os.environ.get("PKEXEC_UID")
+                or os.environ.get("SUDO_UID")
+                or "-1"
+            )
+            user = pwd.getpwuid(uid)
+        except (KeyError, TypeError, ValueError):
+            return True
+
+        runtime_dir = f"/run/user/{uid}"
+        environment = [
+            f"HOME={user.pw_dir}",
+            f"USER={user.pw_name}",
+            f"LOGNAME={user.pw_name}",
+            f"XDG_RUNTIME_DIR={runtime_dir}",
+            f"DBUS_SESSION_BUS_ADDRESS=unix:path={runtime_dir}/bus",
+        ]
+        for variable in (
+            "DISPLAY",
+            "WAYLAND_DISPLAY",
+            "XAUTHORITY",
+            "XDG_CURRENT_DESKTOP",
+            "DESKTOP_SESSION",
+        ):
+            value = os.environ.get(variable)
+            if value:
+                environment.append(f"{variable}={value}")
+
+        subprocess.Popen(
+            [
+                "runuser",
+                "-u",
+                user.pw_name,
+                "--",
+                "env",
+                *environment,
+                "xdg-open",
+                url,
+            ],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            start_new_session=True,
+        )
+        return True
+
+    @staticmethod
+    def compare_kernel_versions(model, first, second, _data=None):
+        first_version = model.get_value(first, 0)
+        second_version = model.get_value(second, 0)
+        comparison = apt_pkg.version_compare(first_version, second_version)
+        if comparison != 0:
+            return comparison
+        first_flavor = model.get_value(first, 1)
+        second_flavor = model.get_value(second, 1)
+        return (first_flavor > second_flavor) - (first_flavor < second_flavor)
+
+    @staticmethod
+    def compare_kernel_status(model, first, second, _data=None):
+        first_rank = model.get_value(first, 6)
+        second_rank = model.get_value(second, 6)
+        if first_rank != second_rank:
+            return first_rank - second_rank
+        return -KernelsWidget.compare_kernel_versions(model, first, second)
+
+    def remove_individual_kernel(self, kernel):
+        packages = self.get_kernel_packages(kernel)
+        candidate = CleanupCandidate(
+            series_version=".".join(kernel["version"].split(".")[:2]),
+            flavor=kernel["flavor"],
+            kernel_version=kernel["version"],
+            packages=packages,
+        )
+        series_list = get_installed_series(get_available_series())
+        removals, reason = simulate_candidate(
+            candidate,
+            get_tracked_meta_packages(series_list),
+        )
+        if removals is None:
+            self.show_message(
+                Gtk.MessageType.WARNING,
+                _("This kernel cannot be removed."),
+                reason,
+            )
+            return
+
+        dialog = Gtk.MessageDialog(
+            transient_for=self.parent_window,
+            modal=True,
+            message_type=Gtk.MessageType.WARNING,
+            buttons=Gtk.ButtonsType.CANCEL,
+            text=_("Remove kernel %s?") % kernel["version"],
+        )
+        dialog.format_secondary_text(
+            _("The following packages will be removed:\n%s")
+            % "\n".join(sorted(removals))
+        )
+        dialog.add_button(_("Remove"), Gtk.ResponseType.OK)
+        response = dialog.run()
+        dialog.destroy()
+        if response == Gtk.ResponseType.OK:
+            self.start_package_transaction(sorted(removals), False)
+
+    def on_cleanup_settings_changed(self, widget, parameter=None):
+        settings = load_cleanup_settings()
+        settings.enabled = self.cleanup_switch.get_active()
+        settings.retain = self.retain_spin.get_value_as_int()
         save_cleanup_settings(settings)
 
     def on_cleanup_clicked(self, button):
@@ -114,6 +635,7 @@ class KernelsWidget:
             series_list,
             self.retain_spin.get_value_as_int(),
             os.uname().release,
+            protected_kernels=load_cleanup_settings().protected_kernels,
         )
         if not candidates:
             self.show_message(

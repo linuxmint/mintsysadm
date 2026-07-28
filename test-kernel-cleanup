@@ -133,13 +133,40 @@ class CleanupPlannerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = os.path.join(directory, "cleanup.conf")
             save_cleanup_settings(
-                CleanupSettings(enabled=True, retain=3),
+                CleanupSettings(
+                    enabled=True,
+                    retain=3,
+                    protected_kernels={"6.8.0-40-generic"},
+                ),
                 path,
             )
             self.assertEqual(
                 load_cleanup_settings(path),
-                CleanupSettings(enabled=True, retain=3),
+                CleanupSettings(
+                    enabled=True,
+                    retain=3,
+                    protected_kernels={"6.8.0-40-generic"},
+                ),
             )
+
+    def test_protected_kernel_is_not_a_cleanup_candidate(self):
+        series = Series(
+            name="6.8",
+            version="6.8",
+            flavor="generic",
+            installed_versions={"6.8.0-40", "6.8.0-41"},
+        )
+        candidates = get_cleanup_candidates(
+            [series],
+            1,
+            "different-kernel",
+            self.packages,
+            protected_kernels={"6.8.0-40-generic"},
+        )
+        self.assertEqual(
+            {candidate.kernel_version for candidate in candidates},
+            {"6.8.0-41"},
+        )
 
     def test_candidate_is_rejected_if_apt_would_remove_tracked_meta(self):
         class FakePackage:
@@ -219,6 +246,42 @@ class CleanupPlannerTests(unittest.TestCase):
         removals, reason = prepare_candidate(cache, candidate, set())
         self.assertIsNone(removals)
         self.assertIn("unrelated-package", reason)
+
+    def test_candidate_accepts_versioned_main_module_packages(self):
+        class FakePackage:
+
+            def __init__(self, name):
+                self.name = name
+                self.is_installed = True
+                self.marked_delete = False
+
+            def mark_delete(self, auto_fix=True, purge=True):
+                self.marked_delete = True
+
+        class FakeCache(dict):
+
+            def get_changes(self):
+                return [
+                    package
+                    for package in self.values()
+                    if package.marked_delete
+                ]
+
+        image = "linux-image-7.0.0-1009-oem"
+        modules = "linux-main-modules-zfs-7.0.0-1009-oem"
+        cache = FakeCache({
+            image: FakePackage(image),
+            modules: FakePackage(modules),
+        })
+        candidate = CleanupCandidate(
+            series_version="7.0",
+            flavor="oem",
+            kernel_version="7.0.0-1009",
+            packages={image, modules},
+        )
+        removals, reason = prepare_candidate(cache, candidate, set())
+        self.assertEqual(removals, {image, modules})
+        self.assertEqual(reason, "")
 
 
 if __name__ == "__main__":
