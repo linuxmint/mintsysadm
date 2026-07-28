@@ -17,6 +17,7 @@ from common.kernel_cleanup import (
     get_cleanup_candidates,
     load_cleanup_settings,
     prepare_candidate,
+    prune_protected_kernels,
     save_cleanup_settings,
 )
 from common.kernels import Series
@@ -166,6 +167,26 @@ class CleanupPlannerTests(unittest.TestCase):
         self.assertEqual(
             {candidate.kernel_version for candidate in candidates},
             {"6.8.0-41"},
+        )
+
+    def test_stale_protected_kernels_are_pruned(self):
+        settings = CleanupSettings(
+            protected_kernels={
+                "6.8.0-40-generic",
+                "6.8.0-39-generic",
+            },
+        )
+        changed = prune_protected_kernels(
+            settings,
+            [
+                "linux-image-6.8.0-40-generic",
+                "linux-modules-6.8.0-40-generic",
+            ],
+        )
+        self.assertTrue(changed)
+        self.assertEqual(
+            settings.protected_kernels,
+            {"6.8.0-40-generic"},
         )
 
     def test_candidate_is_rejected_if_apt_would_remove_tracked_meta(self):

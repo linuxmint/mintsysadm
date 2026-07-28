@@ -135,6 +135,36 @@ def get_installed_versioned_kernel_packages(cache=None):
     return packages
 
 
+def prune_protected_kernels(settings, installed_packages=None):
+    """Discard protections for kernels whose image is no longer installed."""
+    if installed_packages is None:
+        installed_packages = get_installed_versioned_kernel_packages()
+
+    installed_kernels = set()
+    for package_name in installed_packages:
+        if not package_name.startswith((
+            "linux-image-",
+            "linux-image-unsigned-",
+        )):
+            continue
+        match = VERSIONED_KERNEL_PACKAGE_RE.fullmatch(package_name)
+        if match is None:
+            continue
+        identifier = match.group("version")
+        flavor = match.group("flavor")
+        if flavor:
+            identifier += "-" + flavor
+        installed_kernels.add(identifier)
+
+    protected_kernels = settings.protected_kernels.intersection(
+        installed_kernels
+    )
+    if protected_kernels == settings.protected_kernels:
+        return False
+    settings.protected_kernels = protected_kernels
+    return True
+
+
 def get_kernel_package_version(package_name):
     match = VERSIONED_KERNEL_PACKAGE_RE.fullmatch(package_name)
     if match is None:
@@ -391,6 +421,8 @@ def report_cleanup_progress(callback, message):
 
 def run_cleanup(progress_callback=None):
     settings = load_cleanup_settings()
+    if prune_protected_kernels(settings):
+        save_cleanup_settings(settings)
     report_cleanup_progress(
         progress_callback,
         "Looking for older kernel versions...\n",
