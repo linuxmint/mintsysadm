@@ -75,12 +75,9 @@ class MintSysadmWindow():
 
 
         self.stack = self.builder.get_object("main_stack")
-        self.kernels_widget = KernelsWidget(self.window)
-        self.builder.get_object("page_kernels").pack_start(
-            self.kernels_widget,
-            True,
-            True,
-            0,
+        self.kernels_widget = KernelsWidget(
+            self.window,
+            self.builder,
         )
         self.builder.get_object("grub_switch").connect("notify::active", self.grub_switch_toggled)
 
