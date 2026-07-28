@@ -463,6 +463,23 @@
                 <property name="margin-top">12</property>
                 <property name="margin-bottom">12</property>
                 <child>
+                  <object class="GtkBox" id="page_users">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">20</property>
+                    <property name="margin-end">20</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">page_users</property>
+                    <property name="title" translatable="yes">Users</property>
+                    <property name="icon-name">xsi-users</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkBox" id="box_boot">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
@@ -676,7 +693,6 @@
                                                             <property name="halign">start</property>
                                                             <property name="text" translatable="yes">0</property>
                                                             <property name="adjustment">grub_timeout_adjustment</property>
-                                                            <property name="value">0</property>
                                                             </object>
                                                             <packing>
                                                             <property name="expand">False</property>
@@ -990,6 +1006,24 @@
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkBox" id="page_kernels">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">page_kernels</property>
+                    <property name="title" translatable="yes">Kernels</property>
+                    <property name="icon-name">xsi-cpu</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkBox" id="page_environment">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
@@ -1067,25 +1101,7 @@
                     <property name="name">page_environment</property>
                     <property name="title" translatable="yes">Environment Variables</property>
                     <property name="icon-name">lang-variable-symbolic</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="page_users">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-start">20</property>
-                    <property name="margin-end">20</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">page_users</property>
-                    <property name="title" translatable="yes">Users</property>
-                    <property name="icon-name">xsi-users</property>
-                    <property name="position">0</property>
+                    <property name="position">3</property>
                   </packing>
                 </child>
               </object>
