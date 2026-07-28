@@ -30,6 +30,7 @@ from common.kernel_cleanup import (
     get_kernel_package_version,
     get_tracked_meta_packages,
     load_cleanup_settings,
+    prune_protected_kernels,
     read_cleanup_history,
     run_cleanup,
     save_cleanup_settings,
@@ -112,7 +113,10 @@ class KernelsWidget:
 
     def get_available_kernels(self):
         cache = apt.Cache()
-        protected_kernels = load_cleanup_settings().protected_kernels
+        settings = load_cleanup_settings()
+        if prune_protected_kernels(settings):
+            save_cleanup_settings(settings)
+        protected_kernels = settings.protected_kernels
         kernels = []
         seen = set()
         running_release = os.uname().release
