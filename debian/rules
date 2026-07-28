@@ -5,6 +5,9 @@ DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' '
 %:
 	dh ${@}
 
+override_dh_installsystemd:
+	dh_installsystemd --no-start --no-stop-on-upgrade
+
 # Inject version number in the code
 override_dh_installdeb:
 	dh_installdeb
