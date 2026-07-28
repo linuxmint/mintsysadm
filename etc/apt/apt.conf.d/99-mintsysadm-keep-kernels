@@ -1,0 +1,3 @@
+# mintsysadm has its own kernel cleanup mechanism
+# this disables kernel cleanup in apt autoremove
+APT::NeverAutoRemove::KernelCount "99";
