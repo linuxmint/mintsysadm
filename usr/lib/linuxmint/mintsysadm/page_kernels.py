@@ -148,14 +148,14 @@ class KernelsWidget:
 
             installed = package.is_installed
             package_version = package.installed or package.candidate
-            changelog_version = package_version.version
+            changelog_version = package_version.source_version
             if ":" in changelog_version:
                 changelog_version = changelog_version.split(":", 1)[1]
             debian_origin = next(
                 (
                     origin
                     for origin in package_version.origins
-                    if (origin.origin or "").lower() == "debian"
+                    if "debian" in (origin.origin or "").lower()
                 ),
                 None,
             )
@@ -167,9 +167,8 @@ class KernelsWidget:
                 else:
                     prefix = source_name[0]
                 changelog_url = (
-                    "https://metadata.ftp-master.debian.org/changelogs/"
-                    f"/{component}/{prefix}/{source_name}/"
-                    f"{source_name}_{changelog_version}_changelog"
+                    "https://metadata.ftp-master.debian.org/changelogs/main/l/"
+                    f"{source_name}/{source_name}_{changelog_version}_changelog"
                 )
                 bug_reports_url = (
                     "https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg="
