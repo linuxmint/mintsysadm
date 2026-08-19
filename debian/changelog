@@ -1,3 +1,23 @@
+mintsysadm (1.0.7) alfa; urgency=medium
+
+  [ Clement Lefebvre ]
+  * Add support for env variables
+  * env variables: Use 90_mintsysadm
+  * env: Update page icon
+  * env: Quote variables
+  * Add kernel management
+  * Disable apt autoremove kernel cleanup
+  * Cleanup: Don't remove pkgs which would remove non-kernel pkgs
+  * debian: Only enable the systemd timer
+  * ui: Move UI to glade
+  * Add individual kernel management
+  * Prune protected kernels
+
+  [ Michael Webster ]
+  * page_kernels.py: Use apt.package.Version.source_version to construct changelog url, loosen Debian origin check, fix debian url.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 19 Aug 2026 15:23:28 +0200
+
 mintsysadm (1.0.6) alfa; urgency=medium
 
   * settings-user: Set icon with GLib.set_prgname()
