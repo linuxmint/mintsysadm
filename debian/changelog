@@ -1,3 +1,9 @@
+mintsysadm (1.0.8) adrien; urgency=medium
+
+  * Fix startupWMClass
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 17 Sep 2026 11:59:40 +0100
+
 mintsysadm (1.0.7) alfa; urgency=medium
 
   [ Clement Lefebvre ]
