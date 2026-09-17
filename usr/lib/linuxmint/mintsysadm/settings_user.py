@@ -66,7 +66,6 @@ class MainWindow():
         self.window = self.builder.get_object("main_window")
         self.window.set_title(_("Account Details"))
         self.window.set_icon_name("preferences-desktop-user")
-        GLib.set_prgname("mintsysadm-settings-user")
 
         self.face_button = self.builder.get_object("button_avatar")
         self.face_image = self.builder.get_object("image_avatar")
@@ -691,5 +690,6 @@ class PasswordDialog(Gtk.Dialog):
             self.set_response_sensitive(Gtk.ResponseType.OK, True)
 
 if __name__ == "__main__":
+    GLib.set_prgname("mintsysadm-settings-user")
     application = MyApplication("com.linuxmint.sysadm.user", Gio.ApplicationFlags.HANDLES_COMMAND_LINE)
     application.run(sys.argv)

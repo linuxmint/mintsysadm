@@ -8,3 +8,4 @@ Terminal=false
 Type=Application
 Categories=Settings;
 NotShowIn=GNOME;KDE;XFCE;MATE;
+StartupWMClass=mintsysadm-settings-user

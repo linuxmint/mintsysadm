@@ -13,7 +13,7 @@ import xapp.widgets
 gi.require_version("Gtk", "3.0")
 gi.require_version('GtkSource', '3.0')
 gi.require_version('XApp', '1.0')
-from gi.repository import Gtk, Gdk, GtkSource, Gio, XApp
+from gi.repository import Gtk, Gdk, GtkSource, Gio, GLib, XApp
 from page_kernels import KernelsWidget
 from page_users import UsersWidget
 
@@ -371,5 +371,6 @@ GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT {boot_args}"
         self.application.quit()
 
 if __name__ == "__main__":
+    GLib.set_prgname("mintsysadm")
     application = MyApplication("com.linuxmint.sysadm", Gio.ApplicationFlags.HANDLES_COMMAND_LINE)
     application.run(sys.argv)
