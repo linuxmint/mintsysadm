@@ -1,0 +1,11 @@
+// Allow hibernation (disabled by Ubuntu). Whether it is offered is controlled
+// by the Allow* options in /etc/systemd/sleep.conf.d/90-mintsysadm.conf.
+polkit.addRule(function(action, subject) {
+    if ((action.id == "org.freedesktop.upower.hibernate" ||
+         action.id == "org.freedesktop.login1.hibernate" ||
+         action.id == "org.freedesktop.login1.handle-hibernate-key" ||
+         action.id == "org.freedesktop.login1.hibernate-multiple-sessions") &&
+        subject.active == true && subject.local == true) {
+        return polkit.Result.YES;
+    }
+});

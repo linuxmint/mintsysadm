@@ -15,6 +15,7 @@ gi.require_version('GtkSource', '3.0')
 gi.require_version('XApp', '1.0')
 from gi.repository import Gtk, Gdk, GtkSource, Gio, GLib, XApp
 from page_kernels import KernelsWidget
+from page_sleep_modes import SleepModesWidget
 from page_users import UsersWidget
 
 setproctitle.setproctitle("mintsysadm")
@@ -63,6 +64,7 @@ class MyApplication(Gtk.Application):
         group = parser.add_mutually_exclusive_group()
         group.add_argument("--boot", action="store_const", dest="page", const="boot")
         group.add_argument("--environment", action="store_const", dest="page", const="environment")
+        group.add_argument("--sleep-modes", action="store_const", dest="page", const="sleep_modes")
         group.add_argument("--kernels", action="store_const", dest="page", const="kernels")
         group.add_argument("--users", action="store_const", dest="page", const="users")
         argv = command_line.get_arguments()[1:]
@@ -142,6 +144,9 @@ class MintSysadmWindow():
         self.builder.get_object("environment_editor").add(self.environment_editor)
         self.load_environment_variables()
         self.environment_editor.connect("list-changed", self.save_environment_variables)
+
+        # Fill in the sleep modes page
+        self.sleep_modes_widget = SleepModesWidget(self.builder, self.update_boot_arguments)
 
         accel_group = Gtk.AccelGroup()
         self.window.add_accel_group(accel_group)
@@ -297,6 +302,13 @@ GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT {boot_args}"
             for variable in variables:
                 name, value = variable.split("=", 1)
                 print("export %s=%s" % (name, quote_environment_value(value)), file=environment_file)
+
+    def update_boot_arguments(self, prefixes, arguments):
+        # Replace the boot arguments starting with one of the prefixes, then regenerate the boot menu
+        strings = [argument for argument in self.boot_args_editor.get_strings()
+                   if not argument.startswith(prefixes)]
+        self.boot_args_editor.set_strings(strings + arguments)
+        self.save_boot_config(None)
 
     def close_grub_dialog(self, button):
         self.grub_dialog.hide()

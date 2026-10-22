@@ -23,7 +23,7 @@ Categories=GNOME;GTK;System;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Pan
 X-GNOME-Settings-Panel=system-administration
 StartupWMClass=mintsysadm
 """
-additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm.desktop", prefix, _("System Administration"), _("Configure the system"), suffix, keywords=_("system;administration;boot;grub")) # type: ignore
+additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm.desktop", prefix, _("System Administration"), _("Configure the system"), suffix, keywords=_("system;administration;boot;grub;kernel;environment;variables;sleep;suspend;hibernate;hybrid;swap;resume")) # type: ignore
 
 suffix = """Exec=mintsysadm-settings-user
 Icon=preferences-desktop-user

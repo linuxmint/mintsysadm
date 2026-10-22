@@ -1507,6 +1507,207 @@
                     <property name="position">3</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkScrolledWindow" id="page_sleep_modes_scroll">
+                    <property name="visible">True</property>
+                    <property name="hscrollbar-policy">never</property>
+                    <property name="shadow-type">none</property>
+                    <child>
+                  <object class="GtkBox" id="page_sleep_modes">
+                    <property name="margin-bottom">12</property>
+                    <property name="visible">True</property>
+                    <property name="margin-start">20</property>
+                    <property name="margin-end">20</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">8</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="margin-top">12</property>
+                        <property name="label" translatable="yes">Allowed sleep modes</property>
+                        <property name="xalign">0</property>
+                        <attributes><attribute name="weight" value="bold"/></attributes>
+                      </object>
+                      <packing><property name="expand">False</property></packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Choose the sleep modes you want to allow.</property>
+                        <property name="wrap">True</property>
+                        <property name="xalign">0</property>
+                        <style><class name="dim-label"/></style>
+                      </object>
+                      <packing><property name="expand">False</property></packing>
+                    </child>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="shadow-type">in</property>
+                        <child><object class="GtkListBox">
+                        <property name="visible">True</property>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="can-focus">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="spacing">12</property><property name="margin-start">12</property><property name="margin-end">12</property><property name="margin-top">8</property><property name="margin-bottom">8</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="orientation">vertical</property><property name="valign">center</property>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">Suspend</property><property name="xalign">0</property></object></child>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">Keeps the session in memory (RAM). The computer is still running but uses only a bit of power.</property><property name="wrap">True</property><property name="xalign">0</property><style><class name="dim-label"/></style></object></child>
+</object><packing><property name="expand">True</property><property name="fill">True</property></packing></child>
+<child><object class="GtkSwitch" id="switch_suspend"><property name="visible">True</property><property name="can-focus">True</property><property name="valign">center</property></object>
+<packing><property name="expand">False</property><property name="pack-type">end</property></packing></child>
+</object></child></object>
+</child>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkSeparator"><property name="visible">True</property></object></child></object>
+</child>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="can-focus">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="spacing">12</property><property name="margin-start">12</property><property name="margin-end">12</property><property name="margin-top">8</property><property name="margin-bottom">8</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="orientation">vertical</property><property name="valign">center</property>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">Hibernate</property><property name="xalign">0</property></object></child>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">Saves the session to disk (Swap). Shuts down the computer.</property><property name="wrap">True</property><property name="xalign">0</property><style><class name="dim-label"/></style></object></child>
+</object><packing><property name="expand">True</property><property name="fill">True</property></packing></child>
+<child><object class="GtkSwitch" id="switch_hibernate"><property name="visible">True</property><property name="can-focus">True</property><property name="valign">center</property></object>
+<packing><property name="expand">False</property><property name="pack-type">end</property></packing></child>
+</object></child></object>
+</child>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkSeparator"><property name="visible">True</property></object></child></object>
+</child>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="can-focus">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="spacing">12</property><property name="margin-start">12</property><property name="margin-end">12</property><property name="margin-top">8</property><property name="margin-bottom">8</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="orientation">vertical</property><property name="valign">center</property>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">Suspend then hibernate</property><property name="xalign">0</property></object></child>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">Suspends for a while (systemd decides how long, based on battery power), then hibernates.</property><property name="wrap">True</property><property name="xalign">0</property><style><class name="dim-label"/></style></object></child>
+</object><packing><property name="expand">True</property><property name="fill">True</property></packing></child>
+<child><object class="GtkSwitch" id="switch_suspend_then_hibernate"><property name="visible">True</property><property name="can-focus">True</property><property name="valign">center</property></object>
+<packing><property name="expand">False</property><property name="pack-type">end</property></packing></child>
+</object></child></object>
+</child>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkSeparator"><property name="visible">True</property></object></child></object>
+</child>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="can-focus">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="spacing">12</property><property name="margin-start">12</property><property name="margin-end">12</property><property name="margin-top">8</property><property name="margin-bottom">8</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="orientation">vertical</property><property name="valign">center</property>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">Hybrid sleep</property><property name="xalign">0</property></object></child>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">Suspends but also saves the session to disk (Swap).</property><property name="wrap">True</property><property name="xalign">0</property><style><class name="dim-label"/></style></object></child>
+</object><packing><property name="expand">True</property><property name="fill">True</property></packing></child>
+<child><object class="GtkSwitch" id="switch_hybrid_sleep"><property name="visible">True</property><property name="can-focus">True</property><property name="valign">center</property></object>
+<packing><property name="expand">False</property><property name="pack-type">end</property></packing></child>
+</object></child></object>
+</child>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkSeparator"><property name="visible">True</property></object></child></object>
+</child>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="can-focus">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="spacing">12</property><property name="margin-start">12</property><property name="margin-end">12</property><property name="margin-top">8</property><property name="margin-bottom">8</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="orientation">vertical</property><property name="valign">center</property>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">Suspend method</property><property name="xalign">0</property></object></child>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">This is the method used to suspend the computer. Only the methods offered by your BIOS/firmware can be chosen.</property><property name="wrap">True</property><property name="xalign">0</property><style><class name="dim-label"/></style></object></child>
+</object><packing><property name="expand">True</property><property name="fill">True</property></packing></child>
+<child><object class="GtkComboBoxText" id="combo_suspend_mode"><property name="visible">True</property><property name="valign">center</property></object>
+<packing><property name="expand">False</property><property name="pack-type">end</property></packing></child>
+</object></child></object>
+</child>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkSeparator"><property name="visible">True</property></object></child></object>
+</child>
+<child>
+<object class="GtkListBoxRow"><property name="visible">True</property><property name="can-focus">True</property><property name="activatable">False</property><property name="selectable">False</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="spacing">12</property><property name="margin-start">12</property><property name="margin-end">12</property><property name="margin-top">8</property><property name="margin-bottom">8</property>
+<child><object class="GtkBox"><property name="visible">True</property><property name="orientation">vertical</property><property name="valign">center</property>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">Hibernation method</property><property name="xalign">0</property></object></child>
+<child><object class="GtkLabel"><property name="visible">True</property><property name="halign">start</property><property name="label" translatable="yes">This is method used to power off the computer during hibernation.</property><property name="wrap">True</property><property name="xalign">0</property><style><class name="dim-label"/></style></object></child>
+</object><packing><property name="expand">True</property><property name="fill">True</property></packing></child>
+<child><object class="GtkComboBoxText" id="combo_hibernate_method"><property name="visible">True</property><property name="valign">center</property></object>
+<packing><property name="expand">False</property><property name="pack-type">end</property></packing></child>
+</object></child></object>
+</child>
+                        </object></child>
+                      </object>
+                      <packing><property name="expand">False</property></packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="margin-top">12</property>
+                        <property name="label" translatable="yes">Detected problems</property>
+                        <property name="xalign">0</property>
+                        <attributes><attribute name="weight" value="bold"/></attributes>
+                      </object>
+                      <packing><property name="expand">False</property></packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Fix the detected problems to make your allowed sleep modes available.</property>
+                        <property name="wrap">True</property>
+                        <property name="xalign">0</property>
+                        <style><class name="dim-label"/></style>
+                      </object>
+                      <packing><property name="expand">False</property></packing>
+                    </child>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="shadow-type">in</property>
+                        <child><object class="GtkListBox" id="power_checks_list">
+                          <property name="visible">True</property>
+                          <property name="selection-mode">none</property>
+                        </object></child>
+                      </object>
+                      <packing><property name="expand">False</property></packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="margin-top">12</property>
+                        <property name="label" translatable="yes">Available sleep modes</property>
+                        <property name="xalign">0</property>
+                        <attributes><attribute name="weight" value="bold"/></attributes>
+                      </object>
+                      <packing><property name="expand">False</property></packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">These are the sleep modes systemd reports as available right now.</property>
+                        <property name="wrap">True</property>
+                        <property name="xalign">0</property>
+                        <style><class name="dim-label"/></style>
+                      </object>
+                      <packing><property name="expand">False</property></packing>
+                    </child>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="shadow-type">in</property>
+                        <child><object class="GtkListBox" id="available_modes_list">
+                          <property name="visible">True</property>
+                          <property name="selection-mode">none</property>
+                        </object></child>
+                      </object>
+                      <packing><property name="expand">False</property></packing>
+                    </child>
+                  </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">page_sleep_modes</property>
+                    <property name="title" translatable="yes">Sleep Modes</property>
+                    <property name="icon-name">xsi-weather-clear-night-symbolic</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">True</property>
