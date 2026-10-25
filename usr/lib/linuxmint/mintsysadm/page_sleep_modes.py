@@ -106,10 +106,14 @@ def get_available_modes():
         ("CanSuspendThenHibernate", _("Suspend then hibernate")),
         ("CanHybridSleep", _("Hybrid sleep")),
     ]
+    # We run as root, which logind exempts from polkit, so apply the condition of our polkit rule ourselves
+    resume_set = read_resume_config()[0] != 0
     available = []
     try:
         bus = Gio.bus_get_sync(Gio.BusType.SYSTEM, None)
         for method, name in modes:
+            if method != "CanSuspend" and not resume_set:
+                continue
             result = bus.call_sync("org.freedesktop.login1", "/org/freedesktop/login1",
                                    "org.freedesktop.login1.Manager", method, None,
                                    GLib.VariantType("(s)"), Gio.DBusCallFlags.NONE, -1, None)
@@ -333,7 +337,8 @@ class SleepModesWidget:
         title = _("Resume device")
 
         if self.new_resume_device:
-            return [Report(False, title, _("The resume device will be set to %s upon reboot.") % self.new_resume_device)]
+            return [Report(None, title, _("The resume device will be set to %s upon reboot.")
+                          % self.new_resume_device)]
 
         if "noresume" in (read_file("/proc/cmdline") or "").split():
             return [Report(False, title, _("The noresume kernel argument is set, which prevents hibernation."))]

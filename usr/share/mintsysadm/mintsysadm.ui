@@ -1688,7 +1688,7 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">These are the sleep modes systemd reports as available right now.</property>
+                        <property name="label" translatable="yes">These sleep modes should work right now.</property>
                         <property name="wrap">True</property>
                         <property name="xalign">0</property>
                         <style><class name="dim-label"/></style>

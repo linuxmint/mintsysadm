@@ -1,11 +1,19 @@
 // Allow hibernation (disabled by Ubuntu). Whether it is offered is controlled
-// by the Allow* options in /etc/systemd/sleep.conf.d/90-mintsysadm.conf.
+// by the Allow* options in /etc/systemd/sleep.conf.d/90-mintsysadm.conf, and
+// by the running kernel having a resume device: without one, logind refuses
+// hibernation on non-EFI systems but allows it on EFI ones, relying on an
+// initramfs feature Mint doesn't have, and the system would not resume.
 polkit.addRule(function(action, subject) {
     if ((action.id == "org.freedesktop.upower.hibernate" ||
          action.id == "org.freedesktop.login1.hibernate" ||
          action.id == "org.freedesktop.login1.handle-hibernate-key" ||
          action.id == "org.freedesktop.login1.hibernate-multiple-sessions") &&
         subject.active == true && subject.local == true) {
-        return polkit.Result.YES;
+        try {
+            polkit.spawn(["/usr/bin/grep", "-qv", "^0:0$", "/sys/power/resume"]);
+            return polkit.Result.YES;
+        } catch (error) {
+            return polkit.Result.NO;
+        }
     }
 });
