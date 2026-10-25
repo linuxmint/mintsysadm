@@ -146,7 +146,7 @@ class MintSysadmWindow():
         self.environment_editor.connect("list-changed", self.save_environment_variables)
 
         # Fill in the sleep modes page
-        self.sleep_modes_widget = SleepModesWidget(self.builder, self.update_boot_arguments)
+        self.sleep_modes_widget = SleepModesWidget(self.builder, self.update_boot_arguments, self.boot_args_editor.get_strings)
 
         accel_group = Gtk.AccelGroup()
         self.window.add_accel_group(accel_group)
@@ -263,6 +263,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT {boot_args}"
 
         with open(GRUB_FILE, "w") as grub_file:
             print(grub_text, file=grub_file)
+        self.sleep_modes_widget.refresh()
 
         buf = self.builder.get_object("textview_grub_output").get_buffer()
         buf.set_text(_("Running update-grub...\n\n"))

@@ -158,7 +158,7 @@ def get_hibernation_methods():
     return methods, current if current in names else None
 
 # What a check reports (one line in the list of problems and information). ok is True (fine), False (problem) or None (information).
-# action is (swap area, boot arguments) for the "use as resume device" button.
+# action is the boot arguments for the "use as resume device" button.
 Report = namedtuple("Report", "ok title detail action", defaults=(None,))
 
 def get_resume_arguments(entry):
@@ -177,14 +177,15 @@ def get_resume_arguments(entry):
 
 class SleepModesWidget:
 
-    def __init__(self, builder, update_boot_arguments):
+    def __init__(self, builder, update_boot_arguments, get_boot_arguments):
         self.builder = builder
         # Called as update_boot_arguments(prefixes, arguments) to replace boot arguments and update the boot menu
         self.update_boot_arguments = update_boot_arguments
-        self.new_resume_device = None  # Used when the resume device is set to a new swap area
+        # Returns the boot arguments as configured (they take effect upon reboot)
+        self.get_boot_arguments = get_boot_arguments
 
         self.load_sleep_options()
-        self.refresh_lists()
+        self.refresh()
         for switch_name in SLEEP_OPTIONS:
             self.builder.get_object(switch_name).connect("notify::active", self.save_sleep_options)
         for combo_name in ("combo_suspend_mode", "combo_hibernate_method"):
@@ -229,11 +230,13 @@ class SleepModesWidget:
             hibernate_combo.set_active_id("")
         self.update_hibernate_method()
 
-    def set_resume_arguments(self, button, action):
-        path, arguments = action
+    def set_resume_arguments(self, button, arguments):
         self.update_boot_arguments(("resume=", "resume_offset="), arguments)
-        self.new_resume_device = path
-        self.refresh_lists()
+        self.refresh()
+
+    def refresh(self):
+        """Run the checks and show the results."""
+        self.refresh_lists(self.run_checks())
 
     def run_checks(self):
         """Run the checks for the sleep modes that are allowed, in the order they are shown."""
@@ -260,9 +263,17 @@ class SleepModesWidget:
                     self.current_resume_device = entry["path"]
                     break
 
-            # Choosing the swap area the system already uses cancels the pending change
-            if self.new_resume_device == self.current_resume_device:
-                self.new_resume_device = None
+            # The swap area the boot arguments will make the resume device upon reboot, if it is not the current one
+            self.new_resume_device = None
+            self.resume_arguments = sorted(argument for argument in self.get_boot_arguments()
+                                           if argument.startswith(("resume=", "resume_offset=")))
+            self.resume_arguments_matched = not self.resume_arguments
+            for entry in self.entries:
+                if self.resume_arguments and sorted(get_resume_arguments(entry) or []) == self.resume_arguments:
+                    self.resume_arguments_matched = True
+                    if entry["path"] != self.current_resume_device:
+                        self.new_resume_device = entry["path"]
+                    break
 
             hibernation_checks = (self.check_hibernation_support() + self.check_secure_boot()
                                   + self.check_swap() + self.check_resume())
@@ -322,8 +333,7 @@ class SleepModesWidget:
             sizes = {"swap": GLib.format_size(entry["size"]), "ram": GLib.format_size(ram)}
 
             # Offer to make it the resume device unless it already is (or is about to be)
-            arguments = None if entry["path"] == resume_path else get_resume_arguments(entry)
-            action = (entry["path"], arguments) if arguments else None
+            action = None if entry["path"] == resume_path else get_resume_arguments(entry)
 
             if entry["size"] < ram:
                 checks.append(Report(False, title,
@@ -339,6 +349,10 @@ class SleepModesWidget:
         if self.new_resume_device:
             return [Report(None, title, _("The resume device will be set to %s upon reboot.")
                           % self.new_resume_device)]
+
+        if not self.resume_arguments_matched:
+            return [Report(False, title, _("The boot arguments (%s) do not match any swap partition or swap file in use.")
+                          % " ".join(self.resume_arguments))]
 
         if "noresume" in (read_file("/proc/cmdline") or "").split():
             return [Report(False, title, _("The noresume kernel argument is set, which prevents hibernation."))]
@@ -372,12 +386,12 @@ class SleepModesWidget:
                           % {"path": matching["path"], "offset": resume_offset})]
         return [Report(None, title, _("The resume device is set to %s.") % matching["path"])]
 
-    def refresh_lists(self):
+    def refresh_lists(self, checks):
         listbox = self.builder.get_object("power_checks_list")
         for child in listbox.get_children():
             listbox.remove(child)
         # Problems (False) and information (None), in the order of the checks
-        shown = [report for report in self.run_checks() if report.ok is not True]
+        shown = [report for report in checks if report.ok is not True]
         if not any(report.ok is False for report in shown):
             shown.insert(0, Report(True, _("No problems detected"), _("This computer looks ready for the sleep modes above.")))
         for ok, title, detail, action in shown:
@@ -450,21 +464,22 @@ class SleepModesWidget:
         if switch is self.builder.get_object("switch_suspend"):
             self.update_suspend_dependents()
         self.update_hibernate_method()
+        self.write_sleep_options()
+        self.refresh()
 
+    def write_sleep_options(self):
         # Hibernation is disabled by default (the package ships this file with everything set to "no")
-        states = {option: self.builder.get_object(switch_name).get_active()
-                  for switch_name, option in SLEEP_OPTIONS.items()}
+        lines = ["# Do not edit this file. It is generated by mintsysadm.", "[Sleep]"]
+        for switch_name, option in SLEEP_OPTIONS.items():
+            active = self.builder.get_object(switch_name).get_active()
+            lines.append("%s=%s" % (option, "yes" if active else "no"))
+        suspend_mode = self.builder.get_object("combo_suspend_mode").get_active_id()
+        if suspend_mode:
+            lines.append("MemorySleepMode=%s" % suspend_mode)
+        hibernate_method = self.builder.get_object("combo_hibernate_method").get_active_id()
+        if hibernate_method:
+            lines.append("HibernateMode=%s" % hibernate_method)
+
         os.makedirs(os.path.dirname(SLEEP_FILE), exist_ok=True)
         with open(SLEEP_FILE, "w") as sleep_file:
-            print("# Do not edit this file. It is generated by mintsysadm.", file=sleep_file)
-            print("[Sleep]", file=sleep_file)
-            for option, active in states.items():
-                print("%s=%s" % (option, "yes" if active else "no"), file=sleep_file)
-            suspend_mode = self.builder.get_object("combo_suspend_mode").get_active_id()
-            if suspend_mode:
-                print("MemorySleepMode=%s" % suspend_mode, file=sleep_file)
-            hibernate_method = self.builder.get_object("combo_hibernate_method").get_active_id()
-            if hibernate_method:
-                print("HibernateMode=%s" % hibernate_method, file=sleep_file)
-
-        self.refresh_lists()
+            print("\n".join(lines), file=sleep_file)
