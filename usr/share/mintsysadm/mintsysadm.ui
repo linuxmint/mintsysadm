@@ -1640,7 +1640,7 @@
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="margin-top">12</property>
-                        <property name="label" translatable="yes">Detected problems</property>
+                        <property name="label" translatable="yes">Current state</property>
                         <property name="xalign">0</property>
                         <attributes><attribute name="weight" value="bold"/></attributes>
                       </object>
@@ -1649,7 +1649,7 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">Fix the detected problems to make your allowed sleep modes available.</property>
+                        <property name="label" translatable="yes">Fix any detected issues to make allowed sleep modes available.</property>
                         <property name="wrap">True</property>
                         <property name="xalign">0</property>
                         <style><class name="dim-label"/></style>
