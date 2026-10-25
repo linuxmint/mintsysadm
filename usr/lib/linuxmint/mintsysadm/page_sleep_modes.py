@@ -238,8 +238,11 @@ class SleepModesWidget:
                         for name in ("switch_hibernate", "switch_suspend_then_hibernate", "switch_hybrid_sleep"))
 
         checks = []
+        self.suspend_ready = self.hibernation_ready = False
         if suspend:
-            checks += self.check_suspend()
+            suspend_checks = self.check_suspend()
+            self.suspend_ready = not any(report.ok is False for report in suspend_checks)
+            checks += suspend_checks
         if hibernate:
             self.entries = get_swap_entries()
             resume_devno, resume_offset = read_resume_config()
@@ -257,10 +260,10 @@ class SleepModesWidget:
             if self.new_resume_device == self.current_resume_device:
                 self.new_resume_device = None
 
-            checks += self.check_hibernation_support()
-            checks += self.check_secure_boot()
-            checks += self.check_swap()
-            checks += self.check_resume()
+            hibernation_checks = (self.check_hibernation_support() + self.check_secure_boot()
+                                  + self.check_swap() + self.check_resume())
+            self.hibernation_ready = not any(report.ok is False for report in hibernation_checks)
+            checks += hibernation_checks
         return checks
 
     def check_suspend(self):
@@ -391,6 +394,17 @@ class SleepModesWidget:
             row.add(box)
             listbox.add(row)
         listbox.show_all()
+
+        # Warn on the switches that are on but whose mode has a problem
+        ready = {
+            "switch_suspend": self.suspend_ready,
+            "switch_hibernate": self.hibernation_ready,
+            "switch_suspend_then_hibernate": self.suspend_ready and self.hibernation_ready,
+            "switch_hybrid_sleep": self.suspend_ready and self.hibernation_ready,
+        }
+        for switch_name, ok in ready.items():
+            blocked = self.builder.get_object(switch_name).get_active() and not ok
+            self.builder.get_object("warning_" + switch_name).set_visible(blocked)
 
         # Sleep modes systemd reports as available (Can...=yes)
         listbox = self.builder.get_object("available_modes_list")
