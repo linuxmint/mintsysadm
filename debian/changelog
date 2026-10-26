@@ -1,3 +1,17 @@
+mintsysadm (1.0.9) adrien; urgency=medium
+
+  [ Clement Lefebvre ]
+  * Add sleep modes
+  * l10n: Update POT
+
+  [ Michael Webster ]
+  * sleep: Relabel middle section to 'state' instead of 'problems'
+  * sleep: Show a warning icon next to an enabled but inoperative mode
+  * sleep: Only allow hibernation when the kernel has a resume device
+  * sleep: Reflect a pending or changed state by checking kernel params
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 26 Oct 2026 13:36:06 +0000
+
 mintsysadm (1.0.8) adrien; urgency=medium
 
   * Fix startupWMClass
