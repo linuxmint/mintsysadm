@@ -1,3 +1,14 @@
+mintsysadm (1.1.0) adrien; urgency=medium
+
+  [ Michael Webster ]
+  * kernel_cleanup.py: Use apt's default solver.
+
+  [ Clement Lefebvre ]
+  * l10n: Update translations
+  * l10n: Update files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 16 Nov 2026 13:42:21 +0000
+
 mintsysadm (1.0.9) adrien; urgency=medium
 
   [ Clement Lefebvre ]
