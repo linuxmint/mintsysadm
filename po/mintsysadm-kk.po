@@ -1,0 +1,1057 @@
+# Kazakh translation for linuxmint
+# Copyright (c) 2026 Rosetta Contributors and Canonical Ltd 2026
+# This file is distributed under the same license as the linuxmint package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: linuxmint\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2026-10-26 13:35+0000\n"
+"PO-Revision-Date: 2026-11-05 19:49+0000\n"
+"Last-Translator: Baurzhan Muftakhidinov <Unknown>\n"
+"Language-Team: Kazakh <kk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2026-11-16 12:02+0000\n"
+"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
+"Language: kk\n"
+
+#: generate_desktop_files:26 generate_desktop_files:74
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:99
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:362
+#: usr/share/mintsysadm/mintsysadm.ui.h:58
+msgid "System Administration"
+msgstr "Жүйелік әкімшілік"
+
+#: generate_desktop_files:26
+msgid "Configure the system"
+msgstr "Жүйені баптау"
+
+#: generate_desktop_files:26
+msgid ""
+"system;administration;boot;grub;kernel;environment;variables;sleep;suspend;hi"
+"bernate;hybrid;swap;resume"
+msgstr ""
+"system;administration;boot;grub;kernel;environment;variables;sleep;suspend;hi"
+"bernate;hybrid;swap;resume;жүйе;әкімшілендіру;ядро;орта;айнымалылар;ұйқы;кіді"
+"рту;гибернациялау;гибридті;своп;жалғастыру"
+
+#: generate_desktop_files:36
+msgid "Account details"
+msgstr "Тіркелгі ақпараты"
+
+#: generate_desktop_files:36
+msgid "User account and password"
+msgstr "Пайдаланушы тіркелгісі мен паролі"
+
+#: generate_desktop_files:36
+msgid "user;account;password;avatar"
+msgstr "user;account;password;avatar;пайдаланушы;тіркелгі;пароль;аватар"
+
+#: generate_desktop_files:47 usr/share/mintsysadm/mintsysadm.ui.h:1
+msgid "Users"
+msgstr "Пайдаланушылар"
+
+#: generate_desktop_files:47
+msgid "Add or remove users"
+msgstr "Пайдаланушыларды қосу немесе өшіру"
+
+#: generate_desktop_files:47
+msgid "users;accounts"
+msgstr "users;accounts;пайдаланушылар;тіркелгілер"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:123
+msgid "Add a boot argument"
+msgstr "Жүктеу аргументін қосу"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:123
+msgid "If the argument is not recognized by the kernel it will be ignored."
+msgstr "Егер аргумент ядро тарапынан танылмаса, ол еленбейді."
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:138
+msgid "Add an environment variable"
+msgstr "Орта айнымалысын қосу"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:138
+msgid "Enter the variable in NAME=VALUE format."
+msgstr "Айнымалыны АТЫ=МӘНІ пішімінде енгізіңіз."
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:167
+msgid "Quit"
+msgstr "Шығу"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:179
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:360
+msgid "About"
+msgstr "Осы туралы"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:269
+msgid ""
+"Running update-grub...\n"
+"\n"
+msgstr ""
+"Update-grub орындалуда...\n"
+"\n"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:270
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:756
+#: usr/share/mintsysadm/mintsysadm.ui.h:62
+msgid "Processing..."
+msgstr "Өңдеу..."
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:333
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:803
+msgid "Success"
+msgstr "Сәтті аяқталды"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:335
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:807
+msgid "Error"
+msgstr "Қате"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:347
+msgid "Boot arguments cannot include space characters."
+msgstr "Жүктеу аргументтерінде бос орын таңбалары болмауы тиіс."
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:353
+msgid "Environment variables must use the NAME=VALUE format."
+msgstr "Орта айнымалылары АТЫ=МӘНІ пішімін пайдалануы керек."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:247
+msgid "All kernels"
+msgstr "Барлық ядролар"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:253
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:760
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:878
+#: usr/share/mintsysadm/mintsysadm.ui.h:60
+msgid "Close"
+msgstr "Жабу"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:255
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:437
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:498
+msgid "Protect"
+msgstr "Қорғау"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:259
+msgid "Protected kernels are never removed during cleanup."
+msgstr "Қорғалған ядролар тазалау кезінде ешқашан өшірілмейді."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:262
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:434
+msgid "Install"
+msgstr "Орнату"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:270
+msgid "Series"
+msgstr "Қатар"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:272
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:284
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:298
+msgid "All"
+msgstr "Барлығы"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:282
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:374
+msgid "Flavor"
+msgstr "Түрі"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:296
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:375
+msgid "Status"
+msgstr "Қалып-күйі"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:299
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:317
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:486
+msgid "Active"
+msgstr "Белсенді"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:300
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:315
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:484
+msgid "Active, protected"
+msgstr "Белсенді, қорғалған"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:301
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:323
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:492
+msgid "Installed"
+msgstr "Орнатылған"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:304
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:321
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:490
+msgid "Installed, protected"
+msgstr "Орнатылған, қорғалған"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:306
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:326
+msgid "Available"
+msgstr "Қолжетімді"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:373
+msgid "Version"
+msgstr "Нұсқа"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:384
+msgid "Links"
+msgstr "Сілтемелер"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:386
+msgid "Bug reports"
+msgstr "Қате есептері"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:392
+msgid "Changelog"
+msgstr "Өзгерістер журналы"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:434
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:622
+msgid "Remove"
+msgstr "Өшіру"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:437
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:496
+msgid "Unprotect"
+msgstr "Қорғауды алып тастау"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:606
+msgid "This kernel cannot be removed."
+msgstr "Бұл ядроны өшіру мүмкін емес."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:616
+#, python-format
+msgid "Remove kernel %s?"
+msgstr "%s ядросын өшіру керек пе?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:619
+#, python-format
+msgid ""
+"The following packages will be removed:\n"
+"%s"
+msgstr ""
+"Келесі дестелер өшіріледі:\n"
+"%s"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:646
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:665
+msgid "There are no older kernels to remove."
+msgstr "Өшіретін ескі ядролар жоқ."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:682
+msgid "Remove older kernels?"
+msgstr "Ескі ядроларды өшіру керек пе?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:687
+msgid ""
+"The following packages will be removed. The active kernel and tracked "
+"metapackages are protected."
+msgstr ""
+"Келесі дестелер өшіріледі. Белсенді ядро мен бақыланатын метадестелер "
+"қорғалған."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:700
+msgid "Packages to keep"
+msgstr "Сақталатын дестелер"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:705
+msgid "Packages to remove"
+msgstr "Өшірілетін дестелер"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:709
+msgid "Clean up"
+msgstr "Тазалау"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:720
+msgid "Cleaning up kernels"
+msgstr "Ядроларды тазалау"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:744
+msgid ""
+"Starting kernel cleanup...\n"
+"\n"
+msgstr ""
+"Ядроларды тазалауды бастау...\n"
+"\n"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:753
+#: usr/share/mintsysadm/mintsysadm.ui.h:61
+msgid "Result:"
+msgstr "Нәтиже:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:866
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:872
+msgid "Kernel cleanup history"
+msgstr "Ядроларды тазалау тарихы"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:867
+msgid "No cleanup has run yet."
+msgstr "Әзірге ешбір тазалау орындалмады."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:943
+#, python-format
+msgid "%d packages removed"
+msgstr "%d десте өшірілді"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:945
+#, python-format
+msgid ", %d skipped"
+msgstr ", %d аттап өтілді"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:973
+#: usr/share/mintsysadm/mintsysadm.ui.h:22
+msgid "Active kernel:"
+msgstr "Белсенді ядро:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:974
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:986
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1045
+msgid "Unknown"
+msgstr "Белгісіз"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:979
+msgid "Tracked series:"
+msgstr "Бақыланатын қатар:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:985
+msgid "Versions kept per tracked series:"
+msgstr "Әрбір бақыланатын қатарда сақталатын нұсқалар саны:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1007
+msgid "Kernel version"
+msgstr "Ядро нұсқасы"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1014
+msgid "Package name"
+msgstr "Десте атауы"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1048
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:436
+msgid "None"
+msgstr "Жоқ"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1059
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1141
+msgid "LTS"
+msgstr "LTS"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1063
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1145
+msgid "Edge"
+msgstr "Edge"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1065
+msgid "(manually tracked)"
+msgstr "(қолмен бақыланатын)"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1075
+msgid "Unknown date"
+msgstr "Белгісіз күн"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1158
+msgid "Long Term Support"
+msgstr "Ұзақ мерзімді қолдау"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1159
+msgid "This is the most stable series. Recommended for most users."
+msgstr "Бұл — ең тұрақты қатар. Көптеген пайдаланушылар үшін ұсынылады."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1162
+msgid "Hardware Enablement"
+msgstr "Аппараттық құралдарды қамтамасыз ету"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1163
+msgid "This series is recommended for newer hardware."
+msgstr "Бұл қатар жаңа аппараттық құрал үшін ұсынылады."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1165
+msgid ""
+"This series sometimes provides newer kernels than the HWE series but without "
+"support for proprietary drivers."
+msgstr ""
+"Бұл қатар кейде HWE қатарына қарағанда жаңарақ ядроларды қамтамасыз етеді, "
+"бірақ проприетарлық драйверлерге қолдау көрсетілмейді."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1167
+msgid "This series is not officially supported."
+msgstr "Бұл қатарға ресми қолдау көрсетілмейді."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1177
+msgid "Manually tracked"
+msgstr "Қолмен бақыланатын"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1179
+msgid "Tracked"
+msgstr "Бақыланатын"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1205
+#, python-format
+msgid "Installed kernels: %d"
+msgstr "Орнатылған ядролар: %d"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1219
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1280
+msgid "Untrack"
+msgstr "Бақылауды тоқтату"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1223
+msgid "Track"
+msgstr "Бақылау"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1234
+msgid "Mark as untracked"
+msgstr "Бақыланбайтын ретінде белгілеу"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1241
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1305
+msgid "Mark as tracked"
+msgstr "Бақыланатын ретінде белгілеу"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1272
+#, python-format
+msgid "Stop tracking the %s series?"
+msgstr "%s қатарын бақылауды тоқтату керек пе?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1276
+msgid ""
+"Without tracking, this computer will no longer receive security updates for "
+"this kernel series."
+msgstr ""
+"Бақылаусыз бұл компьютер осы ядро қатары үшін қауіпсіздік жаңартуларын бұдан "
+"былай алмайды."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1296
+#, python-format
+msgid "Mark the %s series as tracked?"
+msgstr "%s қатарын бақыланатын ретінде белгілеу керек пе?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1300
+msgid ""
+"This series will be considered manually tracked. It is your responsibility "
+"to ensure that an appropriate metapackage is installed or that kernel "
+"updates are handled another way."
+msgstr ""
+"Бұл қатар қолмен бақыланатын болып саналады. Сәйкес метадестенің "
+"орнатылғанын немесе ядро жаңартуларының басқа жолмен өңделуін қадағалау — "
+"сіздің жауапкершілігіңіз."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:104
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:285
+#: usr/share/mintsysadm/mintsysadm.ui.h:41
+msgid "Suspend"
+msgstr "Кідірту"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:105
+#: usr/share/mintsysadm/mintsysadm.ui.h:43
+msgid "Hibernate"
+msgstr "Гибернациялау"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:106
+#: usr/share/mintsysadm/mintsysadm.ui.h:45
+msgid "Suspend then hibernate"
+msgstr "Кідірту, содан кейін гибернациялау"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:107
+#: usr/share/mintsysadm/mintsysadm.ui.h:47
+msgid "Hybrid sleep"
+msgstr "Гибридті ұйқы"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:130
+msgid "Suspend-to-idle (s2idle)"
+msgstr "Іссіз күйге кідірту (s2idle)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:131
+msgid "Suspend-to-RAM (S3)"
+msgstr "RAM-ға кідірту (S3)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:132
+msgid "Shallow (S1)"
+msgstr "Таяз ұйқы (S1)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:146
+msgid "Platform (the firmware powers off)"
+msgstr "Платформа (микробағдарлама қуатты сөндіреді)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:147
+msgid "Shutdown (the kernel powers off)"
+msgstr "Сөндіру (ядро қуатты сөндіреді)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:211
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:223
+msgid "Default"
+msgstr "Үнсіз келісім бойынша"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:213
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:225
+#, python-format
+msgid "Default — %s"
+msgstr "Үнсіз келісім бойынша — %s"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:288
+msgid "The kernel does not support suspend."
+msgstr "Ядро кідіртуге қолдау көрсетпейді."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:292
+msgid "The kernel supports suspend."
+msgstr "Ядро кідіртуге қолдау көрсетеді."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:293
+#, python-format
+msgid "The kernel supports suspend. Method in use: %s."
+msgstr "Ядро кідіртуге қолдау көрсетеді. Қолданыстағы әдіс: %s."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:297
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:298
+msgid "Kernel support"
+msgstr "Ядроның қолдауы"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:297
+msgid "The kernel supports hibernation."
+msgstr "Ядро гибернацияға қолдау көрсетеді."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:298
+msgid "The kernel does not support hibernation."
+msgstr "Ядро гибернацияға қолдау көрсетпейді."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:313
+msgid "Secure Boot"
+msgstr "Secure Boot"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:315
+msgid "Secure Boot is enabled and the kernel lockdown prevents hibernation."
+msgstr ""
+"Secure Boot іске қосылған және ядроны бұғаттау режимі гибернацияға жол "
+"бермейді."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:317
+msgid "Secure Boot is enabled but the kernel lockdown is not active."
+msgstr ""
+"Secure Boot іске қосылған, бірақ ядроны бұғаттау режимі белсенді емес."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:318
+msgid "Secure Boot is disabled."
+msgstr "Secure Boot сөндірілген."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:323
+msgid "Swap"
+msgstr "Своп"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:323
+msgid "No swap partition or swap file is in use."
+msgstr "Қолданыста бірде-бір своп бөлімі немесе своп файлы жоқ."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:332
+#, python-format
+msgid "Swap area in %s"
+msgstr "%s ішіндегі своп аймағы"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:340
+#, python-format
+msgid "The swap area (%(swap)s) is smaller than the memory (%(ram)s)."
+msgstr "Своп аймағы (%(swap)s) жадыдан (%(ram)s) кішірек."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:343
+#, python-format
+msgid ""
+"The swap area (%(swap)s) is at least as large as the memory (%(ram)s)."
+msgstr "Своп аймағы (%(swap)s) кем дегенде жадымен (%(ram)s) бірдей үлкен."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:347
+msgid "Resume device"
+msgstr "Жалғастыру құрылғысы"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:350
+#, python-format
+msgid "The resume device will be set to %s upon reboot."
+msgstr "Қайта жүктеу кезінде жалғастыру құрылғысы %s етіп орнатылады."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:354
+#, python-format
+msgid ""
+"The boot arguments (%s) do not match any swap partition or swap file in use."
+msgstr ""
+"Жүктеу аргументтері (%s) қолданыстағы бірде-бір своп бөліміне немесе своп "
+"файлына сәйкес келмейді."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:358
+msgid "The noresume kernel argument is set, which prevents hibernation."
+msgstr "«noresume» ядро аргументі орнатылған, бұл гибернацияға жол бермейді."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:362
+msgid "No resume device is set."
+msgstr "Жалғастыру құрылғысы орнатылмаған."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:379
+#, python-format
+msgid ""
+"The resume offset (%(current)d) does not match the start of %(path)s "
+"(%(expected)d)."
+msgstr ""
+"Жалғастыру ығысуы (%(current)d) %(path)s басына (%(expected)d) сәйкес "
+"келмейді."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:381
+#, python-format
+msgid ""
+"The resume device (%(major)d:%(minor)d) does not match any swap partition or "
+"swap file in use."
+msgstr ""
+"Жалғастыру құрылғысы (%(major)d:%(minor)d) қолданыстағы бірде-бір своп "
+"бөліміне немесе своп файлына сәйкес келмейді."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:385
+#, python-format
+msgid ""
+"The resume device is set to the swap file %(path)s (offset %(offset)d)."
+msgstr ""
+"Жалғастыру құрылғысы %(path)s своп файлына орнатылған (ығысу %(offset)d)."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:387
+#, python-format
+msgid "The resume device is set to %s."
+msgstr "Жалғастыру құрылғысы %s етіп орнатылған."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:396
+msgid "No problems detected"
+msgstr "Ақаулар анықталған жоқ"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:396
+msgid "This computer looks ready for the sleep modes above."
+msgstr "Бұл компьютер жоғарыдағы ұйқы режимдеріне дайын сияқты."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:409
+msgid "Set as resume device"
+msgstr "Жалғастыру құрылғысы ретінде орнату"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:434
+msgid "The system could not be asked which sleep modes are available."
+msgstr ""
+"Қандай ұйқы режимдері қолжетімді екенін жүйеден сұрау мүмкін болмады."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:54
+msgid ""
+"A password is needed to encrypt the home directory. Make sure to communicate "
+"it to the user."
+msgstr ""
+"Үй бумасын шифрлеу үшін пароль қажет. Оны пайдаланушыға хабарлауды ұмытпаңыз."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+msgid "Full Name"
+msgstr "Толық аты"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/share/mintsysadm/mintsysadm.ui.h:4
+#: usr/share/mintsysadm/settings_user.ui.h:1
+msgid "Username"
+msgstr "Пайдаланушы аты"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/lib/linuxmint/mintsysadm/page_users.py:559
+#: usr/share/mintsysadm/mintsysadm.ui.h:3
+msgid "Administrator"
+msgstr "Әкімші"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/share/mintsysadm/mintsysadm.ui.h:7
+msgid "Encrypted Home Directory"
+msgstr "Шифрленген үй бумасы"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/share/mintsysadm/mintsysadm.ui.h:5
+#: usr/share/mintsysadm/settings_user.ui.h:2
+msgid "Password"
+msgstr "Пароль"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:90
+#: usr/lib/linuxmint/mintsysadm/page_users.py:199
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:204
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:582
+msgid "Cancel"
+msgstr "Бас тарту"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:90
+msgid "Add"
+msgstr "Қосу"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:112
+msgid ""
+"Invalid username. Only lowercase letters, numbers, hyphens and underscores "
+"are allowed."
+msgstr ""
+"Пайдаланушы аты жарамсыз. Тек кіші әріптер, сандар, дефистер және астын сызу "
+"таңбаларына рұқсат етіледі."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:116
+msgid "This username is already taken."
+msgstr "Бұл пайдаланушы аты әлдеқашан бос емес."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:126
+#: usr/lib/linuxmint/mintsysadm/page_users.py:171
+#: usr/lib/linuxmint/mintsysadm/page_users.py:177
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:554
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:560
+msgid "The password must be at least 8 characters long."
+msgstr "Пароль ұзындығы кемінде 8 таңба болуы керек."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:157
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:533
+msgid "Change Password"
+msgstr "Парольді өзгерту"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:160
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:536
+msgid "New password"
+msgstr "Жаңа пароль"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:160
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:536
+msgid "Confirm password"
+msgstr "Парольді растау"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:165
+#: usr/lib/linuxmint/mintsysadm/page_users.py:246
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:548
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:660
+msgid "Show password"
+msgstr "Парольді көрсету"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:194
+msgid "An error occurred. The password was not changed."
+msgstr "Қате орын алды. Пароль өзгертілмеді."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:200
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:583
+msgid "Generate a password"
+msgstr "Парольді генерациялау"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:201
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:584
+msgid "Change"
+msgstr "Өзгерту"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:243
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:657
+msgid "Hide password"
+msgstr "Парольді жасыру"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:257
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:681
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:682
+msgid "Passwords do not match"
+msgstr "Парольдер сәйкес келмейді"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:321
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:105
+msgid "Browse for more pictures..."
+msgstr "Басқа суреттерді шолу..."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:349
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:110
+msgid "Remove picture"
+msgstr "Суретті өшіру"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:472
+msgid "Never"
+msgstr "Ешқашан"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:483
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:184
+msgid "No password set"
+msgstr "Пароль орнатылмаған"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:485
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:186
+msgid "Set at login"
+msgstr "Кірген кезде орнатылады"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:499
+msgid "This user is currently logged in."
+msgstr "Бұл пайдаланушы қазір жүйеге кіріп тұр."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:506
+msgid ""
+"The user's home directory is encrypted. To preserve access to the encrypted "
+"directory, only the user should change this password."
+msgstr ""
+"Пайдаланушының үй бумасы шифрленген. Шифрленген бумаға қолжетімділікті "
+"сақтап қалу үшін бұл парольді тек пайдаланушының өзі өзгертуі керек."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:521
+#, python-format
+msgid ""
+"Are you sure you want to permanently delete %s and all the files associated "
+"with this user?"
+msgstr ""
+"%s және осы пайдаланушымен байланысты барлық файлдарды толығымен өшіру керек "
+"пе?"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:67
+#: usr/share/mintsysadm/settings_user.ui.h:3
+msgid "Account Details"
+msgstr "Тіркелгі туралы толық ақпарат"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:100
+msgid "Take a photo..."
+msgstr "Фотоға түсіру..."
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:202
+msgid "Take a Picture"
+msgstr "Суретке түсіру"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:205
+msgid "Capture"
+msgstr "Түсіру"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:228
+msgid "Accessing the webcam..."
+msgstr "Веб-камераға қол жеткізілуде..."
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:249
+msgid "Mirror Picture"
+msgstr "Суретті айналау"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:256
+msgid "Zoom:"
+msgstr "Масштаб:"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:329
+msgid "The webcam couldn't be accessed."
+msgstr "Веб-камераға қол жеткізу мүмкін болмады."
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:536
+msgid "Current password"
+msgstr "Ағымдағы пароль"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:628
+msgid "Wrong password"
+msgstr "Қате пароль"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:632
+msgid "Internal Error"
+msgstr "Ішкі қате"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:648
+msgid "An error occurred. Your password was not changed."
+msgstr "Қате орын алды. Пароліңіз өзгертілмеді."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:2
+msgid "Add a new user..."
+msgstr "Жаңа пайдаланушыны қосу..."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:6
+msgid "Last Login"
+msgstr "Соңғы кіру"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:8
+msgid "Remove this user..."
+msgstr "Бұл пайдаланушыны өшіру..."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:9
+msgid "Boot menu"
+msgstr "Жүктеу мәзірі"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:10
+msgid "Show the menu"
+msgstr "Мәзірді көрсету"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:11
+msgid ""
+"The menu will always be shown if multiple operating systems are installed."
+msgstr ""
+"Егер бірнеше операциялық жүйе орнатылған болса, мәзір әрқашан көрсетіледі."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:12
+msgid "Delay before booting the default selection (seconds)"
+msgstr "Әдепкі таңдауды жүктеу алдындағы кідіріс (секунд)"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:13
+msgid "Set the delay to -1 if you want the menu to show indefinitely."
+msgstr ""
+"Егер мәзірдің шексіз көрсетілуін қаласаңыз, кідірісті -1 мәніне орнатыңыз."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:14
+msgid "0"
+msgstr "0"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:15
+msgid "Remember the last selected choice as the default"
+msgstr "Соңғы таңдалған нұсқаны әдепкі ретінде есте сақтау"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:16
+msgid "Boot parameters"
+msgstr "Жүктеу параметрлері"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:17
+msgid "The computer booted with the following parameters:"
+msgstr "Компьютер келесі параметрлермен жүктелді:"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:18
+msgid ""
+"In addition to the system configuration you can set your own parameters in "
+"the list below"
+msgstr ""
+"Жүйелік конфигурацияға қоса, төмендегі тізімде өз параметрлеріңізді орната "
+"аласыз"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:19
+msgid "Press Save and reboot the computer for changes to take effect."
+msgstr ""
+"Өзгерістер күшіне енуі үшін Сақтау батырмасын басып, компьютерді қайта "
+"жүктеңіз."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:20
+msgid "Save"
+msgstr "Сақтау"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:21
+msgid "Boot Menu"
+msgstr "Жүктеу мәзірі"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:23
+msgid "Kernel series"
+msgstr "Ядро қатары"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:24
+msgid ""
+"No kernel series are tracked. This computer may not receive kernel security "
+"updates.\n"
+msgstr ""
+"Ешбір ядро қатары бақыланбайды. Бұл компьютер ядро қауіпсіздік жаңартуларын "
+"алмауы мүмкін.\n"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:26
+msgid "View all kernels"
+msgstr "Барлық ядроларды қарау"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:27
+msgid "Automatic cleanup"
+msgstr "Автоматты тазалау"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:28
+msgid "Cleanup runs weekly."
+msgstr "Тазалау апта сайын орындалады."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:29
+msgid "Remove older kernels automatically"
+msgstr "Ескі ядроларды автоматты түрде өшіру"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:30
+msgid "Number of installed kernels to keep in each tracked series"
+msgstr "Әрбір бақыланатын қатарда сақталатын орнатылған ядролар саны"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:31
+msgid "The active kernel and tracked metapackages are always protected."
+msgstr "Белсенді ядро мен бақыланатын метадестелер әрқашан қорғалған."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:32
+msgid "History"
+msgstr "Тарих"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:33
+msgid "Clean up now"
+msgstr "Қазір тазалау"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:34
+msgid "Kernels"
+msgstr "Ядролар"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:35
+msgid "Environment variables"
+msgstr "Орта айнымалылары"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:36
+msgid "Set system-wide environment variables using the NAME=VALUE format."
+msgstr ""
+"Жүйе бойынша орта айнымалыларын АТЫ=МӘНІ пішімін пайдаланып орнатыңыз."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:37
+msgid "Log out and log back in for changes to take effect."
+msgstr "Өзгерістер күшіне енуі үшін жүйеден шығып, қайта кіріңіз."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:38
+msgid "Environment Variables"
+msgstr "Орта айнымалылары"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:39
+msgid "Allowed sleep modes"
+msgstr "Рұқсат етілген ұйқы режимдері"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:40
+msgid "Choose the sleep modes you want to allow."
+msgstr "Рұқсат еткіңіз келетін ұйқы режимдерін таңдаңыз."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:42
+msgid ""
+"Keeps the session in memory (RAM). The computer is still running but uses "
+"only a bit of power."
+msgstr ""
+"Сеансты жадыда (RAM) сақтайды. Компьютер әлі де жұмыс істеп тұрады, бірақ "
+"өте аз қуат пайдаланады."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:44
+msgid "Saves the session to disk (Swap). Shuts down the computer."
+msgstr "Сеансты дискіге (Swap) сақтайды. Компьютерді сөндіреді."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:46
+msgid ""
+"Suspends for a while (systemd decides how long, based on battery power), "
+"then hibernates."
+msgstr ""
+"Біраз уақытқа кідіртеді (батарея қуатына байланысты қанша уақыт екенін "
+"systemd шешеді), содан кейін гибернациялайды."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:48
+msgid "Suspends but also saves the session to disk (Swap)."
+msgstr "Кідіртеді, сонымен бірге сеансты дискіге (Swap) сақтайды."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:49
+msgid "Suspend method"
+msgstr "Кідірту әдісі"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:50
+msgid ""
+"This is the method used to suspend the computer. Only the methods offered by "
+"your BIOS/firmware can be chosen."
+msgstr ""
+"Бұл — компьютерді кідірту үшін қолданылатын әдіс. Тек сіздің "
+"BIOS/микробағдарламаңыз ұсынған әдістерді ғана таңдауға болады."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:51
+msgid "Hibernation method"
+msgstr "Гибернациялау әдісі"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:52
+msgid "This is method used to power off the computer during hibernation."
+msgstr ""
+"Бұл — гибернация кезінде компьютердің қуатын сөндіру үшін қолданылатын әдіс."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:53
+msgid "Current state"
+msgstr "Ағымдағы қалып-күй"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:54
+msgid "Fix any detected issues to make allowed sleep modes available."
+msgstr ""
+"Рұқсат етілген ұйқы режимдерін қолжетімді ету үшін анықталған кез келген "
+"мәселелерді түзетіңіз."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:55
+msgid "Available sleep modes"
+msgstr "Қолжетімді ұйқы режимдері"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:56
+msgid "These sleep modes should work right now."
+msgstr "Бұл ұйқы режимдері дәл қазір жұмыс істеуі керек."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:57
+msgid "Sleep Modes"
+msgstr "Ұйқы режимдері"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:59
+msgid "Updating the boot menu"
+msgstr "Жүктеу мәзірін жаңарту"

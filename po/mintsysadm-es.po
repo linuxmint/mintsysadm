@@ -7,45 +7,85 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2025-11-24 13:08+0000\n"
-"PO-Revision-Date: 2025-11-24 15:25+0000\n"
-"Last-Translator: Marcos Sánchez <Unknown>\n"
+"POT-Creation-Date: 2026-10-26 13:35+0000\n"
+"PO-Revision-Date: 2026-10-29 14:33+0000\n"
+"Last-Translator: Isidro Pisa <isidro@pisa.red>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-08 15:45+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-11-16 12:02+0000\n"
+"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
 
-#: generate_desktop_files:25 generate_desktop_files:53
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:52
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:214
-#: usr/share/mintsysadm/mintsysadm.ui.h:14
+#: generate_desktop_files:26 generate_desktop_files:74
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:99
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:362
+#: usr/share/mintsysadm/mintsysadm.ui.h:58
 msgid "System Administration"
 msgstr "Administración del sistema"
 
-#: generate_desktop_files:25
+#: generate_desktop_files:26
 msgid "Configure the system"
 msgstr "Configurar el sistema"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
+#: generate_desktop_files:26
+msgid ""
+"system;administration;boot;grub;kernel;environment;variables;sleep;suspend;hi"
+"bernate;hybrid;swap;resume"
+msgstr ""
+"sistema;administración;arranque;GRUB;núcleo;entorno;variables;reposo;suspensi"
+"ón;hibernación;híbrido;intercambio;reanudar"
+
+#: generate_desktop_files:36
+msgid "Account details"
+msgstr "Detalles de la cuenta"
+
+#: generate_desktop_files:36
+msgid "User account and password"
+msgstr "Cuenta de usuario y contraseña"
+
+#: generate_desktop_files:36
+msgid "user;account;password;avatar"
+msgstr "usuario;cuenta;contraseña;avatar"
+
+#: generate_desktop_files:47 usr/share/mintsysadm/mintsysadm.ui.h:1
+msgid "Users"
+msgstr "Usuarios"
+
+#: generate_desktop_files:47
+msgid "Add or remove users"
+msgstr "Añadir o eliminar usuarios"
+
+#: generate_desktop_files:47
+msgid "users;accounts"
+msgstr "usuarios;cuentas"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:123
 msgid "Add a boot argument"
 msgstr "Añadir un argumento de arranque"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:123
 msgid "If the argument is not recognized by the kernel it will be ignored."
 msgstr "Si el argumento no es reconocido por el núcleo, será ignorado."
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:88
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:138
+msgid "Add an environment variable"
+msgstr "Añadir una variable de entorno"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:138
+msgid "Enter the variable in NAME=VALUE format."
+msgstr "Introduce la variable en formato NOMBRE=VALOR."
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:167
 msgid "Quit"
 msgstr "Salir"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:100
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:212
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:179
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:360
 msgid "About"
 msgstr "Acerca de"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:164
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:269
 msgid ""
 "Running update-grub...\n"
 "\n"
@@ -53,63 +93,808 @@ msgstr ""
 "Running update-grub...\n"
 "\n"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:165
-#: usr/share/mintsysadm/mintsysadm.ui.h:18
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:270
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:756
+#: usr/share/mintsysadm/mintsysadm.ui.h:62
 msgid "Processing..."
 msgstr "Procesando..."
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:191
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:333
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:803
 msgid "Success"
 msgstr "Ejecutado correctamente"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:193
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:335
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:807
 msgid "Error"
 msgstr "Ha ocurrido un error"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:205
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:347
 msgid "Boot arguments cannot include space characters."
 msgstr "Los argumentos de arranque no pueden incluir espacios en blanco."
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:1
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:353
+msgid "Environment variables must use the NAME=VALUE format."
+msgstr "Las variables de entorno deben utilizar el formato NOMBRE=VALOR."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:247
+msgid "All kernels"
+msgstr "Todos los núcleos"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:253
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:760
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:878
+#: usr/share/mintsysadm/mintsysadm.ui.h:60
+msgid "Close"
+msgstr "Cerrar"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:255
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:437
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:498
+msgid "Protect"
+msgstr "Proteger"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:259
+msgid "Protected kernels are never removed during cleanup."
+msgstr "Los núcleos protegidos nunca se eliminan durante la limpieza."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:262
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:434
+msgid "Install"
+msgstr "Instalación"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:270
+msgid "Series"
+msgstr "Series"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:272
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:284
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:298
+msgid "All"
+msgstr "Todo"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:282
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:374
+msgid "Flavor"
+msgstr "Sabor"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:296
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:375
+msgid "Status"
+msgstr "Estado"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:299
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:317
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:486
+msgid "Active"
+msgstr "Activo"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:300
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:315
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:484
+msgid "Active, protected"
+msgstr "Activo, protegido"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:301
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:323
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:492
+msgid "Installed"
+msgstr "Instalado"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:304
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:321
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:490
+msgid "Installed, protected"
+msgstr "Instalado, protegido"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:306
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:326
+msgid "Available"
+msgstr "Disponible"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:373
+msgid "Version"
+msgstr "Versión"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:384
+msgid "Links"
+msgstr "Enlaces"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:386
+msgid "Bug reports"
+msgstr "Informe de errores"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:392
+msgid "Changelog"
+msgstr "Registro de cambios"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:434
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:622
+msgid "Remove"
+msgstr "Eliminar"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:437
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:496
+msgid "Unprotect"
+msgstr "Desproteger"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:606
+msgid "This kernel cannot be removed."
+msgstr "Este kernel no se puede eliminar."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:616
+#, python-format
+msgid "Remove kernel %s?"
+msgstr "¿Eliminar el kernel %s?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:619
+#, python-format
+msgid ""
+"The following packages will be removed:\n"
+"%s"
+msgstr ""
+"Se eliminarán los siguientes paquetes:\n"
+"%s"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:646
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:665
+msgid "There are no older kernels to remove."
+msgstr "No hay kernels más antiguos que eliminar."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:682
+msgid "Remove older kernels?"
+msgstr "¿Eliminar los kernels antiguos?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:687
+msgid ""
+"The following packages will be removed. The active kernel and tracked "
+"metapackages are protected."
+msgstr ""
+"Se eliminarán los siguientes paquetes. El kernel activo y los metapaquetes "
+"bajo seguimiento están protegidos."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:700
+msgid "Packages to keep"
+msgstr "Paquetes a conservar"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:705
+msgid "Packages to remove"
+msgstr "Paquetes a eliminar"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:709
+msgid "Clean up"
+msgstr "Limpiar"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:720
+msgid "Cleaning up kernels"
+msgstr "Limpieza de kernels"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:744
+msgid ""
+"Starting kernel cleanup...\n"
+"\n"
+msgstr ""
+"Iniciando la limpieza del kernel...\n"
+"\n"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:753
+#: usr/share/mintsysadm/mintsysadm.ui.h:61
+msgid "Result:"
+msgstr "Resultado:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:866
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:872
+msgid "Kernel cleanup history"
+msgstr "Historial de limpieza del kernel"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:867
+msgid "No cleanup has run yet."
+msgstr "Aún no se ha ejecutado ninguna limpieza."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:943
+#, python-format
+msgid "%d packages removed"
+msgstr "%d paquetes eliminados"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:945
+#, python-format
+msgid ", %d skipped"
+msgstr ", %d omitido(s)"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:973
+#: usr/share/mintsysadm/mintsysadm.ui.h:22
+msgid "Active kernel:"
+msgstr "Kernel activo:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:974
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:986
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1045
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:979
+msgid "Tracked series:"
+msgstr "Series con seguimiento:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:985
+msgid "Versions kept per tracked series:"
+msgstr "Versiones conservadas por serie objeto de seguimiento:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1007
+msgid "Kernel version"
+msgstr "Versión del Kernel"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1014
+msgid "Package name"
+msgstr "Nombre del paquete"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1048
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:436
+msgid "None"
+msgstr "Ninguno"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1059
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1141
+msgid "LTS"
+msgstr "LTS"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1063
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1145
+msgid "Edge"
+msgstr "Edge"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1065
+msgid "(manually tracked)"
+msgstr "(seguimiento manual)"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1075
+msgid "Unknown date"
+msgstr "Fecha desconocida"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1158
+msgid "Long Term Support"
+msgstr "Soporte a largo plazo"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1159
+msgid "This is the most stable series. Recommended for most users."
+msgstr ""
+"Esta es la serie más estable. Recomendada para la mayoría de los usuarios."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1162
+msgid "Hardware Enablement"
+msgstr "Habilitación de hardware"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1163
+msgid "This series is recommended for newer hardware."
+msgstr "Esta serie se recomienda para hardware más reciente."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1165
+msgid ""
+"This series sometimes provides newer kernels than the HWE series but without "
+"support for proprietary drivers."
+msgstr ""
+"Esta serie ofrece en ocasiones kernels más recientes que la serie HWE, pero "
+"sin compatibilidad con controladores propietarios."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1167
+msgid "This series is not officially supported."
+msgstr "Esta serie no cuenta con soporte oficial."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1177
+msgid "Manually tracked"
+msgstr "Seguimiento manual"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1179
+msgid "Tracked"
+msgstr "Con seguimiento"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1205
+#, python-format
+msgid "Installed kernels: %d"
+msgstr "Kernels instalados: %d"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1219
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1280
+msgid "Untrack"
+msgstr "Desactivar el seguimiento"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1223
+msgid "Track"
+msgstr "Seguir"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1234
+msgid "Mark as untracked"
+msgstr "Marcar sin seguimiento"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1241
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1305
+msgid "Mark as tracked"
+msgstr "Marcar en seguimiento"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1272
+#, python-format
+msgid "Stop tracking the %s series?"
+msgstr "¿Dejar de seguir la serie %s?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1276
+msgid ""
+"Without tracking, this computer will no longer receive security updates for "
+"this kernel series."
+msgstr ""
+"Sin seguimiento, este ordenador dejará de recibir actualizaciones de "
+"seguridad para esta serie de kernels."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1296
+#, python-format
+msgid "Mark the %s series as tracked?"
+msgstr "¿Marcar la serie %s como «En seguimiento»?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1300
+msgid ""
+"This series will be considered manually tracked. It is your responsibility "
+"to ensure that an appropriate metapackage is installed or that kernel "
+"updates are handled another way."
+msgstr ""
+"Esta serie se considerará de seguimiento manual. Es tu responsabilidad "
+"asegurarte de que se instale un metapaquete adecuado o de que las "
+"actualizaciones del núcleo se gestionen de otra forma."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:104
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:285
+#: usr/share/mintsysadm/mintsysadm.ui.h:41
+msgid "Suspend"
+msgstr "Suspender"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:105
+#: usr/share/mintsysadm/mintsysadm.ui.h:43
+msgid "Hibernate"
+msgstr "Hibernar"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:106
+#: usr/share/mintsysadm/mintsysadm.ui.h:45
+msgid "Suspend then hibernate"
+msgstr "Poner en suspensión y luego en hibernación"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:107
+#: usr/share/mintsysadm/mintsysadm.ui.h:47
+msgid "Hybrid sleep"
+msgstr "Suspensión híbrida"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:130
+msgid "Suspend-to-idle (s2idle)"
+msgstr "Suspensión en reposo (s2idle)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:131
+msgid "Suspend-to-RAM (S3)"
+msgstr "Suspender a la memoria RAM (S3)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:132
+msgid "Shallow (S1)"
+msgstr "Superficial (S1)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:146
+msgid "Platform (the firmware powers off)"
+msgstr "Plataforma (el firmware se apaga)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:147
+msgid "Shutdown (the kernel powers off)"
+msgstr "Apagado (el núcleo se apaga)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:211
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:223
+msgid "Default"
+msgstr "Por defecto"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:213
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:225
+#, python-format
+msgid "Default — %s"
+msgstr "Por defecto — %s"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:288
+msgid "The kernel does not support suspend."
+msgstr "El kernel no admite el modo de suspensión."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:292
+msgid "The kernel supports suspend."
+msgstr "El kernel admite la suspensión."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:293
+#, python-format
+msgid "The kernel supports suspend. Method in use: %s."
+msgstr "El kernel admite la suspensión. Método utilizado: %s."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:297
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:298
+msgid "Kernel support"
+msgstr "Compatibilidad de kernel"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:297
+msgid "The kernel supports hibernation."
+msgstr "El kernel admite el modo de hibernación."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:298
+msgid "The kernel does not support hibernation."
+msgstr "El kernel no admite la hibernación."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:313
+msgid "Secure Boot"
+msgstr "Arranque seguro"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:315
+msgid "Secure Boot is enabled and the kernel lockdown prevents hibernation."
+msgstr ""
+"El arranque seguro está activado y el bloqueo del núcleo impide la "
+"hibernación."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:317
+msgid "Secure Boot is enabled but the kernel lockdown is not active."
+msgstr ""
+"El arranque seguro está activado, pero el bloqueo del núcleo no está activo."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:318
+msgid "Secure Boot is disabled."
+msgstr "El arranque seguro está desactivado."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:323
+msgid "Swap"
+msgstr "Intercambio"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:323
+msgid "No swap partition or swap file is in use."
+msgstr "No hay ninguna partición o archivo de intercambio en uso."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:332
+#, python-format
+msgid "Swap area in %s"
+msgstr "Área de intercambio en %s"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:340
+#, python-format
+msgid "The swap area (%(swap)s) is smaller than the memory (%(ram)s)."
+msgstr ""
+"El área de intercambio (%(swap)s) es más pequeña que la memoria (%(ram)s)."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:343
+#, python-format
+msgid ""
+"The swap area (%(swap)s) is at least as large as the memory (%(ram)s)."
+msgstr ""
+"El área de intercambio (%(swap)s) es al menos tan grande como la memoria "
+"(%(ram)s)."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:347
+msgid "Resume device"
+msgstr "Dispositivo de reanudación"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:350
+#, python-format
+msgid "The resume device will be set to %s upon reboot."
+msgstr "El dispositivo de reanudación se establecerá en %s tras el reinicio."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:354
+#, python-format
+msgid ""
+"The boot arguments (%s) do not match any swap partition or swap file in use."
+msgstr ""
+"Los argumentos de arranque (%s) no coinciden con ninguna partición o archivo "
+"de intercambio en uso."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:358
+msgid "The noresume kernel argument is set, which prevents hibernation."
+msgstr "No se puede hibernar debido al argumento «noresume» del kernel."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:362
+msgid "No resume device is set."
+msgstr "No se ha establecido un dispositivo de reanudación."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:379
+#, python-format
+msgid ""
+"The resume offset (%(current)d) does not match the start of %(path)s "
+"(%(expected)d)."
+msgstr ""
+"El offset de reanudación (%(current)d) no coincide con el inicio de %(path)s "
+"(%(expected)d)."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:381
+#, python-format
+msgid ""
+"The resume device (%(major)d:%(minor)d) does not match any swap partition or "
+"swap file in use."
+msgstr ""
+"El dispositivo de reanudación (%(major)d:%(minor)d) no coincide con ninguna "
+"partición o archivo de intercambio en uso."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:385
+#, python-format
+msgid ""
+"The resume device is set to the swap file %(path)s (offset %(offset)d)."
+msgstr ""
+"El dispositivo de reanudación está configurado en el archivo de intercambio "
+"%(path)s (desplazamiento %(offset)d)."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:387
+#, python-format
+msgid "The resume device is set to %s."
+msgstr "El dispositivo de reanudación es %s."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:396
+msgid "No problems detected"
+msgstr "No se detectaron problemas"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:396
+msgid "This computer looks ready for the sleep modes above."
+msgstr "Este equipo parece listo para los modos de suspensión anteriores."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:409
+msgid "Set as resume device"
+msgstr "Establecer como dispositivo de reanudación"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:434
+msgid "The system could not be asked which sleep modes are available."
+msgstr ""
+"No fue posible consultar al sistema los modos de suspensión disponibles."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:54
+msgid ""
+"A password is needed to encrypt the home directory. Make sure to communicate "
+"it to the user."
+msgstr ""
+"Se necesita una contraseña para cifrar el directorio de inicio. Asegúrate de "
+"comunicársela al usuario."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+msgid "Full Name"
+msgstr "Nombre completo"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/share/mintsysadm/mintsysadm.ui.h:4
+#: usr/share/mintsysadm/settings_user.ui.h:1
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/lib/linuxmint/mintsysadm/page_users.py:559
+#: usr/share/mintsysadm/mintsysadm.ui.h:3
+msgid "Administrator"
+msgstr "Administrador"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/share/mintsysadm/mintsysadm.ui.h:7
+msgid "Encrypted Home Directory"
+msgstr "Carpeta personal cifrada"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/share/mintsysadm/mintsysadm.ui.h:5
+#: usr/share/mintsysadm/settings_user.ui.h:2
+msgid "Password"
+msgstr "Contraseña"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:90
+#: usr/lib/linuxmint/mintsysadm/page_users.py:199
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:204
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:582
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:90
+msgid "Add"
+msgstr "Añadir"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:112
+msgid ""
+"Invalid username. Only lowercase letters, numbers, hyphens and underscores "
+"are allowed."
+msgstr ""
+"Nombre de usuario no válido. Solo se admiten letras minúsculas, números, "
+"guiones y guiones bajos."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:116
+msgid "This username is already taken."
+msgstr "Este nombre de usuario ya está registrado."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:126
+#: usr/lib/linuxmint/mintsysadm/page_users.py:171
+#: usr/lib/linuxmint/mintsysadm/page_users.py:177
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:554
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:560
+msgid "The password must be at least 8 characters long."
+msgstr "La contraseña debe tener al menos 8 caracteres."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:157
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:533
+msgid "Change Password"
+msgstr "Cambiar la contraseña"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:160
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:536
+msgid "New password"
+msgstr "Nueva contraseña"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:160
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:536
+msgid "Confirm password"
+msgstr "Confirme la contraseña"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:165
+#: usr/lib/linuxmint/mintsysadm/page_users.py:246
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:548
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:660
+msgid "Show password"
+msgstr "Mostrar contraseña"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:194
+msgid "An error occurred. The password was not changed."
+msgstr "Se produjo un error. No se cambió la contraseña."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:200
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:583
+msgid "Generate a password"
+msgstr "Generar una contraseña"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:201
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:584
+msgid "Change"
+msgstr "Cambiar"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:243
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:657
+msgid "Hide password"
+msgstr "Ocultar contraseña"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:257
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:681
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:682
+msgid "Passwords do not match"
+msgstr "Las contraseñas no coinciden"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:321
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:105
+msgid "Browse for more pictures..."
+msgstr "Examinar para buscar más imágenes…"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:349
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:110
+msgid "Remove picture"
+msgstr "Eliminar foto"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:472
+msgid "Never"
+msgstr "Nunca"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:483
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:184
+msgid "No password set"
+msgstr "No hay contraseña"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:485
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:186
+msgid "Set at login"
+msgstr "Configurar al iniciar sesión"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:499
+msgid "This user is currently logged in."
+msgstr "Configurar al iniciar sesión"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:506
+msgid ""
+"The user's home directory is encrypted. To preserve access to the encrypted "
+"directory, only the user should change this password."
+msgstr ""
+"La carpeta personal del usuario está cifrada. Para mantener el acceso al "
+"directorio cifrado, solo el usuario debe cambiar esta contraseña."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:521
+#, python-format
+msgid ""
+"Are you sure you want to permanently delete %s and all the files associated "
+"with this user?"
+msgstr ""
+"¿Estás seguro de que quieres eliminar definitivamente %s y todos los "
+"archivos asociados a este usuario?"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:67
+#: usr/share/mintsysadm/settings_user.ui.h:3
+msgid "Account Details"
+msgstr "Detalles de la cuenta"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:100
+msgid "Take a photo..."
+msgstr "Tomar una foto…"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:202
+msgid "Take a Picture"
+msgstr "Tomar una foto"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:205
+msgid "Capture"
+msgstr "Capturar"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:228
+msgid "Accessing the webcam..."
+msgstr "Accediendo a la cámara web..."
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:249
+msgid "Mirror Picture"
+msgstr "Foto en espejo"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:256
+msgid "Zoom:"
+msgstr "Aumentar:"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:329
+msgid "The webcam couldn't be accessed."
+msgstr "No se pudo acceder a la cámara web."
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:536
+msgid "Current password"
+msgstr "Contraseña actual"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:628
+msgid "Wrong password"
+msgstr "Contraseña incorrecta"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:632
+msgid "Internal Error"
+msgstr "Error interno"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:648
+msgid "An error occurred. Your password was not changed."
+msgstr "Se ha producido un error. Su contraseña no se ha cambiado."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:2
+msgid "Add a new user..."
+msgstr "Agregar un nuevo usuario..."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:6
+msgid "Last Login"
+msgstr "Último inicio de sesión"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:8
+msgid "Remove this user..."
+msgstr "Eliminar a este usuario..."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:9
 msgid "Boot menu"
 msgstr "Menú de arranque"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:2
+#: usr/share/mintsysadm/mintsysadm.ui.h:10
 msgid "Show the menu"
 msgstr "Mostrar el menú"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:3
+#: usr/share/mintsysadm/mintsysadm.ui.h:11
 msgid ""
 "The menu will always be shown if multiple operating systems are installed."
 msgstr ""
 "El menú siempre se mostrará si hay varios sistemas operativos instalados."
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:4
+#: usr/share/mintsysadm/mintsysadm.ui.h:12
 msgid "Delay before booting the default selection (seconds)"
 msgstr "Retraso antes de arrancar la selección predeterminada (segundos)"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:5
+#: usr/share/mintsysadm/mintsysadm.ui.h:13
 msgid "Set the delay to -1 if you want the menu to show indefinitely."
 msgstr ""
 "Establezca el retraso en -1 si desea que el menú se muestre indefinidamente."
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:6
-msgid "-1"
-msgstr "-1"
+#: usr/share/mintsysadm/mintsysadm.ui.h:14
+msgid "0"
+msgstr "0"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:7
+#: usr/share/mintsysadm/mintsysadm.ui.h:15
 msgid "Remember the last selected choice as the default"
 msgstr "Recordar la última opción seleccionada como predeterminada"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:8
+#: usr/share/mintsysadm/mintsysadm.ui.h:16
 msgid "Boot parameters"
 msgstr "Parámetros de arranque"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:9
+#: usr/share/mintsysadm/mintsysadm.ui.h:17
 msgid "The computer booted with the following parameters:"
 msgstr "El ordenador se inició con los siguientes parámetros:"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:10
+#: usr/share/mintsysadm/mintsysadm.ui.h:18
 msgid ""
 "In addition to the system configuration you can set your own parameters in "
 "the list below"
@@ -117,27 +902,166 @@ msgstr ""
 "Además de la configuración del sistema, puede establecer sus propios "
 "parámetros en la siguiente lista"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:11
+#: usr/share/mintsysadm/mintsysadm.ui.h:19
 msgid "Press Save and reboot the computer for changes to take effect."
 msgstr ""
 "Pulse Guardar y reinicie el ordenador para que los cambios surtan efecto."
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:12
+#: usr/share/mintsysadm/mintsysadm.ui.h:20
 msgid "Save"
 msgstr "Guardar"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:13
+#: usr/share/mintsysadm/mintsysadm.ui.h:21
 msgid "Boot Menu"
 msgstr "Menú de arranque"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:15
+#: usr/share/mintsysadm/mintsysadm.ui.h:23
+msgid "Kernel series"
+msgstr "Serie del kernel"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:24
+msgid ""
+"No kernel series are tracked. This computer may not receive kernel security "
+"updates.\n"
+msgstr ""
+"No se hace seguimiento de ninguna serie de kernels. Este equipo podría no "
+"recibir actualizaciones de seguridad del kernel.\n"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:26
+msgid "View all kernels"
+msgstr "Ver todos los kernels"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:27
+msgid "Automatic cleanup"
+msgstr "Limpieza automática"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:28
+msgid "Cleanup runs weekly."
+msgstr "La limpieza se realiza semanalmente."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:29
+msgid "Remove older kernels automatically"
+msgstr "Elimina los kernels más viejos automáticamente"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:30
+msgid "Number of installed kernels to keep in each tracked series"
+msgstr ""
+"Número de kernels instalados que deben conservarse en cada serie bajo "
+"seguimiento"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:31
+msgid "The active kernel and tracked metapackages are always protected."
+msgstr ""
+"El núcleo activo y los metapaquetes rastreados están siempre protegidos."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:32
+msgid "History"
+msgstr "Historia"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:33
+msgid "Clean up now"
+msgstr "Limpiar ahora"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:34
+msgid "Kernels"
+msgstr "Núcleos"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:35
+msgid "Environment variables"
+msgstr "Variables de entorno"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:36
+msgid "Set system-wide environment variables using the NAME=VALUE format."
+msgstr ""
+"Define variables de entorno a nivel de sistema utilizando el formato "
+"NOMBRE=VALOR."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:37
+msgid "Log out and log back in for changes to take effect."
+msgstr "Cierre y vuelva a iniciar sesión para que los cambios surtan efecto."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:38
+msgid "Environment Variables"
+msgstr "Variables de entorno"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:39
+msgid "Allowed sleep modes"
+msgstr "Modos de suspensión permitidos"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:40
+msgid "Choose the sleep modes you want to allow."
+msgstr "Elija los modos de suspensión que quiera permitir."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:42
+msgid ""
+"Keeps the session in memory (RAM). The computer is still running but uses "
+"only a bit of power."
+msgstr ""
+"Mantiene la sesión en la memoria (RAM). El equipo sigue encendido, pero "
+"consume muy poca energía."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:44
+msgid "Saves the session to disk (Swap). Shuts down the computer."
+msgstr ""
+"Guarda la sesión en el disco (espacio de intercambio). Apaga el equipo."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:46
+msgid ""
+"Suspends for a while (systemd decides how long, based on battery power), "
+"then hibernates."
+msgstr ""
+"Suspende el equipo durante un tiempo (systemd determina la duración, en "
+"función de la carga de la batería) y, a continuación, lo hiberna."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:48
+msgid "Suspends but also saves the session to disk (Swap)."
+msgstr ""
+"Suspende el sistema, pero también guarda la sesión en el disco (intercambio)."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:49
+msgid "Suspend method"
+msgstr "Método de suspensión"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:50
+msgid ""
+"This is the method used to suspend the computer. Only the methods offered by "
+"your BIOS/firmware can be chosen."
+msgstr ""
+"Este es el método utilizado para suspender el equipo. Solo es posible elegir "
+"los métodos que ofrece tu BIOS/firmware."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:51
+msgid "Hibernation method"
+msgstr "Método de hibernación"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:52
+msgid "This is method used to power off the computer during hibernation."
+msgstr ""
+"Este es el método que se utiliza para apagar la computadora durante el modo "
+"de hibernación."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:53
+msgid "Current state"
+msgstr "Estado actual"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:54
+msgid "Fix any detected issues to make allowed sleep modes available."
+msgstr ""
+"Corrige cualquier problema detectado para habilitar los modos de suspensión "
+"permitidos."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:55
+msgid "Available sleep modes"
+msgstr "Modos de suspensión disponibles"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:56
+msgid "These sleep modes should work right now."
+msgstr "Estos modos de suspensión deberían funcionar ahora mismo."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:57
+msgid "Sleep Modes"
+msgstr "Modos de suspensión"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:59
 msgid "Updating the boot menu"
 msgstr "Actualizando el menú de arranque"
-
-#: usr/share/mintsysadm/mintsysadm.ui.h:16
-msgid "Close"
-msgstr "Cerrar"
-
-#: usr/share/mintsysadm/mintsysadm.ui.h:17
-msgid "Result:"
-msgstr "Resultado:"

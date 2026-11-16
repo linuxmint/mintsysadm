@@ -7,45 +7,85 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2025-11-24 13:08+0000\n"
-"PO-Revision-Date: 2025-11-27 00:48+0000\n"
-"Last-Translator: Butterfly <Unknown>\n"
+"POT-Creation-Date: 2026-10-26 13:35+0000\n"
+"PO-Revision-Date: 2026-11-13 21:39+0000\n"
+"Last-Translator: cabbar hayıroğlu <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-08 15:45+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-11-16 12:02+0000\n"
+"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
 
-#: generate_desktop_files:25 generate_desktop_files:53
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:52
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:214
-#: usr/share/mintsysadm/mintsysadm.ui.h:14
+#: generate_desktop_files:26 generate_desktop_files:74
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:99
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:362
+#: usr/share/mintsysadm/mintsysadm.ui.h:58
 msgid "System Administration"
 msgstr "Sistem Yönetimi"
 
-#: generate_desktop_files:25
+#: generate_desktop_files:26
 msgid "Configure the system"
 msgstr "Sistemi yapılandır"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
+#: generate_desktop_files:26
+msgid ""
+"system;administration;boot;grub;kernel;environment;variables;sleep;suspend;hi"
+"bernate;hybrid;swap;resume"
+msgstr ""
+"sistem;yönetim;açılış;grub;çekirdek;ortam;değişkenler;askı;uyku;beklet;hibrit"
+";takas;devam"
+
+#: generate_desktop_files:36
+msgid "Account details"
+msgstr "Hesap ayrıntıları"
+
+#: generate_desktop_files:36
+msgid "User account and password"
+msgstr "Kullanıcı hesabı ve parola"
+
+#: generate_desktop_files:36
+msgid "user;account;password;avatar"
+msgstr "kullanıcı;hesap;parola;avatar"
+
+#: generate_desktop_files:47 usr/share/mintsysadm/mintsysadm.ui.h:1
+msgid "Users"
+msgstr "Kullanıcılar"
+
+#: generate_desktop_files:47
+msgid "Add or remove users"
+msgstr "Kullanıcıları ekle ya da kaldır"
+
+#: generate_desktop_files:47
+msgid "users;accounts"
+msgstr "kullanıcılar;hesaplar"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:123
 msgid "Add a boot argument"
 msgstr "Açılış değişkeni ekle"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:70
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:123
 msgid "If the argument is not recognized by the kernel it will be ignored."
 msgstr "Eğer değişken çekirdek tarafından tanınmazsa, yok sayılacaktır."
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:88
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:138
+msgid "Add an environment variable"
+msgstr "Bir ortam değişkeni ekle"
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:138
+msgid "Enter the variable in NAME=VALUE format."
+msgstr "Değişkeni AD=DEĞER (NAME=VALUE) biçiminde giriniz."
+
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:167
 msgid "Quit"
 msgstr "Çıkış"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:100
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:212
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:179
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:360
 msgid "About"
 msgstr "Hakkında"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:164
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:269
 msgid ""
 "Running update-grub...\n"
 "\n"
@@ -53,63 +93,802 @@ msgstr ""
 "update-grub çalışıyor...\n"
 "\n"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:165
-#: usr/share/mintsysadm/mintsysadm.ui.h:18
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:270
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:756
+#: usr/share/mintsysadm/mintsysadm.ui.h:62
 msgid "Processing..."
 msgstr "İşlem sürüyor..."
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:191
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:333
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:803
 msgid "Success"
 msgstr "Başarılı"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:193
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:335
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:807
 msgid "Error"
 msgstr "Hata"
 
-#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:205
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:347
 msgid "Boot arguments cannot include space characters."
 msgstr "Açılış değişkenleri boşluk karakterleri içeremez."
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:1
+#: usr/lib/linuxmint/mintsysadm/mintsysadm.py:353
+msgid "Environment variables must use the NAME=VALUE format."
+msgstr "Ortam değişkenleri AD=DEĞER (NAME=VALUE) biçiminde kullanılmalı."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:247
+msgid "All kernels"
+msgstr "Tüm çekirdekler"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:253
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:760
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:878
+#: usr/share/mintsysadm/mintsysadm.ui.h:60
+msgid "Close"
+msgstr "Kapat"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:255
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:437
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:498
+msgid "Protect"
+msgstr "Koru"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:259
+msgid "Protected kernels are never removed during cleanup."
+msgstr "Korunan çekirdekler temizlik işlemi sırasında asla kaldırılmaz."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:262
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:434
+msgid "Install"
+msgstr "Kur"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:270
+msgid "Series"
+msgstr "Seriler"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:272
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:284
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:298
+msgid "All"
+msgstr "Tümü"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:282
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:374
+msgid "Flavor"
+msgstr "Çeşit"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:296
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:375
+msgid "Status"
+msgstr "Durum"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:299
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:317
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:486
+msgid "Active"
+msgstr "Aktif"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:300
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:315
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:484
+msgid "Active, protected"
+msgstr "Aktif, korunuyor"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:301
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:323
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:492
+msgid "Installed"
+msgstr "Kurulu"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:304
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:321
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:490
+msgid "Installed, protected"
+msgstr "Kurulu, korunuyor"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:306
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:326
+msgid "Available"
+msgstr "Kullanılabilir"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:373
+msgid "Version"
+msgstr "Sürüm"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:384
+msgid "Links"
+msgstr "Bağlantılar"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:386
+msgid "Bug reports"
+msgstr "Hata raporları"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:392
+msgid "Changelog"
+msgstr "Değişim günlüğü"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:434
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:622
+msgid "Remove"
+msgstr "Kaldır"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:437
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:496
+msgid "Unprotect"
+msgstr "Korumayı kaldır"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:606
+msgid "This kernel cannot be removed."
+msgstr "Bu çekirdek kaldırılamaz."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:616
+#, python-format
+msgid "Remove kernel %s?"
+msgstr "%s çekirdeği silinsin mi?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:619
+#, python-format
+msgid ""
+"The following packages will be removed:\n"
+"%s"
+msgstr ""
+"Aşağıdaki paketler silinecektir:\n"
+"%s"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:646
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:665
+msgid "There are no older kernels to remove."
+msgstr "Kaldırılacak eski çekirdek yok."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:682
+msgid "Remove older kernels?"
+msgstr "Eski çekirdekler kaldırılsın mı?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:687
+msgid ""
+"The following packages will be removed. The active kernel and tracked "
+"metapackages are protected."
+msgstr ""
+"Aşağıdaki paketler silinecektir. Aktif çekirdek ve takip edilen meta "
+"paketler korunacaktır."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:700
+msgid "Packages to keep"
+msgstr "Korunacak paketler"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:705
+msgid "Packages to remove"
+msgstr "Kaldırılacak paketler"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:709
+msgid "Clean up"
+msgstr "Temizle"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:720
+msgid "Cleaning up kernels"
+msgstr "Çekirdekleri temizle"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:744
+msgid ""
+"Starting kernel cleanup...\n"
+"\n"
+msgstr ""
+"Çekirdek temizliği başlıyor...\n"
+"\n"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:753
+#: usr/share/mintsysadm/mintsysadm.ui.h:61
+msgid "Result:"
+msgstr "Sonuç:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:866
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:872
+msgid "Kernel cleanup history"
+msgstr "Çekirdek temizliği geçmişi"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:867
+msgid "No cleanup has run yet."
+msgstr "Henüz hiç bir temizlik işlemi yapılmadı."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:943
+#, python-format
+msgid "%d packages removed"
+msgstr "%d paket kaldırıldı"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:945
+#, python-format
+msgid ", %d skipped"
+msgstr ", %d atlandı"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:973
+#: usr/share/mintsysadm/mintsysadm.ui.h:22
+msgid "Active kernel:"
+msgstr "Aktif çekirdek:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:974
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:986
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1045
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:979
+msgid "Tracked series:"
+msgstr "İzlenen seriler:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:985
+msgid "Versions kept per tracked series:"
+msgstr "İzlenen serilere göre korunan sürümler:"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1007
+msgid "Kernel version"
+msgstr "Çekirdek sürümü"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1014
+msgid "Package name"
+msgstr "Paket adı"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1048
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:436
+msgid "None"
+msgstr "Hiçbiri"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1059
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1141
+msgid "LTS"
+msgstr "LTS"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1063
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1145
+msgid "Edge"
+msgstr "Kenar (Edge)"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1065
+msgid "(manually tracked)"
+msgstr "(elle izlendi)"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1075
+msgid "Unknown date"
+msgstr "Bilinmeyen tarih"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1158
+msgid "Long Term Support"
+msgstr "Uzun Süre Destekli"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1159
+msgid "This is the most stable series. Recommended for most users."
+msgstr "Bu en kararlı seridir. Çoğu kullanıcılı için önerilendir."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1162
+msgid "Hardware Enablement"
+msgstr "Donanım Destekleme"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1163
+msgid "This series is recommended for newer hardware."
+msgstr "Bu seri, daha yeni nesil donanımlar için önerilir."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1165
+msgid ""
+"This series sometimes provides newer kernels than the HWE series but without "
+"support for proprietary drivers."
+msgstr ""
+"Bu seri bazen HWE serisine göre daha yeni çekirdekler sunar, ancak sahipli "
+"sürücüler için destek sağlamayabilir."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1167
+msgid "This series is not officially supported."
+msgstr "Bu seri resmi olarak desteklenmiyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1177
+msgid "Manually tracked"
+msgstr "Elle izlendi"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1179
+msgid "Tracked"
+msgstr "İzleniyor"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1205
+#, python-format
+msgid "Installed kernels: %d"
+msgstr "Kurulu çekirdekler: %d"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1219
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1280
+msgid "Untrack"
+msgstr "İzleme"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1223
+msgid "Track"
+msgstr "İzle"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1234
+msgid "Mark as untracked"
+msgstr "İzlenmesin olarak işaretle"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1241
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1305
+msgid "Mark as tracked"
+msgstr "İzlensin olarak işaretle"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1272
+#, python-format
+msgid "Stop tracking the %s series?"
+msgstr "%s serisinin izlenmesi durdurulsun mu?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1276
+msgid ""
+"Without tracking, this computer will no longer receive security updates for "
+"this kernel series."
+msgstr ""
+"İzleme durdurulduğunda, bu çekirdek serisi için artık güvenlik güncellemesi "
+"alamayacaktır."
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1296
+#, python-format
+msgid "Mark the %s series as tracked?"
+msgstr "%s serisi izlenen seri olarak işaretlensin mi?"
+
+#: usr/lib/linuxmint/mintsysadm/page_kernels.py:1300
+msgid ""
+"This series will be considered manually tracked. It is your responsibility "
+"to ensure that an appropriate metapackage is installed or that kernel "
+"updates are handled another way."
+msgstr ""
+"Bu seri elle takip ediliyor olarak değerlendirilecektir. Uygun bir meta "
+"paketin yüklendiğinden veya çekirdek güncellemelerinin başka bir şekilde ele "
+"alındığından emin olmak sizin sorumluluğunuzdadır."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:104
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:285
+#: usr/share/mintsysadm/mintsysadm.ui.h:41
+msgid "Suspend"
+msgstr "Askı"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:105
+#: usr/share/mintsysadm/mintsysadm.ui.h:43
+msgid "Hibernate"
+msgstr "Derin Uyku"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:106
+#: usr/share/mintsysadm/mintsysadm.ui.h:45
+msgid "Suspend then hibernate"
+msgstr "Askıya al sonra derin uyku"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:107
+#: usr/share/mintsysadm/mintsysadm.ui.h:47
+msgid "Hybrid sleep"
+msgstr "Hibrit bekletme"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:130
+msgid "Suspend-to-idle (s2idle)"
+msgstr "Suspend-to-idle (s2idle)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:131
+msgid "Suspend-to-RAM (S3)"
+msgstr "Suspend-to-RAM (S3)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:132
+msgid "Shallow (S1)"
+msgstr "Shallow (S1)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:146
+msgid "Platform (the firmware powers off)"
+msgstr "Platform (firmware kapatma)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:147
+msgid "Shutdown (the kernel powers off)"
+msgstr "Kapatma (çekirdek kapatma)"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:211
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:223
+msgid "Default"
+msgstr "Varsayılan"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:213
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:225
+#, python-format
+msgid "Default — %s"
+msgstr "Varsayılan — %s"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:288
+msgid "The kernel does not support suspend."
+msgstr "Çekirdek askıya almayı desteklemiyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:292
+msgid "The kernel supports suspend."
+msgstr "Çekirdek askıya almayı destekliyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:293
+#, python-format
+msgid "The kernel supports suspend. Method in use: %s."
+msgstr "Çekirdek askıya almayı destekliyor. Kullanılan yöntem: %s."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:297
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:298
+msgid "Kernel support"
+msgstr "Çekirdek desteği"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:297
+msgid "The kernel supports hibernation."
+msgstr "Çekirdek uykuya almayı destekliyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:298
+msgid "The kernel does not support hibernation."
+msgstr "Çekirdek uykuya almayı desteklemiyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:313
+msgid "Secure Boot"
+msgstr "Secure Boot"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:315
+msgid "Secure Boot is enabled and the kernel lockdown prevents hibernation."
+msgstr ""
+"Secure Boot etkin ve çekirdek kilitlemesi uykuya alma kipini engelliyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:317
+msgid "Secure Boot is enabled but the kernel lockdown is not active."
+msgstr "Secure Boot etkin ama çekirdek kilitlemesi etkin değil."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:318
+msgid "Secure Boot is disabled."
+msgstr "Secure Boot ikapalı."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:323
+msgid "Swap"
+msgstr "Takas"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:323
+msgid "No swap partition or swap file is in use."
+msgstr "Kullanımda takas bölümü ya da takas dosyası yok."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:332
+#, python-format
+msgid "Swap area in %s"
+msgstr "%s üstündeki takas alanı"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:340
+#, python-format
+msgid "The swap area (%(swap)s) is smaller than the memory (%(ram)s)."
+msgstr "(%(swap)s) takas alanı bellekten (%(ram)s) daha küçük."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:343
+#, python-format
+msgid ""
+"The swap area (%(swap)s) is at least as large as the memory (%(ram)s)."
+msgstr ""
+"(%(swap)s) takas alanı, en az bellek (%(ram)s) boyutunda veya daha büyük."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:347
+msgid "Resume device"
+msgstr "Devam etme aygıtı"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:350
+#, python-format
+msgid "The resume device will be set to %s upon reboot."
+msgstr ""
+"Yeniden başlatma işlemi ile %s devam ettirme aygıtı olarak ayarlanacak."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:354
+#, python-format
+msgid ""
+"The boot arguments (%s) do not match any swap partition or swap file in use."
+msgstr ""
+"(%s) açılış değişkenleri, kullanımdaki herhangi bir takas bölümü veya takas "
+"dosyasıyla eşleşmiyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:358
+msgid "The noresume kernel argument is set, which prevents hibernation."
+msgstr ""
+"noresume çekirdek değişkeni ayarlı, bu hazırda bekletme kipini engeller."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:362
+msgid "No resume device is set."
+msgstr "Devam etme aygıtı ayarlı değil."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:379
+#, python-format
+msgid ""
+"The resume offset (%(current)d) does not match the start of %(path)s "
+"(%(expected)d)."
+msgstr ""
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:381
+#, python-format
+msgid ""
+"The resume device (%(major)d:%(minor)d) does not match any swap partition or "
+"swap file in use."
+msgstr ""
+"(%(major)d:%(minor)d) devam etme aygıtı, kullanımdaki herhangi bir takas "
+"bölümü veya takas dosyasıyla eşleşmiyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:385
+#, python-format
+msgid ""
+"The resume device is set to the swap file %(path)s (offset %(offset)d)."
+msgstr ""
+"Devam etme aygıtı, takas dosyası %(path)s (offset %(offset)d) olarak "
+"ayarlanmıştır."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:387
+#, python-format
+msgid "The resume device is set to %s."
+msgstr "Devam etme aygıtı %s olarak ayarlandı."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:396
+msgid "No problems detected"
+msgstr "Sorun tespit edilmedi"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:396
+msgid "This computer looks ready for the sleep modes above."
+msgstr "Bu bilgisayar yukarıdaki uyku kiplerine hazır görünüyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:409
+msgid "Set as resume device"
+msgstr "Devam etme aygıtı olarak ayarla"
+
+#: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:434
+msgid "The system could not be asked which sleep modes are available."
+msgstr "Sisteme, hangi uyku kiplerinin kullanılabilir olduğu sorulamadı."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:54
+msgid ""
+"A password is needed to encrypt the home directory. Make sure to communicate "
+"it to the user."
+msgstr ""
+"Ev dizinini şifrelemek için bir parola gereklidir. Bu parolayı kullanıcıya "
+"mutlaka iletin."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+msgid "Full Name"
+msgstr "Tam Ad"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/share/mintsysadm/mintsysadm.ui.h:4
+#: usr/share/mintsysadm/settings_user.ui.h:1
+msgid "Username"
+msgstr "Kullanıcı Adı"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/lib/linuxmint/mintsysadm/page_users.py:559
+#: usr/share/mintsysadm/mintsysadm.ui.h:3
+msgid "Administrator"
+msgstr "Yönetici"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/share/mintsysadm/mintsysadm.ui.h:7
+msgid "Encrypted Home Directory"
+msgstr "Şifreli Ev Dizini"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:61
+#: usr/share/mintsysadm/mintsysadm.ui.h:5
+#: usr/share/mintsysadm/settings_user.ui.h:2
+msgid "Password"
+msgstr "Parola"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:90
+#: usr/lib/linuxmint/mintsysadm/page_users.py:199
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:204
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:582
+msgid "Cancel"
+msgstr "İptal"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:90
+msgid "Add"
+msgstr "Ekle"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:112
+msgid ""
+"Invalid username. Only lowercase letters, numbers, hyphens and underscores "
+"are allowed."
+msgstr ""
+"Geçersiz kullanıcı adı. Sadece küçük harfler, sayılar, tire ve alt çizgiye "
+"izin veriliyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:116
+msgid "This username is already taken."
+msgstr "Bu kullanıcı adı zaten kullanılıyor."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:126
+#: usr/lib/linuxmint/mintsysadm/page_users.py:171
+#: usr/lib/linuxmint/mintsysadm/page_users.py:177
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:554
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:560
+msgid "The password must be at least 8 characters long."
+msgstr "Parola en az 8 karakter uzunlukta olmalı."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:157
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:533
+msgid "Change Password"
+msgstr "Parola Değiştir"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:160
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:536
+msgid "New password"
+msgstr "Yeni parola"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:160
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:536
+msgid "Confirm password"
+msgstr "Parolayı onayla"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:165
+#: usr/lib/linuxmint/mintsysadm/page_users.py:246
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:548
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:660
+msgid "Show password"
+msgstr "Parolayı göster"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:194
+msgid "An error occurred. The password was not changed."
+msgstr "Bir hata oluştu. Parola değiştirilmedi."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:200
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:583
+msgid "Generate a password"
+msgstr "Bir parola üret"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:201
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:584
+msgid "Change"
+msgstr "Değiştir"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:243
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:657
+msgid "Hide password"
+msgstr "Parolayı gizle"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:257
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:681
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:682
+msgid "Passwords do not match"
+msgstr "Parolalar eşleşmedi"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:321
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:105
+msgid "Browse for more pictures..."
+msgstr "Daha fazla resim için gözatın..."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:349
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:110
+msgid "Remove picture"
+msgstr "Resmi kaldır"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:472
+msgid "Never"
+msgstr "Asla"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:483
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:184
+msgid "No password set"
+msgstr "Parola belirlenmedi"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:485
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:186
+msgid "Set at login"
+msgstr "Başlangıçta ayarla"
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:499
+msgid "This user is currently logged in."
+msgstr "Bu kullanıcının oturumu şu an açık."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:506
+msgid ""
+"The user's home directory is encrypted. To preserve access to the encrypted "
+"directory, only the user should change this password."
+msgstr ""
+"Kullanıcının ev dizini şifrelenmiş. Şifrelenmiş dizine erişimi korumak için, "
+"bu parolayı sadece bu kullanıcı değiştirmelidir."
+
+#: usr/lib/linuxmint/mintsysadm/page_users.py:521
+#, python-format
+msgid ""
+"Are you sure you want to permanently delete %s and all the files associated "
+"with this user?"
+msgstr ""
+"%s kullanıcısını ve bu kullanıcıya ait  tüm dosyaları kalıcı olarak silmek "
+"istediğinize emin misiniz?"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:67
+#: usr/share/mintsysadm/settings_user.ui.h:3
+msgid "Account Details"
+msgstr "Hesap Ayrıntıları"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:100
+msgid "Take a photo..."
+msgstr "Resim çek..."
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:202
+msgid "Take a Picture"
+msgstr "Resim Çek"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:205
+msgid "Capture"
+msgstr "Yakala"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:228
+msgid "Accessing the webcam..."
+msgstr "Kameraya erişiliyor..."
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:249
+msgid "Mirror Picture"
+msgstr "Resmi Yansıt"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:256
+msgid "Zoom:"
+msgstr "Yakınlaştır:"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:329
+msgid "The webcam couldn't be accessed."
+msgstr "Kameraya erişilemedi."
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:536
+msgid "Current password"
+msgstr "Mevcut parola"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:628
+msgid "Wrong password"
+msgstr "Hatalı parola"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:632
+msgid "Internal Error"
+msgstr "İçsel Hata"
+
+#: usr/lib/linuxmint/mintsysadm/settings_user.py:648
+msgid "An error occurred. Your password was not changed."
+msgstr "Bir hata oluştu. Parolanız değiştirilmedi."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:2
+msgid "Add a new user..."
+msgstr "Yeni kullanıcı ekle..."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:6
+msgid "Last Login"
+msgstr "Son Giriş"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:8
+msgid "Remove this user..."
+msgstr "Bu kullanıcıyı sil..."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:9
 msgid "Boot menu"
 msgstr "Açılış menüsü"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:2
+#: usr/share/mintsysadm/mintsysadm.ui.h:10
 msgid "Show the menu"
 msgstr "Menüyü göster"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:3
+#: usr/share/mintsysadm/mintsysadm.ui.h:11
 msgid ""
 "The menu will always be shown if multiple operating systems are installed."
 msgstr "Birden fazla işletim sistemi kuruluysa menü her zaman gösterilir."
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:4
+#: usr/share/mintsysadm/mintsysadm.ui.h:12
 msgid "Delay before booting the default selection (seconds)"
 msgstr "Varsayılan seçimi başlatmadan önceki gecikme (saniye)"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:5
+#: usr/share/mintsysadm/mintsysadm.ui.h:13
 msgid "Set the delay to -1 if you want the menu to show indefinitely."
 msgstr ""
 "Menünün süresiz olarak gösterilmesini istiyorsanız gecikmeyi -1 olarak "
 "ayarlayın."
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:6
-msgid "-1"
-msgstr "-1"
+#: usr/share/mintsysadm/mintsysadm.ui.h:14
+msgid "0"
+msgstr "0"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:7
+#: usr/share/mintsysadm/mintsysadm.ui.h:15
 msgid "Remember the last selected choice as the default"
 msgstr "Son seçilen seçeneği varsayılan olarak hatırla"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:8
+#: usr/share/mintsysadm/mintsysadm.ui.h:16
 msgid "Boot parameters"
 msgstr "Açılış değişkenleri"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:9
+#: usr/share/mintsysadm/mintsysadm.ui.h:17
 msgid "The computer booted with the following parameters:"
 msgstr "Bilgisayar aşağıdaki değişkenlerle açıldı:"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:10
+#: usr/share/mintsysadm/mintsysadm.ui.h:18
 msgid ""
 "In addition to the system configuration you can set your own parameters in "
 "the list below"
@@ -117,28 +896,163 @@ msgstr ""
 "Sistem yapılandırmasına ek olarak, aşağıdaki listede kendi değişkenlerinizi "
 "ayarlayabilirsiniz"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:11
+#: usr/share/mintsysadm/mintsysadm.ui.h:19
 msgid "Press Save and reboot the computer for changes to take effect."
 msgstr ""
 "Değişikliklerin etkili olması için Kaydet düğmesine basın ve yeniden "
 "başlatın."
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:12
+#: usr/share/mintsysadm/mintsysadm.ui.h:20
 msgid "Save"
 msgstr "Kaydet"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:13
+#: usr/share/mintsysadm/mintsysadm.ui.h:21
 msgid "Boot Menu"
 msgstr "Açılış Menüsü"
 
-#: usr/share/mintsysadm/mintsysadm.ui.h:15
+#: usr/share/mintsysadm/mintsysadm.ui.h:23
+msgid "Kernel series"
+msgstr "Çekirdek serisi"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:24
+msgid ""
+"No kernel series are tracked. This computer may not receive kernel security "
+"updates.\n"
+msgstr ""
+"Hiçbir çekirdek serisi takip edilmiyor. Bu bilgisayar çekirdek güvenlik "
+"güncellemelerini almayabilir.\n"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:26
+msgid "View all kernels"
+msgstr "Tüm çekirdekleri göster"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:27
+msgid "Automatic cleanup"
+msgstr "Otomatik temizlik"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:28
+msgid "Cleanup runs weekly."
+msgstr "Temizlik haftalık çalıştırılır."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:29
+msgid "Remove older kernels automatically"
+msgstr "Eski çekirdekleri otomatik kaldırır"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:30
+msgid "Number of installed kernels to keep in each tracked series"
+msgstr "Takip edilen her seride korunacak kurulu çekirdek sayısı."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:31
+msgid "The active kernel and tracked metapackages are always protected."
+msgstr "Etkin çekirdek ve izlenen meta paketler her zaman korunmaktadır."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:32
+msgid "History"
+msgstr "Geçmiş"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:33
+msgid "Clean up now"
+msgstr "Şimdi temizle"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:34
+msgid "Kernels"
+msgstr "Çekirdekler"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:35
+msgid "Environment variables"
+msgstr "Ortam değişkenleri"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:36
+msgid "Set system-wide environment variables using the NAME=VALUE format."
+msgstr ""
+"Sistem genelindeki ortam değişkenlerini AD=DEĞER (NAME=VALUE) biçimini "
+"kullanarak ayarlayın."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:37
+msgid "Log out and log back in for changes to take effect."
+msgstr ""
+"Değişikliklerin etkli olması için oturumu kapatıp tekrar oturum açınız."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:38
+msgid "Environment Variables"
+msgstr "Ortam Değişkenleri"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:39
+msgid "Allowed sleep modes"
+msgstr "İzin verilen uyku kipleri"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:40
+msgid "Choose the sleep modes you want to allow."
+msgstr "İzin vermek istediğiniz uyku kiplerini seçin."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:42
+msgid ""
+"Keeps the session in memory (RAM). The computer is still running but uses "
+"only a bit of power."
+msgstr ""
+"Oturumu bellekte (RAM) tutar. Bilgisayar çalışmaya devam eder, ama sadece az "
+"miktarda güç kullanır."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:44
+msgid "Saves the session to disk (Swap). Shuts down the computer."
+msgstr "Oturumu diske kaydeder (Takas). Bilgisayarı kapatır."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:46
+msgid ""
+"Suspends for a while (systemd decides how long, based on battery power), "
+"then hibernates."
+msgstr ""
+"Bir süreliğine askıya alınır (systemd, pil gücüne bağlı olarak süreye karar "
+"verir), ardından derin uyku kipine geçilir."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:48
+msgid "Suspends but also saves the session to disk (Swap)."
+msgstr ""
+"Oturumu askıya alır, ama aynı zamanda diske (takas alanına) kaydeder."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:49
+msgid "Suspend method"
+msgstr "Askıya alma yöntemi"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:50
+msgid ""
+"This is the method used to suspend the computer. Only the methods offered by "
+"your BIOS/firmware can be chosen."
+msgstr ""
+"Bu, bilgisayarı askıya almak için kullanılan yöntemdir. Sadece BIOS/firmware "
+"tarafından sunulan yöntemler seçilebilir."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:51
+msgid "Hibernation method"
+msgstr "Uykuya alma yöntemi"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:52
+msgid "This is method used to power off the computer during hibernation."
+msgstr ""
+"Bu, bilgisayarı uyku kipine alırken kapatmak için kullanılan yöntemdir."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:53
+msgid "Current state"
+msgstr "Mevcut durum"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:54
+msgid "Fix any detected issues to make allowed sleep modes available."
+msgstr ""
+"İzin verilen uyku kiplerinin kullanılabilmesi için tespit edilen sorunları "
+"düzeltin."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:55
+msgid "Available sleep modes"
+msgstr "Kullanımdaki uyku kipleri"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:56
+msgid "These sleep modes should work right now."
+msgstr "Bu uyku kipleri şu anda çalışıyor olmalı."
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:57
+msgid "Sleep Modes"
+msgstr "Uyku Kipleri"
+
+#: usr/share/mintsysadm/mintsysadm.ui.h:59
 msgid "Updating the boot menu"
 msgstr "Açılış menüsü güncelleniyor"
-
-#: usr/share/mintsysadm/mintsysadm.ui.h:16
-msgid "Close"
-msgstr "Kapat"
-
-#: usr/share/mintsysadm/mintsysadm.ui.h:17
-msgid "Result:"
-msgstr "Sonuç:"
