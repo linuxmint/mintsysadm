@@ -31,9 +31,20 @@ class FakeVersion:
 
 class FakePackage:
 
-    def __init__(self, version, source_name, is_installed=False):
+    def __init__(
+        self,
+        version,
+        source_name,
+        is_installed=False,
+        installed_version=None,
+    ):
         self.candidate = FakeVersion(version, source_name)
         self.is_installed = is_installed
+        self.installed = None
+        if is_installed:
+            if installed_version is None:
+                installed_version = version
+            self.installed = FakeVersion(installed_version, source_name)
 
 
 class FakeCache(dict):
@@ -204,6 +215,38 @@ class InstalledSeriesTests(unittest.TestCase):
                     track="ga",
                     meta_packages={"linux-headers-amd64", "linux-image-amd64"},
                 )
+            ],
+        )
+
+    @patch("common.kernels.get_ubuntu_base_release", return_value="24.04")
+    @patch("common.kernels.IS_LMDE", False)
+    @patch("common.kernels.apt.Cache")
+    def test_installed_meta_with_pending_upgrade_keeps_its_series(
+        self,
+        cache,
+        _get_ubuntu_release,
+    ):
+        cache.return_value = FakeCache(
+            {
+                "linux-generic-hwe-24.04": FakePackage(
+                    "7.0.0-42.42~24.04.1",
+                    "linux-meta-hwe-7.0",
+                    True,
+                    "6.14.0-37.37~24.04.1",
+                ),
+            }
+        )
+        self.assertEqual(
+            get_available_series(),
+            [
+                Series(
+                    name="6.14",
+                    version="6.14",
+                    flavor="generic",
+                    track="hwe",
+                    tracked=True,
+                    meta_packages={"linux-generic-hwe-24.04"},
+                ),
             ],
         )
 
