@@ -153,7 +153,7 @@ class MintSysadmWindow():
 
         # Hide users page in desktop environments that have their own user management
         desktop_env = os.environ.get('XDG_CURRENT_DESKTOP', '').lower()
-        if desktop_env not in ['gnome', 'kde', 'xfce', 'mate']:
+        if desktop_env not in ['gnome', 'kde']:
             # Fill in the users page
             self.users_widget = UsersWidget(self.window)
             self.builder.get_object("page_users").add(self.users_widget)

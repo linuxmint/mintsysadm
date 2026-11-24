@@ -30,7 +30,7 @@ Icon=preferences-desktop-user
 Terminal=false
 Type=Application
 Categories=Settings;
-NotShowIn=GNOME;KDE;XFCE;MATE;
+NotShowIn=GNOME;KDE;
 StartupWMClass=mintsysadm-settings-user
 """
 additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm-settings-user.desktop", prefix, _("Account details"), _("User account and password"), suffix, keywords=_("user;account;password;avatar")) # type: ignore
@@ -42,7 +42,7 @@ X-MultipleArgs=false
 Type=Application
 Categories=GNOME;GTK;System;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 X-GNOME-Settings-Panel=system-administration
-NotShowIn=GNOME;KDE;XFCE;MATE;
+NotShowIn=GNOME;KDE;
 """
 additionalfiles.generate(DOMAIN, PATH, "usr/share/applications/mintsysadm-users.desktop", prefix, _("Users"), _("Add or remove users"), suffix, keywords=_("users;accounts")) # type: ignore
 
