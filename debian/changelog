@@ -1,3 +1,9 @@
+mintsysadm (1.1.1) adrien; urgency=medium
+
+  * Enable user management in MATE and Xfce
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 24 Nov 2026 10:50:01 +0000
+
 mintsysadm (1.1.0) adrien; urgency=medium
 
   [ Michael Webster ]
