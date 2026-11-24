@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2026-10-26 13:35+0000\n"
-"PO-Revision-Date: 2026-11-13 21:39+0000\n"
-"Last-Translator: cabbar hayıroğlu <Unknown>\n"
+"PO-Revision-Date: 2026-11-22 20:13+0000\n"
+"Last-Translator: Butterfly <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-11-16 12:02+0000\n"
-"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
+"X-Launchpad-Export-Date: 2026-11-24 12:02+0000\n"
+"X-Generator: Launchpad (build 012091084314157d19ae714f55ef4c582ff0feb5)\n"
 
 #: generate_desktop_files:26 generate_desktop_files:74
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:99
@@ -250,8 +250,8 @@ msgid ""
 "The following packages will be removed. The active kernel and tracked "
 "metapackages are protected."
 msgstr ""
-"Aşağıdaki paketler silinecektir. Aktif çekirdek ve takip edilen meta "
-"paketler korunacaktır."
+"Aşağıdaki paketler silinecektir. Aktif çekirdek ve izlenen meta paketler "
+"korunacaktır."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:700
 msgid "Packages to keep"
@@ -434,8 +434,8 @@ msgid ""
 "to ensure that an appropriate metapackage is installed or that kernel "
 "updates are handled another way."
 msgstr ""
-"Bu seri elle takip ediliyor olarak değerlendirilecektir. Uygun bir meta "
-"paketin yüklendiğinden veya çekirdek güncellemelerinin başka bir şekilde ele "
+"Bu seri elle izleniyor olarak değerlendirilecektir. Uygun bir meta paketin "
+"yüklendiğinden veya çekirdek güncellemelerinin başka bir şekilde ele "
 "alındığından emin olmak sizin sorumluluğunuzdadır."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:104
@@ -591,6 +591,8 @@ msgid ""
 "The resume offset (%(current)d) does not match the start of %(path)s "
 "(%(expected)d)."
 msgstr ""
+"(%(current)d) devam ettirme ofseti, %(path)s (%(expected)d) başlangıcıyla "
+"eşleşmiyor."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:381
 #, python-format
@@ -919,7 +921,7 @@ msgid ""
 "No kernel series are tracked. This computer may not receive kernel security "
 "updates.\n"
 msgstr ""
-"Hiçbir çekirdek serisi takip edilmiyor. Bu bilgisayar çekirdek güvenlik "
+"Hiçbir çekirdek serisi izlenmiyor. Bu bilgisayar çekirdek güvenlik "
 "güncellemelerini almayabilir.\n"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:26
@@ -936,11 +938,11 @@ msgstr "Temizlik haftalık çalıştırılır."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:29
 msgid "Remove older kernels automatically"
-msgstr "Eski çekirdekleri otomatik kaldırır"
+msgstr "Eski çekirdekleri otomatik kaldır"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:30
 msgid "Number of installed kernels to keep in each tracked series"
-msgstr "Takip edilen her seride korunacak kurulu çekirdek sayısı."
+msgstr "İzlenen her seride, korunacak kurulu çekirdek sayısı."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:31
 msgid "The active kernel and tracked metapackages are always protected."

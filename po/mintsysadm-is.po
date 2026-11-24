@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the linuxmint package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
-# SPDX-FileCopyrightText: 2025 Sveinn í Felli <sv1@fellsnet.is>
+# SPDX-FileCopyrightText: 2025, 2026 Sveinn í Felli <sv1@fellsnet.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2026-10-26 13:35+0000\n"
-"PO-Revision-Date: 2025-12-10 14:57+0000\n"
+"PO-Revision-Date: 2026-11-23 10:51+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-11-16 12:02+0000\n"
-"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
+"X-Launchpad-Export-Date: 2026-11-24 12:02+0000\n"
+"X-Generator: Launchpad (build 012091084314157d19ae714f55ef4c582ff0feb5)\n"
 "Language: is\n"
 
 #: generate_desktop_files:26 generate_desktop_files:74
@@ -35,30 +35,32 @@ msgid ""
 "system;administration;boot;grub;kernel;environment;variables;sleep;suspend;hi"
 "bernate;hybrid;swap;resume"
 msgstr ""
+"Kerfi;stjórnun;ræsing;grub;kjarni;umhverfi;breytur;svæfing;bið;dvali;hybrid;s"
+"wap;diskminni;resume;vakning"
 
 #: generate_desktop_files:36
 msgid "Account details"
-msgstr ""
+msgstr "Nánar um notanda"
 
 #: generate_desktop_files:36
 msgid "User account and password"
-msgstr ""
+msgstr "Notandaaðgangur og lykilorð"
 
 #: generate_desktop_files:36
 msgid "user;account;password;avatar"
-msgstr ""
+msgstr "notandi;aðgangar;lykilorð;auðkennismynd"
 
 #: generate_desktop_files:47 usr/share/mintsysadm/mintsysadm.ui.h:1
 msgid "Users"
-msgstr ""
+msgstr "Notendur"
 
 #: generate_desktop_files:47
 msgid "Add or remove users"
-msgstr ""
+msgstr "Bæta við eða fjarlægja notendur"
 
 #: generate_desktop_files:47
 msgid "users;accounts"
-msgstr ""
+msgstr "notendur;aðgangar"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:123
 msgid "Add a boot argument"
@@ -70,11 +72,11 @@ msgstr "Ef viðfangið er ekki þekkt af kjarnanum, verður það hunsað."
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:138
 msgid "Add an environment variable"
-msgstr ""
+msgstr "Bæta við umhverfisbreytu"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:138
 msgid "Enter the variable in NAME=VALUE format."
-msgstr ""
+msgstr "Settu inn breytuna á sniðinu NAFN=GILDI."
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:167
 msgid "Quit"
@@ -115,11 +117,11 @@ msgstr "Ræsiviðföng mega ekki innihalda stafabil."
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:353
 msgid "Environment variables must use the NAME=VALUE format."
-msgstr ""
+msgstr "Umhverfisbreytur verða að vera á sniðinu NAFN=GILDI."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:247
 msgid "All kernels"
-msgstr ""
+msgstr "Allir kjarnar"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:253
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:760
@@ -132,100 +134,100 @@ msgstr "Loka"
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:437
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:498
 msgid "Protect"
-msgstr ""
+msgstr "Vernda"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:259
 msgid "Protected kernels are never removed during cleanup."
-msgstr ""
+msgstr "Verndaðir kjarnar eru aldrei fjarlægðir við tiltekt."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:262
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:434
 msgid "Install"
-msgstr ""
+msgstr "Setja upp"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:270
 msgid "Series"
-msgstr ""
+msgstr "Útgáfuraðir"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:272
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:284
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:298
 msgid "All"
-msgstr ""
+msgstr "Allt"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:282
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:374
 msgid "Flavor"
-msgstr ""
+msgstr "Afbrigði"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:296
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:375
 msgid "Status"
-msgstr ""
+msgstr "Staða"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:299
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:317
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:486
 msgid "Active"
-msgstr ""
+msgstr "Virkur"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:300
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:315
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:484
 msgid "Active, protected"
-msgstr ""
+msgstr "Virkur, verndaður"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:301
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:323
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:492
 msgid "Installed"
-msgstr ""
+msgstr "Uppsettur"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:304
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:321
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:490
 msgid "Installed, protected"
-msgstr ""
+msgstr "Uppsettur, verndaður"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:306
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:326
 msgid "Available"
-msgstr ""
+msgstr "Tiltækur"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:373
 msgid "Version"
-msgstr ""
+msgstr "Útgáfa"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:384
 msgid "Links"
-msgstr ""
+msgstr "Tenglar"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:386
 msgid "Bug reports"
-msgstr ""
+msgstr "Villutilkynningar"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:392
 msgid "Changelog"
-msgstr ""
+msgstr "Breytingaskrá"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:434
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:622
 msgid "Remove"
-msgstr ""
+msgstr "Fjarlægja"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:437
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:496
 msgid "Unprotect"
-msgstr ""
+msgstr "Afvernda"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:606
 msgid "This kernel cannot be removed."
-msgstr ""
+msgstr "Ekki er hægt að fjarlægja þennan kjarna."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:616
 #, python-format
 msgid "Remove kernel %s?"
-msgstr ""
+msgstr "Fjarlægja %s kjarnann?"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:619
 #, python-format
@@ -233,43 +235,49 @@ msgid ""
 "The following packages will be removed:\n"
 "%s"
 msgstr ""
+"Eftirfarandi pakkar verða fjarlægðir:\n"
+"%s"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:646
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:665
 msgid "There are no older kernels to remove."
-msgstr ""
+msgstr "Það eru engir eldri kjarnar til að fjarlægja."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:682
 msgid "Remove older kernels?"
-msgstr ""
+msgstr "Fjarlægja eldri kjarna?"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:687
 msgid ""
 "The following packages will be removed. The active kernel and tracked "
 "metapackages are protected."
 msgstr ""
+"Eftirfarandi pakkar verða fjarlægðir. Virkur kjarni og lýsipakkar sem fylgst "
+"er með eru verndaðir."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:700
 msgid "Packages to keep"
-msgstr ""
+msgstr "Pakkar sem skal halda"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:705
 msgid "Packages to remove"
-msgstr ""
+msgstr "Pakkar sem skal fjarlægja"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:709
 msgid "Clean up"
-msgstr ""
+msgstr "Hreinsa til"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:720
 msgid "Cleaning up kernels"
-msgstr ""
+msgstr "Hreinsa kjarna"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:744
 msgid ""
 "Starting kernel cleanup...\n"
 "\n"
 msgstr ""
+"Hef tiltekt kjarna...\n"
+"\n"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:753
 #: usr/share/mintsysadm/mintsysadm.ui.h:61
@@ -279,144 +287,149 @@ msgstr "Niðurstaða:"
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:866
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:872
 msgid "Kernel cleanup history"
-msgstr ""
+msgstr "Ferill tiltekta á kjörnum"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:867
 msgid "No cleanup has run yet."
-msgstr ""
+msgstr "Engin tiltekt hefur enn verið keyrð."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:943
 #, python-format
 msgid "%d packages removed"
-msgstr ""
+msgstr "%d pakkar fjarlægðir"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:945
 #, python-format
 msgid ", %d skipped"
-msgstr ""
+msgstr ", %d sleppt"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:973
 #: usr/share/mintsysadm/mintsysadm.ui.h:22
 msgid "Active kernel:"
-msgstr ""
+msgstr "Virkur kjarni:"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:974
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:986
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1045
 msgid "Unknown"
-msgstr ""
+msgstr "Óþekkt"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:979
 msgid "Tracked series:"
-msgstr ""
+msgstr "Útgáfuraðir sem fylgt er:"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:985
 msgid "Versions kept per tracked series:"
-msgstr ""
+msgstr "Fjöldi útgáfa sem haldið er af fylgdri útgáfuröð:"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1007
 msgid "Kernel version"
-msgstr ""
+msgstr "Útgáfa kjarna"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1014
 msgid "Package name"
-msgstr ""
+msgstr "Heiti pakka"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1048
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:436
 msgid "None"
-msgstr ""
+msgstr "Ekkert"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1059
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1141
 msgid "LTS"
-msgstr ""
+msgstr "LTS"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1063
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1145
 msgid "Edge"
-msgstr ""
+msgstr "Nýrunnið - Edge"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1065
 msgid "(manually tracked)"
-msgstr ""
+msgstr "(fylgt handvirkt)"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1075
 msgid "Unknown date"
-msgstr ""
+msgstr "Óþekkt dagsetning"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1158
 msgid "Long Term Support"
-msgstr ""
+msgstr "Langtímastuðningur LTS"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1159
 msgid "This is the most stable series. Recommended for most users."
 msgstr ""
+"Þetta er stöðasta útgáfuröðin. Mælt er með þessu fyrir flesta notendur."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1162
 msgid "Hardware Enablement"
-msgstr ""
+msgstr "Virkjun vélbúnaðar"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1163
 msgid "This series is recommended for newer hardware."
-msgstr ""
+msgstr "Mælt er með þessari útgáfuröð fyrir nýrri vélbúnað."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1165
 msgid ""
 "This series sometimes provides newer kernels than the HWE series but without "
 "support for proprietary drivers."
 msgstr ""
+"Þessi útgáfuröð býður stundum nýrri kjarna en HWE-útgáfuröðin en þá án "
+"stuðnings við séreignarekla."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1167
 msgid "This series is not officially supported."
-msgstr ""
+msgstr "Þessi útgáfuröð er ekki með opinberan stuðning."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1177
 msgid "Manually tracked"
-msgstr ""
+msgstr "Fylgt handvirkt"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1179
 msgid "Tracked"
-msgstr ""
+msgstr "Fylgt"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1205
 #, python-format
 msgid "Installed kernels: %d"
-msgstr ""
+msgstr "Uppsettir kjarnar: %d"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1219
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1280
 msgid "Untrack"
-msgstr ""
+msgstr "Hætta að fylgja"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1223
 msgid "Track"
-msgstr ""
+msgstr "Fylgja"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1234
 msgid "Mark as untracked"
-msgstr ""
+msgstr "Merkja sem ekki fylgt"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1241
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1305
 msgid "Mark as tracked"
-msgstr ""
+msgstr "Merkja sem fylgt"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1272
 #, python-format
 msgid "Stop tracking the %s series?"
-msgstr ""
+msgstr "Hætta að fylgja %s útgáfuröðinni?"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1276
 msgid ""
 "Without tracking, this computer will no longer receive security updates for "
 "this kernel series."
 msgstr ""
+"Án eftirfylgni mun þessi tölva ekki lengur fá öryggisuppfærslur fyrir þessa "
+"útgáfuröð kjarna."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1296
 #, python-format
 msgid "Mark the %s series as tracked?"
-msgstr ""
+msgstr "Merkja %s útgáfuröðina til að fylgja?"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1300
 msgid ""
@@ -424,147 +437,157 @@ msgid ""
 "to ensure that an appropriate metapackage is installed or that kernel "
 "updates are handled another way."
 msgstr ""
+"Litið verður á að þessari útgáfuröð sé fylgt handvirkt. Það er á þína ábyrgð "
+"að tryggja að viðeigandi lýsigagnapakki sé uppsettur eða að uppfærslur á "
+"kjarna fari fram á annan hátt."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:104
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:285
 #: usr/share/mintsysadm/mintsysadm.ui.h:41
 msgid "Suspend"
-msgstr ""
+msgstr "Setja í bið"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:105
 #: usr/share/mintsysadm/mintsysadm.ui.h:43
 msgid "Hibernate"
-msgstr ""
+msgstr "Leggja í dvala"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:106
 #: usr/share/mintsysadm/mintsysadm.ui.h:45
 msgid "Suspend then hibernate"
-msgstr ""
+msgstr "Í bið, svo í dvala"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:107
 #: usr/share/mintsysadm/mintsysadm.ui.h:47
 msgid "Hybrid sleep"
-msgstr ""
+msgstr "Blönduð svæfing (hybrid)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:130
 msgid "Suspend-to-idle (s2idle)"
-msgstr ""
+msgstr "Setja í bið-í-aðgerðaleysi (s2idle)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:131
 msgid "Suspend-to-RAM (S3)"
-msgstr ""
+msgstr "Setja í bið í minni (RAM - S3)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:132
 msgid "Shallow (S1)"
-msgstr ""
+msgstr "Grunnt (S1)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:146
 msgid "Platform (the firmware powers off)"
-msgstr ""
+msgstr "Vélbúnaðar (fastbúnaður slekkur)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:147
 msgid "Shutdown (the kernel powers off)"
-msgstr ""
+msgstr "Slökkva (kjarninn slekkur)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:211
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:223
 msgid "Default"
-msgstr ""
+msgstr "Sjálfgefið"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:213
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:225
 #, python-format
 msgid "Default — %s"
-msgstr ""
+msgstr "Sjálfgefið - %s"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:288
 msgid "The kernel does not support suspend."
-msgstr ""
+msgstr "Kjarninn styður ekki að sett sé í bið (suspend)."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:292
 msgid "The kernel supports suspend."
-msgstr ""
+msgstr "Kjarninn styður að sett sé í bið (suspend)."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:293
 #, python-format
 msgid "The kernel supports suspend. Method in use: %s."
-msgstr ""
+msgstr "Kjarninn styður að sett sé í bið (suspend). Aðferð í notkun: %s."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:297
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:298
 msgid "Kernel support"
-msgstr ""
+msgstr "Stuðningur kjarna"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:297
 msgid "The kernel supports hibernation."
-msgstr ""
+msgstr "Kjarninn styður lagningu í dvala."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:298
 msgid "The kernel does not support hibernation."
-msgstr ""
+msgstr "Kjarninn styður ekki lagningu í dvala."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:313
 msgid "Secure Boot"
-msgstr ""
+msgstr "Secure Boot"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:315
 msgid "Secure Boot is enabled and the kernel lockdown prevents hibernation."
 msgstr ""
+"Secure Boot ræsing er virkjuð og læsing kjarnans kemur í veg fyrir lagningu "
+"í dvala."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:317
 msgid "Secure Boot is enabled but the kernel lockdown is not active."
-msgstr ""
+msgstr "Secure Boot ræsing er virkjuð en læsing kjarnans kemur er ekki virk."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:318
 msgid "Secure Boot is disabled."
-msgstr ""
+msgstr "Secure Boot ræsing er óvirk."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:323
 msgid "Swap"
-msgstr ""
+msgstr "Diskminni (swap)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:323
 msgid "No swap partition or swap file is in use."
-msgstr ""
+msgstr "Ekkert diskminni (swap) eða diskminnisskrá er í notkun."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:332
 #, python-format
 msgid "Swap area in %s"
-msgstr ""
+msgstr "Diskminnissvæði í %s"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:340
 #, python-format
 msgid "The swap area (%(swap)s) is smaller than the memory (%(ram)s)."
-msgstr ""
+msgstr "Diskminnissvæðið (%(swap)s) er minna en vinnsluminnið (%(ram)s)."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:343
 #, python-format
 msgid ""
 "The swap area (%(swap)s) is at least as large as the memory (%(ram)s)."
 msgstr ""
+"Diskminnissvæðið (%(swap)s) er að minnsta kosti jafn stórt og vinnsluminnið "
+"(%(ram)s)."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:347
 msgid "Resume device"
-msgstr ""
+msgstr "Vakningartæki"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:350
 #, python-format
 msgid "The resume device will be set to %s upon reboot."
-msgstr ""
+msgstr "Vakningartækið mun verða stillt á %s eftir endurræsingu."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:354
 #, python-format
 msgid ""
 "The boot arguments (%s) do not match any swap partition or swap file in use."
 msgstr ""
+"Viðföng ræsingar (%s) samsvara ekki neinu diskminni eða diskminnisskrá í "
+"notkun."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:358
 msgid "The noresume kernel argument is set, which prevents hibernation."
 msgstr ""
+"noresume-viðfang kjarnans er stillt, sem kemur í veg fyrir lagningu í dvala."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:362
 msgid "No resume device is set."
-msgstr ""
+msgstr "Ekkert vakningartæki er stillt."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:379
 #, python-format
@@ -572,6 +595,8 @@ msgid ""
 "The resume offset (%(current)d) does not match the start of %(path)s "
 "(%(expected)d)."
 msgstr ""
+"Hliðrun vakningar (%(current)d) samsvarar ekki upphafinu á %(path)s "
+"(%(expected)d)."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:381
 #, python-format
@@ -579,87 +604,95 @@ msgid ""
 "The resume device (%(major)d:%(minor)d) does not match any swap partition or "
 "swap file in use."
 msgstr ""
+"Vakningartækið (%(major)d:%(minor)d) samsvarar ekki neinu diskminni (swap) "
+"eða diskminnisskrá í notkun."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:385
 #, python-format
 msgid ""
 "The resume device is set to the swap file %(path)s (offset %(offset)d)."
 msgstr ""
+"Vakningartækið er stillt á diskminnisskrána %(path)s (hliðrun %(offset)d)."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:387
 #, python-format
 msgid "The resume device is set to %s."
-msgstr ""
+msgstr "Vakningartækið er stillt á %s."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:396
 msgid "No problems detected"
-msgstr ""
+msgstr "Engin vandamál fundust"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:396
 msgid "This computer looks ready for the sleep modes above."
 msgstr ""
+"Þessi tölva lítur út fyrir að vera tilbúin fyrir svæfingarhamina hér að ofan."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:409
 msgid "Set as resume device"
-msgstr ""
+msgstr "Setja sem vakningartæki"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:434
 msgid "The system could not be asked which sleep modes are available."
-msgstr ""
+msgstr "Ekki tókst að spyrja kerfið um hvaða svæfingarhamir séu tiltækir."
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:54
 msgid ""
 "A password is needed to encrypt the home directory. Make sure to communicate "
 "it to the user."
 msgstr ""
+"Lykilorð er nauðsynlegt til að dulrita heimasvæðið. Gakktu úr skugga um að "
+"notandinn viti um það."
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:61
 msgid "Full Name"
-msgstr ""
+msgstr "Fullt nafn"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:61
 #: usr/share/mintsysadm/mintsysadm.ui.h:4
 #: usr/share/mintsysadm/settings_user.ui.h:1
 msgid "Username"
-msgstr ""
+msgstr "Notandanafn"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:61
 #: usr/lib/linuxmint/mintsysadm/page_users.py:559
 #: usr/share/mintsysadm/mintsysadm.ui.h:3
 msgid "Administrator"
-msgstr ""
+msgstr "Stjórnandi"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:61
 #: usr/share/mintsysadm/mintsysadm.ui.h:7
 msgid "Encrypted Home Directory"
-msgstr ""
+msgstr "Dulrituð heimamappa"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:61
 #: usr/share/mintsysadm/mintsysadm.ui.h:5
 #: usr/share/mintsysadm/settings_user.ui.h:2
 msgid "Password"
-msgstr ""
+msgstr "Lykilorð"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:90
 #: usr/lib/linuxmint/mintsysadm/page_users.py:199
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:204
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:582
 msgid "Cancel"
-msgstr ""
+msgstr "Hætta við"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:90
 msgid "Add"
-msgstr ""
+msgstr "Bæta við"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:112
 msgid ""
 "Invalid username. Only lowercase letters, numbers, hyphens and underscores "
 "are allowed."
 msgstr ""
+"Ógilt notandanafn. Aðeins lágstafir (a-z), tölustafir, bandstrik og "
+"undirstrik eru leyfð."
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:116
 msgid "This username is already taken."
-msgstr ""
+msgstr "Þetta notandanafn er þegar í notkun."
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:126
 #: usr/lib/linuxmint/mintsysadm/page_users.py:171
@@ -667,88 +700,90 @@ msgstr ""
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:554
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:560
 msgid "The password must be at least 8 characters long."
-msgstr ""
+msgstr "Lykilorðið verður að vera að minnsta kosti 8 stafa langt."
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:157
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:533
 msgid "Change Password"
-msgstr ""
+msgstr "Breyta lykilorði"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:160
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:536
 msgid "New password"
-msgstr ""
+msgstr "Nýtt lykilorð"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:160
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:536
 msgid "Confirm password"
-msgstr ""
+msgstr "Staðfesta lykilorð"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:165
 #: usr/lib/linuxmint/mintsysadm/page_users.py:246
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:548
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:660
 msgid "Show password"
-msgstr ""
+msgstr "Birta lykilorð"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:194
 msgid "An error occurred. The password was not changed."
-msgstr ""
+msgstr "Villa kom upp. Lykilorðið breyttist ekki."
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:200
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:583
 msgid "Generate a password"
-msgstr ""
+msgstr "Framleiða lykilorð"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:201
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:584
 msgid "Change"
-msgstr ""
+msgstr "Skipta um"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:243
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:657
 msgid "Hide password"
-msgstr ""
+msgstr "Fela lykilorð"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:257
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:681
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:682
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Lykilorðin stemma ekki"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:321
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:105
 msgid "Browse for more pictures..."
-msgstr ""
+msgstr "Finna fleiri myndir..."
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:349
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:110
 msgid "Remove picture"
-msgstr ""
+msgstr "Fjarlægja mynd"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:472
 msgid "Never"
-msgstr ""
+msgstr "Aldrei"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:483
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:184
 msgid "No password set"
-msgstr ""
+msgstr "Ekkert lykilorð sett"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:485
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:186
 msgid "Set at login"
-msgstr ""
+msgstr "Stillt við innskráningu"
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:499
 msgid "This user is currently logged in."
-msgstr ""
+msgstr "Þessi notandi er skráður inn núna."
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:506
 msgid ""
 "The user's home directory is encrypted. To preserve access to the encrypted "
 "directory, only the user should change this password."
 msgstr ""
+"Heimamappa notandans er dulrituð. Til að halda aðgangi að dulrituðu möppunni "
+"ætti einungis notandinn að breyta þessu lykilorði."
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:521
 #, python-format
@@ -756,67 +791,69 @@ msgid ""
 "Are you sure you want to permanently delete %s and all the files associated "
 "with this user?"
 msgstr ""
+"Ertu viss um að þú viljir eyða %s endanlega ásamt öllum þeim skrám sem "
+"tengjast þessum notanda?"
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:67
 #: usr/share/mintsysadm/settings_user.ui.h:3
 msgid "Account Details"
-msgstr ""
+msgstr "Nánar um notandaaðgang"
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:100
 msgid "Take a photo..."
-msgstr ""
+msgstr "Taka mynd..."
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:202
 msgid "Take a Picture"
-msgstr ""
+msgstr "Taka mynd"
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:205
 msgid "Capture"
-msgstr ""
+msgstr "Upptaka"
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:228
 msgid "Accessing the webcam..."
-msgstr ""
+msgstr "Fæ aðgang að vefmyndavélinni..."
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:249
 msgid "Mirror Picture"
-msgstr ""
+msgstr "Spegla mynd"
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:256
 msgid "Zoom:"
-msgstr ""
+msgstr "Aðdráttur:"
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:329
 msgid "The webcam couldn't be accessed."
-msgstr ""
+msgstr "Ekki var hægt að fá aðgang að vefmyndavél."
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:536
 msgid "Current password"
-msgstr ""
+msgstr "Núverandi lykilorð"
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:628
 msgid "Wrong password"
-msgstr ""
+msgstr "Rangt lykilorð"
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:632
 msgid "Internal Error"
-msgstr ""
+msgstr "Innri villa"
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:648
 msgid "An error occurred. Your password was not changed."
-msgstr ""
+msgstr "Villa kom upp. Lykilorðið þitt breyttist ekki."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:2
 msgid "Add a new user..."
-msgstr ""
+msgstr "Bæta við nýjum notanda..."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:6
 msgid "Last Login"
-msgstr ""
+msgstr "Síðasta innskráning"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:8
 msgid "Remove this user..."
-msgstr ""
+msgstr "Fjarlægja þennan notanda..."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:9
 msgid "Boot menu"
@@ -841,7 +878,7 @@ msgstr "Settu töfina á -1 ef þú vilt að valmyndin sé sýnd óendanlega len
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:14
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:15
 msgid "Remember the last selected choice as the default"
@@ -878,131 +915,140 @@ msgstr "Ræsivalmynd"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:23
 msgid "Kernel series"
-msgstr ""
+msgstr "Útgáfuraðir kjarna"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:24
 msgid ""
 "No kernel series are tracked. This computer may not receive kernel security "
 "updates.\n"
 msgstr ""
+"Ekki er fylgt neinni útgáfuröð kjarna. Þessi tölva gæti ekki lengur fengið "
+"öryggisuppfærslur fyrir kjarna.\n"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:26
 msgid "View all kernels"
-msgstr ""
+msgstr "Skoða alla kjarna"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:27
 msgid "Automatic cleanup"
-msgstr ""
+msgstr "Sjálfvirk tiltekt"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:28
 msgid "Cleanup runs weekly."
-msgstr ""
+msgstr "Tiltektin keyrir vikulega."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:29
 msgid "Remove older kernels automatically"
-msgstr ""
+msgstr "Fjarlægja eldri kjarna sjálfvirkt"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:30
 msgid "Number of installed kernels to keep in each tracked series"
-msgstr ""
+msgstr "Fjöldi uppsettra kjarna sem haldið er í hverri fylgdri útgáfuröð"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:31
 msgid "The active kernel and tracked metapackages are always protected."
-msgstr ""
+msgstr "Virkur kjarni og lýsipakkar sem fylgst er með eru alltaf verndaðir."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:32
 msgid "History"
-msgstr ""
+msgstr "Ferill"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:33
 msgid "Clean up now"
-msgstr ""
+msgstr "Hreinsa til núna"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:34
 msgid "Kernels"
-msgstr ""
+msgstr "Kjarnar"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:35
 msgid "Environment variables"
-msgstr ""
+msgstr "Umhverfisbreytur"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:36
 msgid "Set system-wide environment variables using the NAME=VALUE format."
-msgstr ""
+msgstr "Stilltu kerfislægar umhverfisbreytur á sniðinu NAFN=GILDI."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:37
 msgid "Log out and log back in for changes to take effect."
-msgstr ""
+msgstr "Skráðu þig út og svo inn aftur til að breytingarnar taki gildi."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:38
 msgid "Environment Variables"
-msgstr ""
+msgstr "Umhverfisbreytur"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:39
 msgid "Allowed sleep modes"
-msgstr ""
+msgstr "Leyfðir svæfingarhamir"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:40
 msgid "Choose the sleep modes you want to allow."
-msgstr ""
+msgstr "Veldu hvaða svæfingarhami þú vilt leyfa."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:42
 msgid ""
 "Keeps the session in memory (RAM). The computer is still running but uses "
 "only a bit of power."
 msgstr ""
+"Heldur setunni í vinnsluminni (RAM). Tölvan er ennþá í gangi en notar mjög "
+"lítið rafmagn."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:44
 msgid "Saves the session to disk (Swap). Shuts down the computer."
-msgstr ""
+msgstr "Vistar setuna á disk (diskminni). Slekkur á tölvunni."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:46
 msgid ""
 "Suspends for a while (systemd decides how long, based on battery power), "
 "then hibernates."
 msgstr ""
+"Setur tímabundið í bið (systemd ákvarðar hve lengi út frá hleðslu rafhlöðu), "
+"fer síðan í dvala."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:48
 msgid "Suspends but also saves the session to disk (Swap)."
-msgstr ""
+msgstr "Setur í bið en vistar líka setuna á disk (diskminni)."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:49
 msgid "Suspend method"
-msgstr ""
+msgstr "Aðferð við að setja í bið"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:50
 msgid ""
 "This is the method used to suspend the computer. Only the methods offered by "
 "your BIOS/firmware can be chosen."
 msgstr ""
+"Þetta er aðferð við að setja tölvuna í bið. Aðeins er hægt að velja um þær "
+"aðferðir sem BIOS/fastbúnaður tölvunnar býður."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:51
 msgid "Hibernation method"
-msgstr ""
+msgstr "Aðferð við að leggja í dvala"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:52
 msgid "This is method used to power off the computer during hibernation."
-msgstr ""
+msgstr "Þetta er aðferð við að slökkva á tölvunni á meðan lagt er í dvala."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:53
 msgid "Current state"
-msgstr ""
+msgstr "Núverandi staða"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:54
 msgid "Fix any detected issues to make allowed sleep modes available."
 msgstr ""
+"Lagfæra öll greind vandamál til að gera leyfða svæfingarhami tiltæka."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:55
 msgid "Available sleep modes"
-msgstr ""
+msgstr "Tiltækir svæfingarhamir"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:56
 msgid "These sleep modes should work right now."
-msgstr ""
+msgstr "Þessir svæfingarhamir ættu núna að virka."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:57
 msgid "Sleep Modes"
-msgstr ""
+msgstr "Svæfingarhamir"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:59
 msgid "Updating the boot menu"

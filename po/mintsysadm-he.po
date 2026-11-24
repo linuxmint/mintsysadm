@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2026-10-26 13:35+0000\n"
-"PO-Revision-Date: 2026-11-15 08:59+0000\n"
+"PO-Revision-Date: 2026-11-23 09:56+0000\n"
 "Last-Translator: Avi Markovitz <avi.markovitz@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-11-16 12:02+0000\n"
-"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
+"X-Launchpad-Export-Date: 2026-11-24 12:02+0000\n"
+"X-Generator: Launchpad (build 012091084314157d19ae714f55ef4c582ff0feb5)\n"
 
 #: generate_desktop_files:26 generate_desktop_files:74
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:99
@@ -945,7 +945,7 @@ msgstr "הגדרת משתני סביבה כלל־מערכתיים באמצעות
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:37
 msgid "Log out and log back in for changes to take effect."
-msgstr ""
+msgstr "להתנתק ולהתחבר מחדש כדי שהשינויים ייכנסו לתוקף."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:38
 msgid "Environment Variables"
@@ -953,31 +953,32 @@ msgstr "משתני סביבה"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:39
 msgid "Allowed sleep modes"
-msgstr ""
+msgstr "מצבי שינה מותרים"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:40
 msgid "Choose the sleep modes you want to allow."
-msgstr ""
+msgstr "בחירת מצבי השינה המותרים לשימוש"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:42
 msgid ""
 "Keeps the session in memory (RAM). The computer is still running but uses "
 "only a bit of power."
-msgstr ""
+msgstr "החזקת השיח בזיכרון (RAM). המחשב נותר פועל בצריכת חשמל מזערית."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:44
 msgid "Saves the session to disk (Swap). Shuts down the computer."
-msgstr ""
+msgstr "שמירת השיח לכונן (Swap). המכשב ייכבה."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:46
 msgid ""
 "Suspends for a while (systemd decides how long, based on battery power), "
 "then hibernates."
 msgstr ""
+"מעבר להשהיה זמנית (למשך זמן שנקבע על ידי systemd לפי הסוללה), ואז לתרדמת."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:48
 msgid "Suspends but also saves the session to disk (Swap)."
-msgstr ""
+msgstr "השהיית המערכת, אך במקביל שמירת ההפעלה בכונן (Swap)."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:49
 msgid "Suspend method"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2026-10-26 13:35+0000\n"
-"PO-Revision-Date: 2026-11-11 17:32+0000\n"
+"PO-Revision-Date: 2026-11-21 12:11+0000\n"
 "Last-Translator: Quentin PAGÈS <Unknown>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-11-16 12:02+0000\n"
-"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
+"X-Launchpad-Export-Date: 2026-11-24 12:02+0000\n"
+"X-Generator: Launchpad (build 012091084314157d19ae714f55ef4c582ff0feb5)\n"
 
 #: generate_desktop_files:26 generate_desktop_files:74
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:99
@@ -240,7 +240,7 @@ msgstr ""
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:646
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:665
 msgid "There are no older kernels to remove."
-msgstr "I a pas cap de nuclèu a suprimir."
+msgstr "I a pas cap de nuclèu mai ancian de suprimir."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:682
 msgid "Remove older kernels?"
@@ -380,7 +380,7 @@ msgstr ""
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1167
 msgid "This series is not officially supported."
-msgstr "Aquesta seria benefícia d’aucun sosten oficial."
+msgstr "Aquesta seria benefícia de cap de sosten oficial."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1177
 msgid "Manually tracked"
@@ -423,7 +423,7 @@ msgid ""
 "Without tracking, this computer will no longer receive security updates for "
 "this kernel series."
 msgstr ""
-"Sens seguiment, aqueste ordenador recebrà pas mai pus las mesas a jorn de "
+"Sens seguiment, aqueste ordenador recebrà pas mai las mesas a jorn de "
 "seguretat d’aquesta seria de nuclèus."
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:1296
@@ -476,7 +476,7 @@ msgstr "Velha leugièra (S1)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:146
 msgid "Platform (the firmware powers off)"
-msgstr "Platafòrma (lo microbiologia arrèsta l’alimentacion)"
+msgstr "Platafòrma (lo micrologicial arrèsta l’alimentacion)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:147
 msgid "Shutdown (the kernel powers off)"
@@ -628,7 +628,7 @@ msgstr "Cap de problèma pas detectat"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:396
 msgid "This computer looks ready for the sleep modes above."
-msgstr "Aqueste ordenador sembla lèst a utilizar los mòdes de velha çai-jos."
+msgstr "Aqueste ordenador sembla lèst a utilizar los mòdes de velha çai-sus."
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:409
 msgid "Set as resume device"
@@ -691,7 +691,7 @@ msgid ""
 "Invalid username. Only lowercase letters, numbers, hyphens and underscores "
 "are allowed."
 msgstr ""
-"Lo nom d’utilizaire es invalid. Sonque las letras minusculas, los chifras, "
+"Lo nom d’utilizaire es invalid. Sonque las letras minusculas, las chifras, "
 "los jonhents e los jonhents bas son autorizats."
 
 #: usr/lib/linuxmint/mintsysadm/page_users.py:116
@@ -801,7 +801,7 @@ msgstr ""
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:67
 #: usr/share/mintsysadm/settings_user.ui.h:3
 msgid "Account Details"
-msgstr "Detalhs del comptes"
+msgstr "Detalhs del compte"
 
 #: usr/lib/linuxmint/mintsysadm/settings_user.py:100
 msgid "Take a photo..."
@@ -929,7 +929,7 @@ msgid ""
 "updates.\n"
 msgstr ""
 "Cap de seria de nuclèus es pas seguida. Poiriá arribar qu’aqueste ordenador "
-"aja las mesas a jorn de seguretat del nuclèu.\n"
+"aja pas las mesas a jorn de seguretat del nuclèu.\n"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:26
 msgid "View all kernels"
@@ -949,7 +949,7 @@ msgstr "Suprimir automaticament los nuclèus ancians."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:30
 msgid "Number of installed kernels to keep in each tracked series"
-msgstr "Nombre de nuclèus installat de servar per cada seria seguida"
+msgstr "Nombre de nuclèus installats de servar per cada seria seguida"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:31
 msgid "The active kernel and tracked metapackages are always protected."
@@ -1059,7 +1059,7 @@ msgstr "Mòdes de velha disponibles"
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:56
 msgid "These sleep modes should work right now."
-msgstr "Aqueste mòdes de velha deurián foncionar ara."
+msgstr "Aquestes mòdes de velha deurián foncionar ara."
 
 #: usr/share/mintsysadm/mintsysadm.ui.h:57
 msgid "Sleep Modes"

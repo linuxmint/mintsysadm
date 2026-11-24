@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2026-10-26 13:35+0000\n"
-"PO-Revision-Date: 2026-11-10 19:01+0000\n"
+"PO-Revision-Date: 2026-11-21 11:07+0000\n"
 "Last-Translator: Niko Košćina <nikokoscina@icloud.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-11-16 12:02+0000\n"
-"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
+"X-Launchpad-Export-Date: 2026-11-24 12:02+0000\n"
+"X-Generator: Launchpad (build 012091084314157d19ae714f55ef4c582ff0feb5)\n"
 
 #: generate_desktop_files:26 generate_desktop_files:74
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:99
@@ -33,6 +33,8 @@ msgid ""
 "system;administration;boot;grub;kernel;environment;variables;sleep;suspend;hi"
 "bernate;hybrid;swap;resume"
 msgstr ""
+"sustav;administracija;pokretanje;grub;kernel;okruženje;varijable;spavaj;suspe"
+"ndiraj;hiberniraj;hibrid;swap;nastavi"
 
 #: generate_desktop_files:36
 msgid "Account details"
@@ -68,7 +70,7 @@ msgstr "Ako argument nije prepoznatljiv od strane kernela bit će ignorirano."
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:138
 msgid "Add an environment variable"
-msgstr ""
+msgstr "Dodaj varijablu okoline"
 
 #: usr/lib/linuxmint/mintsysadm/mintsysadm.py:138
 msgid "Enter the variable in NAME=VALUE format."
@@ -117,7 +119,7 @@ msgstr ""
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:247
 msgid "All kernels"
-msgstr ""
+msgstr "Svi kerneli"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:253
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:760
@@ -239,7 +241,7 @@ msgstr ""
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:682
 msgid "Remove older kernels?"
-msgstr ""
+msgstr "Ukloni starije kernele?"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:687
 msgid ""
@@ -286,12 +288,12 @@ msgstr ""
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:943
 #, python-format
 msgid "%d packages removed"
-msgstr ""
+msgstr "%d pakete uklonjeno"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:945
 #, python-format
 msgid ", %d skipped"
-msgstr ""
+msgstr ", %d preskočeno"
 
 #: usr/lib/linuxmint/mintsysadm/page_kernels.py:973
 #: usr/share/mintsysadm/mintsysadm.ui.h:22
@@ -450,11 +452,11 @@ msgstr ""
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:131
 msgid "Suspend-to-RAM (S3)"
-msgstr ""
+msgstr "Suspendiraj-na-RAM (S3)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:132
 msgid "Shallow (S1)"
-msgstr ""
+msgstr "Plitko (S1)"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:146
 msgid "Platform (the firmware powers off)"
@@ -491,7 +493,7 @@ msgstr ""
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:297
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:298
 msgid "Kernel support"
-msgstr ""
+msgstr "Kernel podrška"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:297
 msgid "The kernel supports hibernation."
@@ -528,7 +530,7 @@ msgstr ""
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:332
 #, python-format
 msgid "Swap area in %s"
-msgstr ""
+msgstr "Swap prozor u %s"
 
 #: usr/lib/linuxmint/mintsysadm/page_sleep_modes.py:340
 #, python-format
