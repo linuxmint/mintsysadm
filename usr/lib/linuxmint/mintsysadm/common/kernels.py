@@ -241,11 +241,16 @@ def get_available_series():
             meta_package_names.append(name)
 
     for package_name in meta_package_names:
-        candidate = cache[package_name].candidate
-        if candidate is None:
+        package = cache[package_name]
+        # An installed metapackage tracks the series it currently depends
+        # on, even when an upgrade to a newer series is pending or held.
+        meta_version = package.installed
+        if meta_version is None:
+            meta_version = package.candidate
+        if meta_version is None:
             continue
 
-        version_match = re.match(r"(\d+\.\d+)", candidate.version)
+        version_match = re.match(r"(\d+\.\d+)", meta_version.version)
         if version_match is None:
             continue
         version = version_match.group(1)
